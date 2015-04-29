@@ -20,6 +20,19 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  generic:
+    term:
+      log_in: Log in
+      log_out: Log out
+
   project:
     name: Fish Species Leaderboard
     description: Hone your angling skills through friendly competition
+
+  nav:
+    users:
+      invite_new_user: Send invitation
+
+  page:
+    leaderboard:
+      title: Leaderboard

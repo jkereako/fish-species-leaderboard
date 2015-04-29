@@ -11,8 +11,10 @@
   </head>
   <body>
     <div class="container">
+      <%= render 'shared/navigation' %>
       <div class="row">
         <div class="col-xs-12" itemprop="mainContentOfPage" role="main">
+          <%= render 'shared/messages' %>
           <%= yield %>
         </div><!-- /.col-xs-12 -->
       </div><!-- /.row -->
