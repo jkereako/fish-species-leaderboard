@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  project:
+    name: Fish Species Leaderboard
+    description: Hone your angling skills through friendly competition

@@ -1,0 +1,9 @@
+// Always load sprokets before the Sass package.
+
+// @see: https://github.com/twbs/bootstrap-sass
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// @see:  https://github.com/FortAwesome/font-awesome-sass
+@import "font-awesome-sprockets";
+@import "font-awesome";
