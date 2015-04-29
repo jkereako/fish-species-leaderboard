@@ -1,0 +1,16 @@
+<h1 class="page-header"><%= t 'page.user.title' %></h1>
+<p><%= t 'page.user.message' %></p>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= t 'generic.term.email' %></th>
+      <th><%= t 'generic.term.role' %></th>
+      <th><%= t 'generic.term.last_logged_in' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @users %>
+  </tbody>
+</table>

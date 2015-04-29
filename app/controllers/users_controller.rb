@@ -7,5 +7,7 @@ class UsersController < ApplicationController
 
   def show
     authorize :user
+
+    @user = current_user
   end
 end
