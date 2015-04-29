@@ -5,6 +5,9 @@
 *.log
 Thumbs.db
 
+#-- Development files
+db/seeds/development.rb
+
 *.rbc
 capybara-*.html
 .rspec
