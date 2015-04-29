@@ -36,3 +36,11 @@ en:
   page:
     leaderboard:
       title: Leaderboard
+    log_in:
+      title: Log in
+      form:
+        label:
+          password: Password
+          email: Email
+          remember_me: Remember me
+          forgot_password?: Forgot your password?
