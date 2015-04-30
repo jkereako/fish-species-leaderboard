@@ -12,23 +12,30 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="<%= css_class_for controller: 'leaderboard' %>" role="presentation">
-          <%= link_to t('page.title.leaderboard'), leaderboard_path  %>
+          <%= link_to t('nav.leaderboard'), leaderboard_path  %>
         </li>
-        <li class="<%= css_class_for controller: 'about' %>" role="presentation">
-          <a class="disabled" href="#" role="menuitem">About</a>
+        <% if user_signed_in? %>
+        <li class="<%= css_class_for controller: 'competitions' %>" role="presentation">
+          <%= link_to t('nav.competitions'), competitions_path  %>
         </li>
+        <li class="<%= css_class_for controller: 'catches' %>" role="presentation">
+          <%= link_to t('nav.catches'), catches_path  %>
+        </li>
+        <% end %>
       </ul>
+
       <% if user_signed_in? %>
       <small class="navbar-text navbar-right">
-        Logged in as <strong><%= link_to current_user.email, current_user %></strong>
+        <strong><%= link_to current_user.name, current_user %></strong>
       </small>
       <% end %>
+
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
         <% if policy(:user).show? %>
         <li class="dropdown">
           <a href="<%= url_for users_path  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <%= t 'generic.term.users' %> <span class="caret"></span>
+            <%= t 'nav.users.name' %> <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation">

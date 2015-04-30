@@ -31,14 +31,22 @@ en:
       submit: Submit
 
   project:
-    name: Fish Species Leaderboard
+    name: FSL
     description: Hone your angling skills through friendly competition
 
   nav:
+    leaderboard: Leaderboard
+    competitions: Competitions
+    catches: Catches
     users:
+      name: Anglers
       invite_new_user: Send invitation
 
   page:
+    catch:
+      index:
+        title: Catches
+
     competition:
       index:
         title: Competitions
