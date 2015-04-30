@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430134532) do
+ActiveRecord::Schema.define(version: 20150430142727) do
 
   create_table "catches", force: :cascade do |t|
-    t.integer  "catches_id"
+    t.integer  "users_id"
     t.string   "species",              default: "", null: false
     t.integer  "length_in_inches",     default: 0,  null: false
     t.string   "bait_used",            default: "", null: false
@@ -24,8 +24,20 @@ ActiveRecord::Schema.define(version: 20150430134532) do
     t.datetime "updated_at",                        null: false
   end
 
-  add_index "catches", ["catches_id"], name: "index_catches_on_catches_id"
   add_index "catches", ["species"], name: "index_catches_on_species"
+  add_index "catches", ["users_id"], name: "index_catches_on_users_id"
+
+  create_table "competitions", force: :cascade do |t|
+    t.string   "name",        default: "", null: false
+    t.datetime "begins_at",                null: false
+    t.datetime "ends_at",                  null: false
+    t.integer  "users_count", default: 0,  null: false
+    t.integer  "integer",     default: 0,  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "competitions", ["name"], name: "index_competitions_on_name"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -38,6 +50,13 @@ ActiveRecord::Schema.define(version: 20150430134532) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",        default: 0,  null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "invitation_token"
@@ -50,12 +69,17 @@ ActiveRecord::Schema.define(version: 20150430134532) do
     t.integer  "invitations_count",      default: 0
     t.string   "name",                   default: "", null: false
     t.string   "role",                   default: "", null: false
+    t.integer  "competition_id"
+    t.integer  "catches_count",          default: 0,  null: false
   end
 
+  add_index "users", ["competition_id"], name: "index_users_on_competition_id"
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count"
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
 
 end

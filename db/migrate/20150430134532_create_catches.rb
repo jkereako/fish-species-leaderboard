@@ -2,7 +2,7 @@ class CreateCatches < ActiveRecord::Migration
   def change
     create_table :catches do |t|
       # Foreign key
-      t.references :catches, index: true
+      t.references :users, index: true
 
       t.string :species, null: false, default: ''
       t.integer :length_in_inches, null: false, default: 0

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :competitions
   # Prevent new users from registering new accounts.
   # This app is invite only.
   devise_for :users, skip: :registrations
