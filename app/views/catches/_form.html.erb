@@ -11,7 +11,69 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :species, t('page.catch.form.label.species') %>
+    <br />
+    <%= f.text_field :species,
+                      class: 'form-control',
+                      autofocus: true,
+                      required: true,
+                      placeholder: t('page.catch.form.placeholder.species') %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :length_in_inches, t('page.catch.form.label.length_in_inches') %>
+    <br />
+    <%=
+    f.text_field :species,
+                  class: 'form-control',
+                  required: true,
+                  placeholder: t('page.catch.form.placeholder.length_in_inches') %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bait_used, t('page.catch.form.label.bait_used') %>
+    <br />
+    <%= f.text_field :species,
+                      class: 'form-control',
+                      required: true,
+                      placeholder: t('page.catch.form.placeholder.bait_used') %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location_description,
+                t('page.catch.form.label.location_description') %>
+    <br />
+    <%=
+    f.text_field :species,
+                  class: 'form-control',
+                  required: true,
+                  placeholder: t('page.catch.form.placeholder.location_description') %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :caught_at, t('page.catch.form.label.caught_at') %>
+    <br />
+    <%= f.text_field :species,
+                      class: 'form-control',
+                      required: true,
+                      placeholder: t('page.catch.form.placeholder.caught_at') %>
+  </div>
+
+  <!--
+
+  t.integer  "users_id"
+    t.string   "species",              default: "", null: false
+    t.integer  "length_in_inches",     default: 0,  null: false
+    t.string   "bait_used",            default: "", null: false
+    t.string   "location_description", default: "", null: false
+    t.datetime "caught_at",                         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+
+  -->
+
+  <div class="actions">
+    <%= f.submit t('generic.term.submit'), class: 'btn btn-default' %>
+  </div
 <% end %>

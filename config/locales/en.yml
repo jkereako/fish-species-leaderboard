@@ -46,6 +46,23 @@ en:
     catch:
       index:
         title: Catches
+      new:
+        title: New catch
+      form:
+        label:
+          user_id: Angler
+          species: Species
+          length_in_inches: Length in inches
+          bait_used: Bait used
+          location_description: Location
+          caught_at: Date caught
+        placeholder:
+          user_id: Angler
+          species: Species
+          length_in_inches: Length in inches
+          bait_used: Bait used
+          location_description: Location
+          caught_at: Date caught
 
     competition:
       index:
@@ -67,7 +84,9 @@ en:
           ends_at: Ends
 
     leaderboard:
-      title: Leaderboard
+      index:
+        title: Leaderboard
+
     log_in:
       title: Log in
       form:
