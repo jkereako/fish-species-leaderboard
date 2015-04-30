@@ -20,8 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  action:
+    delete: Click here to delete the thing
+
   generic:
     term:
+      delete: Delete
       log_in: Log in
       log_out: Log out
       submit: Submit
@@ -40,6 +44,8 @@ en:
         title: Competitions
       new:
         title: New competition
+      show:
+        title: Competition
       form:
         label:
           name: Name

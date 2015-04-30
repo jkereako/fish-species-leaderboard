@@ -1,4 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="col-sm-12">
+  <header role="heading">
+    <h1 class="page-header" itemprop="name"><%=t 'page.competition.show.title' %></h1>
+  </header>
+  <article class="">
+    <h2>Name</h2>
+    <p>
+      <%= @competition.name %>
+    </p>
 
-<%= link_to 'Edit', edit_competition_path(@competition) %> |
-<%= link_to 'Back', competitions_path %>
+    <h2>Prize</h2>
+    <p>
+      <%= @competition.prize %>
+    </p>
+    <h2>Start</h2>
+    <p>
+      <%= @competition.begins_at %>
+    </p>
+  </article>
+  <footer>
+    <p>
+      <%= link_to 'Edit', edit_competition_path(@competition) %> |
+      <%= link_to 'Back', competitions_path %>
+    </p>
+  </footer>
+</div>

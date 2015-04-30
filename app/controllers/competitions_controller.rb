@@ -24,15 +24,26 @@ class CompetitionsController < ApplicationController
   # POST /competitions
   # POST /competitions.json
   def create
-    @competition = Competition.new(competition_params)
+    @competition = Competition.new
+
+    @competition.name = competition_params[:name]
+    @competition.prize = competition_params[:prize]
+    @competition.begins_at = Date.strptime(competition_params[:begins_at],
+                                           '%m/%d/%Y')
+    @competition.ends_at = Date.strptime(competition_params[:ends_at],
+                                         '%m/%d/%Y')
 
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to @competition, notice: 'Competition was successfully created.' }
-        format.json { render :show, status: :created, location: @competition }
+        format.html { redirect_to @competition,
+                      notice: 'Competition was successfully created.' }
+        format.json { render :show,
+                      status: :created,
+                      location: @competition}
       else
         format.html { render :new }
-        format.json { render json: @competition.errors, status: :unprocessable_entity }
+        format.json { render json: @competition.errors,
+                             status: :unprocessable_entity }
       end
     end
   end

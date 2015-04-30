@@ -29,29 +29,25 @@
                       required: true,
                       placeholder: t('page.competition.form.placeholder.prize') %>
   </div>
-
   <div class="form-group">
     <%= f.label :begins_at, t('page.competition.form.label.begins_at') %>
-    <br />
-    <%= f.datetime_field :begins_at,
-                          class: 'form-control',
-                          data: {'date-format'=> 'mm/dd/yyyy'},
-                          required: true,
-                          placeholder:
-                            t('page.competition.form.placeholder.begins_at') %>
-  </div>
+    <div class="input-group">
+        <%= f.datetime_field :begins_at,
+                              class: 'form-control',
+                              data: {'date-format'=> 'mm/dd/yyyy'},
+                              required: true,
+                              placeholder:
+                                t('page.competition.form.placeholder.begins_at') %>
+        <span class="input-group-addon">to</span>
+        <%= f.datetime_field :ends_at,
+                              class: 'form-control',
+                              data: {'date-format'=> 'mm/dd/yyyy'},
+                              required: true,
+                              placeholder:
+                                t('page.competition.form.placeholder.ends_at') %>
 
-  <div class="form-group">
-    <%= f.label :ends_at, t('page.competition.form.label.ends_at') %>
-    <br />
-    <%= f.datetime_field :ends_at,
-                          class: 'form-control',
-                          data: {'date-format'=> 'mm/dd/yyyy'},
-                          required: true,
-                          placeholder:
-                            t('page.competition.form.placeholder.ends_at') %>
+    </div>
   </div>
-
   <div class="actions">
     <%= f.submit t('generic.term.submit'), class: 'btn btn-default' %>
   </div>
