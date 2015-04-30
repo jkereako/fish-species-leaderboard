@@ -5,6 +5,9 @@
 *.log
 Thumbs.db
 
+#-- Bower assets
+/vendor/assets/components
+
 #-- Development files
 db/seeds/development.rb
 
