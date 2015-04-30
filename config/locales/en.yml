@@ -36,7 +36,22 @@ en:
 
   page:
     competition:
-      title: Competition
+      index:
+        title: Competitions
+      new:
+        title: New competition
+      form:
+        label:
+          name: Name
+          prize: Prize
+          begins_at: Begins
+          ends_at: Ends
+        placeholder:
+          name: Name of the competition
+          prize: What will the winner get?
+          begins_at: Begins
+          ends_at: Ends
+
     leaderboard:
       title: Leaderboard
     log_in:

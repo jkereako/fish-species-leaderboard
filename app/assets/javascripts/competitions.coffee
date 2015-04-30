@@ -1,3 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+class Competition
+  constructor: ->
+    args =
+      todayBtn: 'linked'
+      todayHighlight: true
+      autoClose: true
+
+    $ 'input[type="datetime"]'
+    .each ->
+      $ @
+      .datepicker args
+
+competition = new Competition
