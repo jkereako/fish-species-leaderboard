@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20150430142727) do
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name",        default: "", null: false
+    t.string   "prize",       default: "", null: false
+    t.integer  "winner_id"
     t.datetime "begins_at",                null: false
     t.datetime "ends_at",                  null: false
     t.integer  "users_count", default: 0,  null: false
@@ -37,7 +39,8 @@ ActiveRecord::Schema.define(version: 20150430142727) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "competitions", ["name"], name: "index_competitions_on_name"
+  add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true
+  add_index "competitions", ["winner_id"], name: "index_competitions_on_winner_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -24,6 +24,7 @@ en:
     term:
       log_in: Log in
       log_out: Log out
+      submit: Submit
 
   project:
     name: Fish Species Leaderboard
@@ -34,6 +35,8 @@ en:
       invite_new_user: Send invitation
 
   page:
+    competition:
+      title: Competition
     leaderboard:
       title: Leaderboard
     log_in:
