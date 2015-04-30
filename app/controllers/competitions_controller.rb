@@ -1,6 +1,9 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
 
+  def add_competitor
+    add_user
+  end
   # GET /competitions
   # GET /competitions.json
   def index
@@ -15,6 +18,10 @@ class CompetitionsController < ApplicationController
   # GET /competitions/new
   def new
     @competition = Competition.new
+
+    # Create at least 2 users for the competition
+    add_competitor
+    add_competitor
   end
 
   # GET /competitions/1/edit
@@ -73,6 +80,9 @@ class CompetitionsController < ApplicationController
   end
 
   private
+    def add_user
+      @competition.users << User.new
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_competition
       @competition = Competition.find(params[:id])
