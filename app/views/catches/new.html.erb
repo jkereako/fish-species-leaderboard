@@ -13,3 +13,9 @@
     </footer>
   </article>
 </div>
+
+<%# Prevent the browser from parsing the JSON. %>
+<%# @see http://stackoverflow.com/questions/7581133/how-can-i-read-a-json-in-the-script-tag-from-javascript#7956249 %>
+<script id="species-data" type="application/json">
+  <%= raw @species.to_json %>
+</script>

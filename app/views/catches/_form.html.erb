@@ -15,7 +15,7 @@
     <%= f.label :species, t('page.catch.form.label.species') %>
     <br />
     <%= f.text_field :species,
-                      class: 'form-control',
+                      class: ['form-control', 'typeahead'],
                       autofocus: true,
                       required: true,
                       placeholder: t('page.catch.form.placeholder.species') %>
@@ -25,7 +25,7 @@
     <%= f.label :length_in_inches, t('page.catch.form.label.length_in_inches') %>
     <br />
     <%=
-    f.text_field :species,
+    f.text_field :length_in_inches,
                   class: 'form-control',
                   required: true,
                   placeholder: t('page.catch.form.placeholder.length_in_inches') %>
@@ -34,7 +34,7 @@
   <div class="form-group">
     <%= f.label :bait_used, t('page.catch.form.label.bait_used') %>
     <br />
-    <%= f.text_field :species,
+    <%= f.text_field :bait_used,
                       class: 'form-control',
                       required: true,
                       placeholder: t('page.catch.form.placeholder.bait_used') %>
@@ -45,7 +45,7 @@
                 t('page.catch.form.label.location_description') %>
     <br />
     <%=
-    f.text_field :species,
+    f.text_field :location_description,
                   class: 'form-control',
                   required: true,
                   placeholder: t('page.catch.form.placeholder.location_description') %>
@@ -54,7 +54,7 @@
   <div class="form-group">
     <%= f.label :caught_at, t('page.catch.form.label.caught_at') %>
     <br />
-    <%= f.text_field :species,
+    <%= f.text_field :caught_at,
                       class: 'form-control',
                       required: true,
                       placeholder: t('page.catch.form.placeholder.caught_at') %>

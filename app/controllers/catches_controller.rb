@@ -1,6 +1,5 @@
 class CatchesController < ApplicationController
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
-
   # GET /catches
   # GET /catches.json
   def index
@@ -14,6 +13,8 @@ class CatchesController < ApplicationController
 
   # GET /catches/new
   def new
+    species_path = Rails.root.join('config', 'data', 'species.yml')
+    @species = YAML.load_file species_path
     @catch = Catch.new
   end
 
