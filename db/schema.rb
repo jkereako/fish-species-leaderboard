@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429203031) do
+ActiveRecord::Schema.define(version: 20150430134532) do
+
+  create_table "catches", force: :cascade do |t|
+    t.integer  "catches_id"
+    t.string   "species",              default: "", null: false
+    t.integer  "length_in_inches",     default: 0,  null: false
+    t.string   "bait_used",            default: "", null: false
+    t.string   "location_description", default: "", null: false
+    t.datetime "caught_at",                         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "catches", ["catches_id"], name: "index_catches_on_catches_id"
+  add_index "catches", ["species"], name: "index_catches_on_species"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
