@@ -23,7 +23,6 @@
   "dependencies": {
     "bootstrap-datepicker": "~1.4.0",
     "typeahead.js": "~0.11.1",
-    "bootstrap-tagsinput": "~0.4.2",
     "bootstrap-multiselect": "~0.9.12"
   }
 }

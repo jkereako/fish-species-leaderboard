@@ -1,4 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_catch_path(@catch) %> |
-<%= link_to 'Back', catches_path %>
+<article class="">
+  <header role="heading">
+    <h1 class="page-header" itemprop="name">
+      <%= @catch.species %>
+    </h1>
+  </header>
+    <div class="row">
+      <div class="col-sm-6">
+        <h3>Length <small><%= @catch.length_in_inches %></small></h3>
+        <h3>Bait used <small><%= @catch.bait_used %></small></h3>
+        <h3>Date caught <small><%= @catch.caught_at %></small></h3>
+        <h3>Caught at <small><%= @catch.location_description %></small></h3>
+      </div>
+      <div class="col-sm-6">
+        <img class="img-thumbnail img-responsive" src="http://lorempixel.com/output/animals-h-c-1886-1920-5.jpg" alt="" />
+    </div>
+  <footer>
+    <p>
+      <%= link_to 'Edit', edit_catch_path(@catch) %> |
+      <%= link_to 'Back', catches_path %>
+    </p>
+  </footer>
+</article>

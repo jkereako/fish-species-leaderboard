@@ -15,7 +15,7 @@ class Catch
           hint: true
           highlight: true
           minLength: 2
-          {name: 'species'
+          {name: 'species_sugs'
           source: bloodhound}
 
 aCatch = new Catch $ 'input#catch_species'

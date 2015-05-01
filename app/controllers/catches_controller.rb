@@ -30,7 +30,13 @@ class CatchesController < ApplicationController
   # POST /catches
   # POST /catches.json
   def create
-    @catch = Catch.new(catch_params)
+    @catch = Catch.new
+    @catch.species = catch_params[:species]
+    @catch.bait_used = catch_params[:bait_used]
+    @catch.length_in_inches = catch_params[:length_in_inches]
+    @catch.location_description = catch_params[:location_description]
+    @catch.caught_at = Date.parse catch_params[:caught_at]
+    @catch.user = current_user
 
     respond_to do |format|
       if @catch.save
