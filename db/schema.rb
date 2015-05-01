@@ -28,16 +28,17 @@ ActiveRecord::Schema.define(version: 20150501171754) do
   add_index "catches", ["user_id"], name: "index_catches_on_user_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.integer  "winner_id",     default: 0,  null: false
-    t.integer  "integer",       default: 0,  null: false
-    t.string   "name",          default: "", null: false
-    t.string   "prize",         default: "", null: false
-    t.datetime "begins_at",                  null: false
-    t.datetime "ends_at",                    null: false
-    t.integer  "catches_count", default: 0,  null: false
-    t.integer  "users_count",   default: 0,  null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "winner_id",     default: 0,    null: false
+    t.integer  "integer",       default: 0,    null: false
+    t.string   "name",          default: "",   null: false
+    t.string   "prize",         default: "",   null: false
+    t.datetime "begins_at",                    null: false
+    t.datetime "ends_at",                      null: false
+    t.boolean  "is_active",     default: true, null: false
+    t.integer  "catches_count", default: 0,    null: false
+    t.integer  "users_count",   default: 0,    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true

@@ -7,6 +7,7 @@ class CreateCompetitions < ActiveRecord::Migration
       t.string :prize, null: false, default: ''
       t.datetime :begins_at, null: false
       t.datetime :ends_at, null: false
+      t.boolean :is_active, null: false,  default: true
       # The number of catches the winner has
       t.integer :catches_count, :integer, default: 0, null: false
       # Magic columns
