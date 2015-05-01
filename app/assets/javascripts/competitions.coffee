@@ -12,23 +12,23 @@ class Competition
           wildcard: '%NAME'
         }
 
-      # Find all user name text fields
-      $ @userNameFields
-      .each (idx, obj)->
-        $ obj
-        .typeahead
-          hint: true
-          highlight: true
-          minLength: 2
-          {name: "user_#{idx}"
-          source: bloodhound}
-
-    # Arguments for the date picker
-    args =
-      startDate: 'today'
-      todayBtn: 'linked'
-      todayHighlight: true
-      autoClose: true
+    #   # Find all user name text fields
+    #   $ @userNameFields
+    #   .each (idx, obj)->
+    #     $ obj
+    #     .typeahead
+    #       hint: true
+    #       highlight: true
+    #       minLength: 2
+    #       {name: "user_#{idx}"
+    #       source: bloodhound}
+    #
+    # # Arguments for the date picker
+    # args =
+    #   startDate: 'today'
+    #   todayBtn: 'linked'
+    #   todayHighlight: true
+    #   autoClose: true
 
     # Add a date picker to each field of type "datetime"
     # $ 'input[type="date"]'

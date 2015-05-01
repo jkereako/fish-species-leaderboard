@@ -52,13 +52,10 @@
   <h2>Competing anglers</h2>
   <%= competition_form.fields_for :users do |user_form| %>
   <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <i class="glyphicon glyphicon-user"></i>
-      </span>
-      <%= user_form.text_field :name, class: 'form-control', required: true %>
-      <span aria-hidden="true" class="glyphicon glyphicon-remove form-control-feedback" style="display:none;"></span>
-    </div>
+    <%= user_form.collection_select :name,
+                  User.all, :id, :name,
+                  {prompt: true},
+                  {class: 'form-control'} %>
   </div><!-- /.form-group -->
   <% end %>
 
