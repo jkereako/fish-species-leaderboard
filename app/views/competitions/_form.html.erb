@@ -33,14 +33,14 @@
   <div class="form-group">
     <%= competition_form.label :begins_at, t('page.competition.form.label.begins_at') %>
     <div class="input-group">
-        <%= competition_form.datetime_field :begins_at,
+        <%= competition_form.date_field :begins_at,
                               class: 'form-control',
                               data: {'date-format'=> 'mm/dd/yyyy'},
                               required: true,
                               placeholder:
                                 t('page.competition.form.placeholder.begins_at') %>
         <span class="input-group-addon">to</span>
-        <%= competition_form.datetime_field :ends_at,
+        <%= competition_form.date_field :ends_at,
                               class: 'form-control',
                               data: {'date-format'=> 'mm/dd/yyyy'},
                               required: true,

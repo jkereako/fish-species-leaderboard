@@ -10,6 +10,6 @@ class CreateCatches < ActiveRecord::Migration
       t.datetime :caught_at, null: false
       t.timestamps null: false
     end
-    add_index :catches, :species, unique: false
+    add_index :catches, :species
   end
 end

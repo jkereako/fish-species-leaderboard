@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430142727) do
+ActiveRecord::Schema.define(version: 20150501032230) do
 
   create_table "catches", force: :cascade do |t|
     t.integer  "users_id"
@@ -28,19 +28,28 @@ ActiveRecord::Schema.define(version: 20150430142727) do
   add_index "catches", ["users_id"], name: "index_catches_on_users_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.string   "name",        default: "", null: false
-    t.string   "prize",       default: "", null: false
-    t.integer  "winner_id"
-    t.datetime "begins_at",                null: false
-    t.datetime "ends_at",                  null: false
-    t.integer  "users_count", default: 0,  null: false
-    t.integer  "integer",     default: 0,  null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "users_id"
+    t.string   "name",          default: "", null: false
+    t.string   "prize",         default: "", null: false
+    t.datetime "begins_at",                  null: false
+    t.datetime "ends_at",                    null: false
+    t.integer  "catches_count", default: 0,  null: false
+    t.integer  "integer",       default: 0,  null: false
+    t.integer  "users_count",   default: 0,  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true
-  add_index "competitions", ["winner_id"], name: "index_competitions_on_winner_id"
+  add_index "competitions", ["users_id"], name: "index_competitions_on_users_id"
+
+  create_table "competitions_users", force: :cascade do |t|
+    t.integer "competition_id", null: false
+    t.integer "user_id",        null: false
+  end
+
+  add_index "competitions_users", ["competition_id"], name: "index_competitions_users_on_competition_id"
+  add_index "competitions_users", ["user_id"], name: "index_competitions_users_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -72,11 +81,8 @@ ActiveRecord::Schema.define(version: 20150430142727) do
     t.integer  "invitations_count",      default: 0
     t.string   "name",                   default: "", null: false
     t.string   "role",                   default: "", null: false
-    t.integer  "competition_id"
-    t.integer  "catches_count",          default: 0,  null: false
   end
 
-  add_index "users", ["competition_id"], name: "index_users_on_competition_id"
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true

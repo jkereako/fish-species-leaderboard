@@ -31,9 +31,9 @@ class Competition
       autoClose: true
 
     # Add a date picker to each field of type "datetime"
-    $ 'input[type="datetime"]'
-    .each ->
-      $ @
-      .datepicker args
+    # $ 'input[type="date"]'
+    # .each ->
+    #   $ @
+    #   .datepicker args
 
 competition = new Competition( $ '[id^=competition_users_attributes]' )

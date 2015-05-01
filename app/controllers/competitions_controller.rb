@@ -39,10 +39,8 @@ class CompetitionsController < ApplicationController
 
     @competition.name = competition_params[:name]
     @competition.prize = competition_params[:prize]
-    @competition.begins_at = Date.strptime(competition_params[:begins_at],
-                                           '%m/%d/%Y')
-    @competition.ends_at = Date.strptime(competition_params[:ends_at],
-                                         '%m/%d/%Y')
+    @competition.begins_at = Date.parse competition_params[:begins_at]
+    @competition.ends_at = Date.parse competition_params[:ends_at]
 
     respond_to do |format|
       if @competition.save
