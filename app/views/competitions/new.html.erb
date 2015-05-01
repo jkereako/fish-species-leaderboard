@@ -1,19 +1,11 @@
-<div class="col-md-6 col-md-offset-3">
-  <article class="article">
-    <header role="heading">
-      <h1 class="page-header" itemprop="name"><%=t 'page.competition.new.title' %></h1>
-    </header>
-    <%= render 'form' %>
-    <footer>
-      <p>
-        <%= link_to 'Back', competitions_path %>
-      </p>
-    </footer>
-  </article>
-</div>
-
-<%# Prevent the browser from parsing the JSON. %>
-<%# @see http://stackoverflow.com/questions/7581133/how-can-i-read-a-json-in-the-script-tag-from-javascript#7956249 %>
-<script id="client-data" type="application/json">
-  <%= raw @client_data.to_json %>
-</script>
+<article class="article">
+  <header role="heading">
+    <h1 class="page-header" itemprop="name"><%=t 'page.competition.new.title' %></h1>
+  </header>
+  <%= render 'form' %>
+  <footer>
+    <p>
+      <%= link_to 'Back', competitions_path %>
+    </p>
+  </footer>
+</article>

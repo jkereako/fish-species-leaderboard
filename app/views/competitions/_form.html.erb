@@ -1,70 +1,81 @@
 <%= form_for @competition do |competition_form| %>
-  <% if @competition.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
+<div class="row">
+  <div class="col-sm-7">
+      <% if @competition.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@competition.errors.count, "error") %> prohibited this competition from being saved:</h2>
 
-      <ul>
-      <% @competition.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @competition.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+      <div class="form-group">
+        <%= competition_form.label :name, t('page.competition.form.label.name') %>
+        <br />
+        <%= competition_form.text_field :name,
+                          class: 'form-control',
+                          autofocus: true,
+                          required: true,
+                          placeholder: t('page.competition.form.placeholder.name') %>
+      </div>
+
+      <div class="form-group">
+        <%= competition_form.label :prize, t('page.competition.form.label.prize') %>
+        <br />
+        <%= competition_form.text_field :prize,
+                          class: 'form-control',
+                          required: true,
+                          placeholder: t('page.competition.form.placeholder.prize') %>
+      </div>
+      <div class="form-group">
+        <%= competition_form.label :begins_at, t('page.competition.form.label.begins_at') %>
+        <div class="input-group">
+            <%= competition_form.date_field :begins_at,
+                                  class: 'form-control',
+                                  data: {'date-format'=> 'mm/dd/yyyy'},
+                                  required: true,
+                                  placeholder:
+                                    t('page.competition.form.placeholder.begins_at') %>
+            <span class="input-group-addon">to</span>
+            <%= competition_form.date_field :ends_at,
+                                  class: 'form-control',
+                                  data: {'date-format'=> 'mm/dd/yyyy'},
+                                  required: true,
+                                  placeholder:
+                                    t('page.competition.form.placeholder.ends_at') %>
+
+        </div>
+      </div>
     </div>
-  <% end %>
+    <div class="col-sm-5">
+      <h2>Competing anglers</h2>
+      <p class="help-block">
+        There has to be at least 2 competitors for this to work.
+      </p>
 
-  <div class="form-group">
-    <%= competition_form.label :name, t('page.competition.form.label.name') %>
-    <br />
-    <%= competition_form.text_field :name,
-                      class: 'form-control',
-                      autofocus: true,
-                      required: true,
-                      placeholder: t('page.competition.form.placeholder.name') %>
-  </div>
+      <div class="form-group">
+        <%= competition_form.label :competitors, t('page.competition.form.label.prize') %>
+        <br />
+        <%= competition_form.collection_select :competitors,
+                      User.all, :id, :name,
+                      {prompt: false, include_hidden: false},
+                      {class: 'form-control',
+                      multiple: true} %>
+      </div>
+    </div>
 
-  <div class="form-group">
-    <%= competition_form.label :prize, t('page.competition.form.label.prize') %>
-    <br />
-    <%= competition_form.text_field :prize,
-                      class: 'form-control',
-                      required: true,
-                      placeholder: t('page.competition.form.placeholder.prize') %>
-  </div>
-  <div class="form-group">
-    <%= competition_form.label :begins_at, t('page.competition.form.label.begins_at') %>
-    <div class="input-group">
-        <%= competition_form.date_field :begins_at,
-                              class: 'form-control',
-                              data: {'date-format'=> 'mm/dd/yyyy'},
-                              required: true,
-                              placeholder:
-                                t('page.competition.form.placeholder.begins_at') %>
-        <span class="input-group-addon">to</span>
-        <%= competition_form.date_field :ends_at,
-                              class: 'form-control',
-                              data: {'date-format'=> 'mm/dd/yyyy'},
-                              required: true,
-                              placeholder:
-                                t('page.competition.form.placeholder.ends_at') %>
-
+</div><!-- /.row -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="actions">
+      <%= competition_form.submit t('generic.term.submit'),
+      class: 'btn btn-primary' %>
     </div>
   </div>
-  <h2>Competing anglers</h2>
-  <p class="help-block">
-    There has to be at least 2 competitors for this to work.
-  </p>
-
-  <div class="form-group">
-    <%= competition_form.label :competitors, t('page.competition.form.label.prize') %>
-    <br />
-    <%= competition_form.collection_select :competitors,
-                  User.all, :id, :name,
-                  {prompt: false, include_hidden: false},
-                  {class: 'form-control',
-                  multiple: true} %>
-  </div>
-
-  <div class="actions">
-    <%= competition_form.submit t('generic.term.submit'), class: 'btn btn-default' %>
-  </div>
+</div>
 <% end %>
