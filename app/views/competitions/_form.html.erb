@@ -55,9 +55,9 @@
   </p>
 
   <div class="form-group">
-    <%= competition_form.label :prize, t('page.competition.form.label.prize') %>
+    <%= competition_form.label :competitors, t('page.competition.form.label.prize') %>
     <br />
-    <%= competition_form.collection_select :users,
+    <%= competition_form.collection_select :competitors,
                   User.all, :id, :name,
                   {prompt: false, include_hidden: false},
                   {class: 'form-control',

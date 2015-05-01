@@ -5,9 +5,6 @@ class CompetitionsController < ApplicationController
     authorize :competition
   end
 
-  def add_competitor
-    add_user
-  end
   # GET /competitions
   # GET /competitions.json
   def index
@@ -22,8 +19,9 @@ class CompetitionsController < ApplicationController
   # GET /competitions/new
   def new
     @competition = Competition.new
-    # Create at least 2 users for the competition
-    add_competitor
+    # Although there is multiple competitors for a competition, we only need 1
+    # competitor so that we can show the user a form
+    @competition.competitors << User.new
   end
 
   # GET /competitions/1/edit
@@ -41,7 +39,7 @@ class CompetitionsController < ApplicationController
     @competition.ends_at = Date.parse competition_params[:ends_at]
 
     # @see http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select-using-an-embedde
-    @competition.competitors = User.find competition_params[:users]
+    @competition.competitors = User.find competition_params[:competitors]
 
     exit unless @competition.valid?
 
@@ -85,9 +83,6 @@ class CompetitionsController < ApplicationController
   end
 
   private
-    def add_user
-      @competition.users << User.new
-    end
     # Use callbacks to share common setup or constraints between actions.
     def set_competition
       @competition = Competition.find(params[:id])

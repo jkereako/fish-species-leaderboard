@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501032230) do
+ActiveRecord::Schema.define(version: 20150501171754) do
 
   create_table "catches", force: :cascade do |t|
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.string   "species",              default: "", null: false
     t.integer  "length_in_inches",     default: 0,  null: false
     t.string   "bait_used",            default: "", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150501032230) do
   end
 
   add_index "catches", ["species"], name: "index_catches_on_species"
-  add_index "catches", ["users_id"], name: "index_catches_on_users_id"
+  add_index "catches", ["user_id"], name: "index_catches_on_user_id"
 
   create_table "competitions", force: :cascade do |t|
     t.integer  "winner_id",     default: 0,  null: false
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150501032230) do
     t.integer  "invitations_count",      default: 0
     t.string   "name",                   default: "", null: false
     t.string   "role",                   default: "", null: false
+    t.integer  "catches_count",          default: 0,  null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

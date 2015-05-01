@@ -21,8 +21,6 @@ class CatchesController < ApplicationController
     species_path = Rails.root.join('config', 'data', 'species.yml')
     @species = YAML.load_file species_path
     @catch = Catch.new
-
-    @catch.user = current_user
   end
 
   # GET /catches/1/edit

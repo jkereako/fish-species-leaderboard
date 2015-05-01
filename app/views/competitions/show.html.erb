@@ -1,26 +1,60 @@
-<div class="col-sm-12">
+<article class="">
   <header role="heading">
-    <h1 class="page-header" itemprop="name"><%=t 'page.competition.show.title' %></h1>
+    <h1 class="page-header" itemprop="name">
+      <%=t 'page.competition.show.title' %>
+    </h1>
   </header>
-  <article class="">
-    <h2>Name</h2>
-    <p>
-      <%= @competition.name %>
-    </p>
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>Name</h2>
+        <p>
+          <%= @competition.name %>
+        </p>
 
-    <h2>Prize</h2>
-    <p>
-      <%= @competition.prize %>
-    </p>
-    <h2>Start</h2>
-    <p>
-      <%= @competition.begins_at %>
-    </p>
-  </article>
+        <h2>Prize</h2>
+        <p>
+          <%= @competition.prize %>
+        </p>
+        <h2>Start</h2>
+        <p>
+          <%= @competition.begins_at %>
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th>
+                Catches
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @competition.competitors.each do |competitor| %>
+          <tr>
+            <th>
+              <%= competitor.name %>
+            </th>
+            <th>
+              <%= competitor.catches.count %>
+            </th>
+          </tr>
+
+          <% end %>
+          </tbody>
+        </table>
+        <p>
+          <%= render @competition.competitors %>
+        </p>
+      </div>
+    </div>
   <footer>
     <p>
       <%= link_to 'Edit', edit_competition_path(@competition) %> |
       <%= link_to 'Back', competitions_path %>
     </p>
   </footer>
-</div>
+</article>

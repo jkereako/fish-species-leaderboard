@@ -6,4 +6,4 @@ class Competition
       do $ obj
       .multiselect
 
-competition = new Competition( $ '#competition_users' )
+competition = new Competition( $ '#competition_competitors' )
