@@ -30,5 +30,6 @@ end
 
 group :production do
   gem 'pg' # Postgres
+  gem 'puma'
   gem 'rails_12factor' # Heroku
 end
