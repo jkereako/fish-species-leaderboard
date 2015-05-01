@@ -6,7 +6,8 @@
 Thumbs.db
 
 #-- Bower assets
-/vendor/assets/components
+# These files need to be present for deploying on Heroku
+# /vendor/assets/components
 
 #-- Development files
 db/seeds/development.rb
