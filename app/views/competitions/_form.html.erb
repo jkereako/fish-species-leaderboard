@@ -50,6 +50,9 @@
     </div>
   </div>
   <h2>Competing anglers</h2>
+  <p class="help-block">
+    There has to be at least 2 competitors for this to work.
+  </p>
   <%= competition_form.fields_for :users do |user_form| %>
   <div class="form-group">
     <%= user_form.collection_select :name,
