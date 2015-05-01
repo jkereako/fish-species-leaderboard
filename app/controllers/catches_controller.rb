@@ -48,7 +48,6 @@ class CatchesController < ApplicationController
   # PATCH/PUT /catches/1
   # PATCH/PUT /catches/1.json
   def update
-    authorize :catch
     respond_to do |format|
       if @catch.update(catch_params)
         format.html { redirect_to @catch, notice: 'Catch was successfully updated.' }

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :catches
   # Prevent new users from registering new accounts.
   # This app is invite only.
-  devise_for :users, skip: :registrations
+  devise_for :users,
+             skip: :registrations,
+             controllers: { invitations: 'user_invitations' }
 
   # Restrict updating catches to users
   resources :users, only: [:index, :show]
