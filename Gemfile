@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 #-- Rails
 gem 'rails', '4.2.1'
-gem 'sqlite3'
 
 #-- Assets
 gem 'sass-rails', '~> 5.0'
@@ -22,8 +21,14 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug'
   gem 'better_errors'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+end
+
+group :production do
+  gem 'pg' # Postgres
+  gem 'rails_12factor' # Heroku
 end
