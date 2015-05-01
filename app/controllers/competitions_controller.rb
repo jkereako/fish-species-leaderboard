@@ -1,13 +1,16 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
 
+  before_action except: [:index, :show] do
+    authorize :competition
+  end
+
   def add_competitor
     add_user
   end
   # GET /competitions
   # GET /competitions.json
   def index
-    authorize :catch
     @competitions = Competition.all
   end
 
@@ -18,7 +21,6 @@ class CompetitionsController < ApplicationController
 
   # GET /competitions/new
   def new
-    authorize :catch
     @competition = Competition.new
     @client_data = {}
     @client_data[:ajaxURL] = "#{users_url}.json"
@@ -34,7 +36,6 @@ class CompetitionsController < ApplicationController
   # POST /competitions
   # POST /competitions.json
   def create
-    authorize :catch
     @competition = Competition.new
 
     @competition.name = competition_params[:name]
@@ -60,7 +61,6 @@ class CompetitionsController < ApplicationController
   # PATCH/PUT /competitions/1
   # PATCH/PUT /competitions/1.json
   def update
-    authorize :catch
     respond_to do |format|
       if @competition.update(competition_params)
         format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
@@ -75,7 +75,6 @@ class CompetitionsController < ApplicationController
   # DELETE /competitions/1
   # DELETE /competitions/1.json
   def destroy
-    authorize :catch
     @competition.destroy
     respond_to do |format|
       format.html { redirect_to competitions_url, notice: 'Competition was successfully destroyed.' }

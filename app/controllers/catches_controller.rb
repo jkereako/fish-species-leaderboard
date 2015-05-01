@@ -1,9 +1,13 @@
 class CatchesController < ApplicationController
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
+
+  before_action except: [:index, :show] do
+    authorize :catch
+  end
+
   # GET /catches
   # GET /catches.json
   def index
-    authorize :catch
     @catches = Catch.all
   end
 
@@ -14,8 +18,6 @@ class CatchesController < ApplicationController
 
   # GET /catches/new
   def new
-    authorize :catch
-
     species_path = Rails.root.join('config', 'data', 'species.yml')
     @species = YAML.load_file species_path
     @catch = Catch.new
@@ -25,13 +27,11 @@ class CatchesController < ApplicationController
 
   # GET /catches/1/edit
   def edit
-    authorize :catch
   end
 
   # POST /catches
   # POST /catches.json
   def create
-    authorize :catch
     @catch = Catch.new(catch_params)
 
     respond_to do |format|
@@ -63,7 +63,6 @@ class CatchesController < ApplicationController
   # DELETE /catches/1
   # DELETE /catches/1.json
   def destroy
-    authorize :catch
     @catch.destroy
     respond_to do |format|
       format.html { redirect_to catches_url, notice: 'Catch was successfully destroyed.' }
