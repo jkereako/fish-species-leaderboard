@@ -18,7 +18,8 @@ class CompetitionsController < ApplicationController
   # GET /competitions/new
   def new
     @competition = Competition.new
-
+    @client_data = {}
+    @client_data[:ajaxURL] = "#{users_url}.json"
     # Create at least 2 users for the competition
     add_competitor
     add_competitor
