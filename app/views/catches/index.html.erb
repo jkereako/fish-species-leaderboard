@@ -5,6 +5,14 @@
       <%=t 'page.catch.index.title' %>
     </h1>
   </header>
+  <% unless @catches.any? %>
+  <p class="lead">
+    There aren't any.
+  </p>
+  <p>
+    <%= link_to 'Log in', new_user_session_path %> and add a bunch.
+  </p>
+  <% else %>
   <table class="table">
     <thead>
       <tr>
@@ -24,7 +32,7 @@
       <% end %>
     </tbody>
   </table>
-
+  <% end %>
   <footer>
     <p>
       <%= link_to 'New Catch', new_catch_path  %>

@@ -1,41 +1,53 @@
 <div class="col-xs-12">
-  <header role="heading">
-    <h1 class="page-header" itemprop="name">
-      <%=t 'page.competition.index.title' %>
-    </h1>
-  </header>
+  <article class="article">
+    <header role="heading">
+      <h1 class="page-header" itemprop="name">
+        <%=t 'page.competition.index.title' %>
+      </h1>
+    </header>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Prize</th>
-        <th>Start</th>
-        <th>Competitors</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @competitions.each do |competition| %>
+    <% unless @competitions.any? %>
+    <p class="lead">
+      There aren't any.
+    </p>
+    <p>
+      <%= link_to 'Log in', new_user_session_path %> and add one.
+    </p>
+    <% else %>
+    <table class="table">
+      <thead>
         <tr>
-          <td>
-            <%= link_to competition.name, competition %>
-          </td>
-          <td>
-            <%= competition.prize %>
-          </td>
-          <td>
-            <%= competition.begins_at %>
-          </td>
-          <!-- <td><%= link_to 'Show', competition %></td>
-          <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
-          <td><%= link_to 'Destroy', competition, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+          <th>Name</th>
+          <th>Prize</th>
+          <th>Start</th>
+          <th>Competitors</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
 
-  <br>
-
-  <%= link_to 'New Competition', new_competition_path %>
+      <tbody>
+        <% @competitions.each do |competition| %>
+          <tr>
+            <td>
+              <%= link_to competition.name, competition %>
+            </td>
+            <td>
+              <%= competition.prize %>
+            </td>
+            <td>
+              <%= competition.begins_at %>
+            </td>
+            <!-- <td><%= link_to 'Show', competition %></td>
+            <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
+            <td><%= link_to 'Destroy', competition, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end  %>
+    <footer>
+      <p>
+        <%= link_to 'New Competition', new_competition_path %>
+      </p>
+    </footer>
+  </article>
 </div>
