@@ -2,7 +2,7 @@ class CreateCompetitions < ActiveRecord::Migration
   def change
     create_table :competitions do |t|
       # Foreign key: the winner
-      t.references :users, index: true, foreign_key: true
+      t.integer :winner_id, :integer, default: 0, null: false
       t.string :name, null: false, default: ''
       t.string :prize, null: false, default: ''
       t.datetime :begins_at, null: false
@@ -13,6 +13,7 @@ class CreateCompetitions < ActiveRecord::Migration
       t.integer :users_count, :integer, default: 0, null: false
       t.timestamps null: false
     end
+    add_index :competitions, :winner_id
     add_index :competitions, :name, unique: true
   end
 end

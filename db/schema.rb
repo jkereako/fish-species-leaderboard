@@ -28,20 +28,20 @@ ActiveRecord::Schema.define(version: 20150501032230) do
   add_index "catches", ["users_id"], name: "index_catches_on_users_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.integer  "users_id"
+    t.integer  "winner_id",     default: 0,  null: false
+    t.integer  "integer",       default: 0,  null: false
     t.string   "name",          default: "", null: false
     t.string   "prize",         default: "", null: false
     t.datetime "begins_at",                  null: false
     t.datetime "ends_at",                    null: false
     t.integer  "catches_count", default: 0,  null: false
-    t.integer  "integer",       default: 0,  null: false
     t.integer  "users_count",   default: 0,  null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
 
   add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true
-  add_index "competitions", ["users_id"], name: "index_competitions_on_users_id"
+  add_index "competitions", ["winner_id"], name: "index_competitions_on_winner_id"
 
   create_table "competitions_users", force: :cascade do |t|
     t.integer "competition_id", null: false

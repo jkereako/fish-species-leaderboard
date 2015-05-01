@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :competitions
+  has_one :victory, class_name: 'Competition'
   has_many :catches
 
   # Include default devise modules. Others available are:

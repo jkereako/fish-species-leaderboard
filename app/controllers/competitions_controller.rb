@@ -22,10 +22,7 @@ class CompetitionsController < ApplicationController
   # GET /competitions/new
   def new
     @competition = Competition.new
-    @client_data = {}
-    @client_data[:ajaxURL] = "#{users_url}.json"
     # Create at least 2 users for the competition
-    add_competitor
     add_competitor
   end
 
@@ -43,8 +40,13 @@ class CompetitionsController < ApplicationController
     @competition.begins_at = Date.parse competition_params[:begins_at]
     @competition.ends_at = Date.parse competition_params[:ends_at]
 
+    # @see http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select-using-an-embedde
+    @competition.competitors = User.find competition_params[:users]
+
+    exit unless @competition.valid?
+
     respond_to do |format|
-      if @competition.save
+      if @competition.save!
         format.html { redirect_to @competition,
                       notice: 'Competition was successfully created.' }
         format.json { render :show,

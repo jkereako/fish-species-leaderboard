@@ -3,5 +3,5 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require typeahead-js
+//= require bootstrap-multiselect
 //= require_tree .
