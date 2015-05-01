@@ -1,1 +1,35 @@
-<h1 class="page-header"><%= @user.name %></h1>
+<article class="">
+  <header role="heading">
+    <h1 class="page-header" itemprop="name">
+      <%= @user.name %>
+    </h1>
+  </header>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Species
+              </th>
+              <th>
+                Bait used
+              </th>
+              <th>
+                Date caught
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @user.catches.each do |catch| %>
+          <tr>
+            <td><%= catch.species %></th>
+            <td><%= catch.bait_used %></td>
+            <td><%= catch.caught_at %></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</article>

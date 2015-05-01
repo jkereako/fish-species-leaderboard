@@ -27,18 +27,10 @@
       <tbody>
         <% @competitions.each do |competition| %>
           <tr>
-            <td>
-              <%= link_to competition.name, competition %>
-            </td>
-            <td>
-              <%= competition.prize %>
-            </td>
-            <td>
-              <%= competition.begins_at %>
-            </td>
-            <!-- <td><%= link_to 'Show', competition %></td>
-            <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
-            <td><%= link_to 'Destroy', competition, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+            <td><%= link_to competition.name, competition %></td>
+            <td><%= competition.prize %></td>
+            <td><%= competition.begins_at %></td>
+            <td><%= competition.competitors.count %></td>
           </tr>
         <% end %>
       </tbody>

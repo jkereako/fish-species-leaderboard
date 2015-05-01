@@ -1,16 +1,11 @@
 <article class="">
   <header role="heading">
     <h1 class="page-header" itemprop="name">
-      <%=t 'page.competition.show.title' %>
+      <%= @competition.name %>
     </h1>
   </header>
     <div class="row">
       <div class="col-sm-6">
-        <h2>Name</h2>
-        <p>
-          <%= @competition.name %>
-        </p>
-
         <h2>Prize</h2>
         <p>
           <%= @competition.prize %>
@@ -21,6 +16,7 @@
         </p>
       </div>
       <div class="col-sm-6">
+        <h2>Competitors</h2>
         <table class="table">
           <thead>
             <tr>
@@ -36,7 +32,7 @@
           <% @competition.competitors.each do |competitor| %>
           <tr>
             <th>
-              <%= competitor.name %>
+              <%= link_to competitor.name, competitor %>
             </th>
             <th>
               <%= competitor.catches.count %>
@@ -46,9 +42,6 @@
           <% end %>
           </tbody>
         </table>
-        <p>
-          <%= render @competition.competitors %>
-        </p>
       </div>
     </div>
   <footer>
