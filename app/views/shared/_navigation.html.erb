@@ -14,12 +14,14 @@
         <li class="<%= css_class_for controller: 'leaderboard' %>" role="presentation">
           <%= link_to t('nav.leaderboard'), leaderboard_path  %>
         </li>
-        <li class="<%= css_class_for controller: 'competitions' %>" role="presentation">
-          <%= link_to t('nav.competitions'), competitions_path  %>
-        </li>
         <li class="<%= css_class_for controller: 'catches' %>" role="presentation">
           <%= link_to t('nav.catches'), catches_path  %>
         </li>
+        <% if user_signed_in? %>
+        <li class="<%= css_class_for controller: 'competitions' %>" role="presentation">
+          <%= link_to t('nav.competitions'), competitions_path  %>
+        </li>
+        <% end %>
       </ul>
 
       <% if user_signed_in? %>

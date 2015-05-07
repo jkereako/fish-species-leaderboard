@@ -1,0 +1,9 @@
+<tr>
+  <th>1</th>
+  <td><%= competitor.name %></td>
+  <td><%= competitor.catches.count %></td>
+  <td>
+    <%= render partial:'catch',
+               object: last_catch_for(competitor:competitor) %>
+  </td>
+</tr>
