@@ -16,7 +16,9 @@
     </div>
   <footer>
     <p>
+      <% if policy(:catch).edit? %>
       <%= link_to 'Edit', edit_catch_path(@catch) %> |
+      <% end %>
       <%= link_to 'Back', catches_path %>
     </p>
   </footer>

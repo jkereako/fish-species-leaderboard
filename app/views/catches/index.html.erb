@@ -36,9 +36,11 @@
     </table>
     <% end %>
     <footer>
+      <% if policy(:catch).new? %>
       <p>
         <%= link_to 'New Catch', new_catch_path, class: 'btn btn-default'  %>
       </p>
+      <% end %>
     </footer>
   </article>
 </div>

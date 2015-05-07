@@ -37,11 +37,13 @@
     </table>
     <% end  %>
     <footer>
+      <% if policy(:competition).new? %>
       <p>
         <%= link_to 'New Competition',
                     new_competition_path,
                     class: 'btn btn-default' %>
       </p>
+      <% end %>
     </footer>
   </article>
 </div>
