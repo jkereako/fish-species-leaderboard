@@ -3,6 +3,11 @@
     <h3 class="panel-title"><%= competition.name %></h3>
   </div>
   <div class="panel-body">
+    <p>
+      <%= time_ago_in_words competition.begins_at %>
+      Began on <%= (competition.ends_at - competition.begins_at)/1.day  %>
+    </p>
+
     <table class="table">
       <thead>
         <th></th>
