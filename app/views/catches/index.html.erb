@@ -1,46 +1,53 @@
-<div class="col-xs-12">
-  <article class="article">
-    <header role="heading">
-      <h1 class="page-header" itemprop="name">
-        <%=t 'page.catch.index.title' %>
-      </h1>
-    </header>
-    <% unless @catches.any? %>
-    <p class="lead">
-      There aren't any.
-    </p>
-    <p>
-      <%= link_to 'Log in', new_user_session_path %> and add a bunch.
-    </p>
-    <% else %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Species</th>
-          <th>Length</th>
-          <th>Angler</th>
-          <th></th>
-        </tr>
-      </thead>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header" itemprop="name" role="heading">
+      <%=t 'page.catch.index.title' %>
+    </h1>
+  </div>
+</div>
 
-      <tbody>
-        <% @catches.each do |catch| %>
-          <tr>
-            <td><%= link_to catch.species, catch %></td>
-            <td><%= catch.length_in_inches %></td>
-            <td><%= catch.user.name %></td>
-            <td>thumbnail</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end %>
-    <footer>
-      <% if policy(:catch).new? %>
-      <p>
-        <%= link_to 'New Catch', new_catch_path, class: 'btn btn-default'  %>
+<div class="row">
+  <div class="col-md-3">
+    things
+  </div>
+  <div class="col-md-9">
+
+      <% unless @catches.any? %>
+      <p class="lead">
+        There aren't any.
       </p>
+      <p>
+        <%= link_to 'Log in', new_user_session_path %> and add a bunch.
+      </p>
+      <% else %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Species</th>
+            <th>Length</th>
+            <th>Angler</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @catches.each do |catch| %>
+            <tr>
+              <td><%= link_to catch.species, catch %></td>
+              <td><%= catch.length_in_inches %></td>
+              <td><%= catch.user.name %></td>
+              <td>thumbnail</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
       <% end %>
-    </footer>
-  </article>
+      <footer>
+        <% if policy(:catch).new? %>
+        <p>
+          <%= link_to 'New Catch', new_catch_path, class: 'btn btn-default'  %>
+        </p>
+        <% end %>
+      </footer>
+  </div>
 </div>
