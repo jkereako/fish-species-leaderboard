@@ -1,35 +1,37 @@
 source 'https://rubygems.org'
 
 #-- Rails
-gem 'rails', '4.2.1'
+gem 'rails'
 
 #-- Assets
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-# gem 'bootstrap-sass'
-# gem 'font-awesome-sass'
+gem 'sass-rails'    # Sass support
+gem 'uglifier'      # Concatenate and minify
+gem 'coffee-rails'  # CoffeeScript support
+gem 'jquery-rails'  # jQuery library
+gem 'turbolinks'
+gem 'jbuilder'      # Easily build JSON
 
 #-- User management
-gem 'devise'
-gem 'devise_invitable'
-gem 'pundit'
+gem 'devise'            # Complete user management
+gem 'devise_invitable'  # Add user invitation s to Devise
+gem 'pundit'            # Define user polcies
 
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
+#-- Documentation
+gem 'sdoc', group: :doc
 
 group :development, :test do
+  gem 'letter_opener'       # Preview mailer templates in development
   gem 'sqlite3'
-  gem 'byebug'
-  gem 'better_errors'
-  gem 'web-console', '~> 2.0'
+  gem 'byebug'              # Call `byebug` anywhere in code to stop execution
+  gem 'better_errors'       # Display robust errors in the browser
+  gem 'web-console'         # Acceess IRB by typing <%= console %> in views
   gem 'spring'
+  gem 'factory_girl_rails'  # Generate models and by-passing validation
+  gem 'rspec-rails'         # The most popular testing framework
 end
 
 group :production do
-  gem 'pg' # Postgres
-  gem 'puma'
-  gem 'rails_12factor' # Heroku
+  gem 'pg'              # PostgreSQL
+  gem 'puma'            # The Puma web server
+  gem 'rails_12factor'  # Heroku
 end
