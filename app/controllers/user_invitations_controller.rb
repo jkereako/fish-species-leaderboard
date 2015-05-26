@@ -1,7 +1,5 @@
 class UserInvitationsController < Devise::InvitationsController
-  before_action do
-    authorize :user_invitation
-  end
+  before_action :authorize_user_invitation
 
   # GET /catches
   # GET /catches.json
@@ -41,6 +39,12 @@ class UserInvitationsController < Devise::InvitationsController
   # DELETE /catches/1.json
   def destroy
     super
+  end
+
+  private
+
+  def authorize_user_invitation
+    authorize :user_invitation
   end
 
 end

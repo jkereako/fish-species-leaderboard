@@ -1,9 +1,6 @@
 class CatchesController < ApplicationController
+  before_action :authorize_catch, except: [:index, :show]
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
-
-  before_action except: [:index, :show] do
-    authorize :catch
-  end
 
   # GET /catches
   # GET /catches.json
@@ -74,9 +71,13 @@ class CatchesController < ApplicationController
   end
 
   private
+    def authorize_catch
+      authorize :catch
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_catch
-      @catch = Catch.find(params[:id])
+      @catch = Catch.find_by_id params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

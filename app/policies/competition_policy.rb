@@ -12,15 +12,14 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.nil?
+    user.present?
   end
 
   def update?
-    !user.nil?
+    user.present?
   end
 
   def destroy?
-    return false if user.nil?
-    user.role == 'administrator'
+    user.present? && user.role == 'administrator'
   end
 end

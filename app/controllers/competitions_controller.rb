@@ -1,9 +1,6 @@
 class CompetitionsController < ApplicationController
+  before_action :authorize_competition, except: [:index, :show]
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
-
-  before_action except: [:index, :show] do
-    authorize :competition
-  end
 
   # GET /competitions
   # GET /competitions.json
@@ -83,9 +80,12 @@ class CompetitionsController < ApplicationController
   end
 
   private
+    def authorize_competition
+      authorize :competition
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_competition
-      @competition = Competition.find(params[:id])
+      @competition = Competition.find_by_id params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
