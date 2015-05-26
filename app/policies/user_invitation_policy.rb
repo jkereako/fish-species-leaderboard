@@ -1,29 +1,11 @@
 class UserInvitationPolicy < ApplicationPolicy
-  def index?
-    return false if user.nil?
-    user.role == 'administrator'
-  end
+  # Only administrators can manage user invitations
+   def create?
+     user.present? && user.admin?
+   end
 
-  def show?
-    return false if user.nil?
-    user.role == 'administrator'
-  end
-
-  def new?
-    !user.nil?
-  end
-
-  def create?
-    !user.nil?
-  end
-
-  def update?
-    return false if user.nil?
-    user.role == 'administrator'
-  end
-
-  def destroy?
-    return false if user.nil?
-    user.role == 'administrator'
-  end
-end
+   # Invited users require rights
+   def update?
+     true
+   end
+ end

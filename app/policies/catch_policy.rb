@@ -8,15 +8,10 @@ class CatchPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.nil?
+    user.present?
   end
 
   def update?
-    !user.nil?
-  end
-
-  def destroy?
-    return false if user.nil?
-    user.role == 'administrator'
+    user.present?
   end
 end

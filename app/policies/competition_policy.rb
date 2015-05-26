@@ -18,8 +18,4 @@ class CompetitionPolicy < ApplicationPolicy
   def update?
     user.present?
   end
-
-  def destroy?
-    user.present? && user.role == 'administrator'
-  end
 end
