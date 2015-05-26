@@ -18,4 +18,17 @@ class Catch
           {name: 'species_sugs'
           source: bloodhound}
 
+# The code below is boilerplate for use with TurboLinks
+# see: http://stackoverflow.com/questions/18770517/rails-4-how-to-use-document-ready-with-turbo-links#18770589
+ready = ->
+  clientData = JSON.parse ($ 'script#client-data'
+  .html())
+
+  # Only load this JavaScript if the corresponding controller is showing.
+  if 'catches' is clientData.controller
+    aCatch = new Catch $ 'input#catch_species'
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
+
 aCatch = new Catch $ 'input#catch_species'

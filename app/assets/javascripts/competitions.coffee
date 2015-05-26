@@ -40,4 +40,12 @@ class Competition
               retVal = false
         retVal
 
-competition = new Competition $ 'form'
+ready = ->
+  clientData = JSON.parse ($ 'script#client-data'
+  .html())
+
+  if 'competitions' is clientData.controller
+    competition = new Competition $ 'form'
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

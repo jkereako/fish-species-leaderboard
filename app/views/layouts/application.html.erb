@@ -8,6 +8,12 @@
     <title><%= content_for?(:title) ? yield(:title) : t('project.name') %></title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <% unless @client_data.nil? %>
+   <script id="client-data" type="application/json">
+     <%= raw @client_data.to_json %>
+   </script>
+   <% end %>
   </head>
   <body>
     <div class="container">
@@ -19,8 +25,5 @@
         </div><!-- /.col-xs-12 -->
       </div><!-- /.row -->
     </div><!-- /.container -->
-
-  <!-- Scripts -->
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
 </html>
