@@ -41,11 +41,15 @@ class Competition
         retVal
 
 ready = ->
-  clientData = JSON.parse ($ 'script#client-data'
-  .html())
+  json = do $ 'script#client-data'
+  .html
 
-  if 'competitions' is clientData.controller
-    competition = new Competition $ 'form'
+  if json?
+    clientData = JSON.parse json
+    if 'competitions' is clientData.controller
+      competition = new Competition $ 'form'
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$ document
+.ready ready
+$ document
+.on 'page:load', ready

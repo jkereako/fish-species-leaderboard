@@ -16,7 +16,7 @@ class CatchesController < ApplicationController
   # GET /catches/new
   def new
     species_path = Rails.root.join('config', 'data', 'species.yml')
-    @species = YAML.load_file species_path
+    @client_data[:species] = YAML.load_file species_path
     @catch = Catch.new
   end
 
