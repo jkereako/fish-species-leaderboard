@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   before_action :set_client_data
+  before_action :set_json_response, only: [:create, :update]
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -13,6 +14,12 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to url_for new_user_session_path
+  end
+
+  protected
+
+  def set_json_response
+    @json_response = { status: 'success', data: { notice: '' } }
   end
 
   private

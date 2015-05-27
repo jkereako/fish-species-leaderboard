@@ -30,6 +30,12 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new
 
+    # REVIEW: Allow for XHR responses and save state when errors occur
+    unless competition_params_present?
+      render :new
+      return
+    end
+
     @competition.name = competition_params[:name]
     @competition.prize = competition_params[:prize]
     @competition.begins_at = Date.parse competition_params[:begins_at]
@@ -80,16 +86,31 @@ class CompetitionsController < ApplicationController
   end
 
   private
+
+  #-- Helpers
+  def competition_params
+    params[:competition]
+  end
+
+  #-- Callbacks
   def authorize_competition
     authorize :competition
   end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_competition
     @competition = Competition.find_by_id params[:id]
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def competition_params
-    params[:competition]
+  def competition_params_present?
+    return false if nil == competition_params[:name]
+    return false if nil == competition_params[:prize]
+    return false if nil == competition_params[:begins_at]
+    return false if nil == competition_params[:ends_at]
+    return false if nil == competition_params[:competitors]
+    return false if nil == competition_params[:name]
+
+    true
   end
+
 end

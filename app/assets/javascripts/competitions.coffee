@@ -22,23 +22,23 @@ class Competition
         #     submitButton.attr "disabled", true
         #     submitButton.disabled = true
 
-    submitButton.click (event) =>
-      do event.preventDefault
-      if false not in (@validate obj for obj in @form.find '.form-control')
-        console.log 'Everything is okay'
-
-    @validate = (field) ->
-        retVal = true
-
-        if field.value is ''
-          retVal = false
-        else
-          if field.type is 'email'
-            pattern = ///[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?///
-
-            if not field.value.match pattern
-              retVal = false
-        retVal
+    # submitButton.click (event) =>
+    #   do event.preventDefault
+    #   if false not in (@validate obj for obj in @form.find '.form-control')
+    #     console.log 'Everything is okay'
+    #
+    # @validate = (field) ->
+    #     retVal = true
+    #
+    #     if field.value is ''
+    #       retVal = false
+    #     else
+    #       if field.type is 'email'
+    #         pattern = ///[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?///
+    #
+    #         if not field.value.match pattern
+    #           retVal = false
+    #     retVal
 
 ready = ->
   json = do $ 'script#client-data'
