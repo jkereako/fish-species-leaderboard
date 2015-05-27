@@ -18,7 +18,7 @@ class CompetitionsController < ApplicationController
     @competition = Competition.new
     # Although there is multiple competitors for a competition, we only need 1
     # competitor so that we can show the user a form
-    @competition.competitors << User.new
+    @competition.users << User.new
   end
 
   # GET /competitions/1/edit
@@ -42,7 +42,7 @@ class CompetitionsController < ApplicationController
     @competition.ends_at = Date.parse competition_params[:ends_at]
 
     # @see http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select-using-an-embedde
-    @competition.competitors = User.find competition_params[:competitors]
+    @competition.users = User.find competition_params[:users]
 
     exit unless @competition.valid?
 
@@ -107,7 +107,7 @@ class CompetitionsController < ApplicationController
     return false if nil == competition_params[:prize]
     return false if nil == competition_params[:begins_at]
     return false if nil == competition_params[:ends_at]
-    return false if nil == competition_params[:competitors]
+    return false if nil == competition_params[:users]
     return false if nil == competition_params[:name]
 
     true

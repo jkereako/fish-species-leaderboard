@@ -33,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-          <% @competition.competitors.each do |competitor| %>
+          <% @competition.users.each do |competitor| %>
           <tr>
             <th>
               <%= link_to competitor.name, competitor %>

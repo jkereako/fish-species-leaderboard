@@ -9,15 +9,12 @@ class Competition < ActiveRecord::Base
              class_name: 'User',
              foreign_key: 'winner_id'
 
-  # A n:m association. Allows us to keep historical data
-  has_and_belongs_to_many :competitors,
-                          inverse_of: 'competitions',
-                          class_name: 'User',
-                          counter_cache: true
+  has_many :memberships
+  has_many :users, through: 'memberships'
 
   # Allows us to associate multiple User objects with 1 Competition object
   # when updating
-  accepts_nested_attributes_for :competitors
+  accepts_nested_attributes_for :users
 
   # Overidden
   def to_param

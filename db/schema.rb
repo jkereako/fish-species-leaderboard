@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501171754) do
+ActiveRecord::Schema.define(version: 20150527143124) do
 
   create_table "catches", force: :cascade do |t|
     t.integer  "user_id"
@@ -43,13 +43,15 @@ ActiveRecord::Schema.define(version: 20150501171754) do
   add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true
   add_index "competitions", ["winner_id"], name: "index_competitions_on_winner_id"
 
-  create_table "competitions_users", force: :cascade do |t|
-    t.integer "competition_id", null: false
-    t.integer "user_id",        null: false
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "competition_id", null: false
+    t.integer  "user_id",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "competitions_users", ["competition_id"], name: "index_competitions_users_on_competition_id"
-  add_index "competitions_users", ["user_id"], name: "index_competitions_users_on_user_id"
+  add_index "memberships", ["competition_id"], name: "index_memberships_on_competition_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",   null: false
