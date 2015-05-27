@@ -28,17 +28,16 @@ ActiveRecord::Schema.define(version: 20150501171754) do
   add_index "catches", ["user_id"], name: "index_catches_on_user_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.integer  "winner_id",     default: 0,    null: false
-    t.integer  "integer",       default: 0,    null: false
-    t.string   "name",          default: "",   null: false
-    t.string   "prize",         default: "",   null: false
-    t.datetime "begins_at",                    null: false
-    t.datetime "ends_at",                      null: false
-    t.boolean  "is_active",     default: true, null: false
-    t.integer  "catches_count", default: 0,    null: false
-    t.integer  "users_count",   default: 0,    null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "winner_id",            default: 0,    null: false
+    t.string   "name",                 default: "",   null: false
+    t.string   "prize",                default: "",   null: false
+    t.datetime "begins_at",                           null: false
+    t.datetime "ends_at",                             null: false
+    t.boolean  "is_active",            default: true, null: false
+    t.integer  "winner_catches_count", default: 0,    null: false
+    t.integer  "users_count",          default: 0,    null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true
@@ -53,12 +52,12 @@ ActiveRecord::Schema.define(version: 20150501171754) do
   add_index "competitions_users", ["user_id"], name: "index_competitions_users_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "email",                  default: "",   null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -67,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150501171754) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        default: 0,  null: false
+    t.integer  "failed_attempts",        default: 0,    null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "created_at"
@@ -80,9 +79,10 @@ ActiveRecord::Schema.define(version: 20150501171754) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
-    t.string   "name",                   default: "", null: false
-    t.string   "role",                   default: "", null: false
-    t.integer  "catches_count",          default: 0,  null: false
+    t.string   "name",                   default: "",   null: false
+    t.string   "role",                   default: "",   null: false
+    t.boolean  "is_active",              default: true, null: false
+    t.integer  "catches_count",          default: 0,    null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

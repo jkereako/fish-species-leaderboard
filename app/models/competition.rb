@@ -1,4 +1,6 @@
 class Competition < ActiveRecord::Base
+  scope :active, -> { where is_active: true }
+
   # Creates the method `winner` which is associated with the model `User` and
   # the column name `winner_id`. And so, `@competition.winner` returns a `User`
   # object.

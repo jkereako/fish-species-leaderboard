@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   scope :administrators, -> { where role: 'administrator' }
   scope :users, -> { where role: 'user' }
+  scope :active, -> { where is_active: true }
+  scope :leaders, -> { order 'catches_count DESC' }
 
   ROLES = %w(administrator user)
 
