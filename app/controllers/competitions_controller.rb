@@ -80,16 +80,16 @@ class CompetitionsController < ApplicationController
   end
 
   private
-    def authorize_competition
-      authorize :competition
-    end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_competition
-      @competition = Competition.find_by_id params[:id]
-    end
+  def authorize_competition
+    authorize :competition
+  end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_competition
+    @competition = Competition.find_by_id params[:id]
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def competition_params
-      params[:competition]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def competition_params
+    params[:competition]
+  end
 end

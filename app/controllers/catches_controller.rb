@@ -71,17 +71,17 @@ class CatchesController < ApplicationController
   end
 
   private
-    def authorize_catch
-      authorize :catch
-    end
+  def authorize_catch
+    authorize :catch
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_catch
-      @catch = Catch.find_by_id params[:id]
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_catch
+    @catch = Catch.find_by_id params[:id]
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def catch_params
-      params[:catch]
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def catch_params
+    params[:catch]
+  end
 end

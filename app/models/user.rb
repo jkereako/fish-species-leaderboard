@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable,
          :rememberable, :trackable, :validatable
 
+  # Overidden
+  def to_param
+    "#{id} #{name}".parameterize
+  end
+
   def admin?
     role == ROLES.first
   end

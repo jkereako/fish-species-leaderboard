@@ -16,18 +16,18 @@ class UsersController < ApplicationController
   end
 
   private
-    def authorize_user
-      authorize :user
-    end
+  def authorize_user
+    authorize :user
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find_by_id params[:id]
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find_by_id params[:id]
+  end
 
-    # Never trust parameters from the scary internet, only allow the white lis
-    # through.
-    def user_params
-      params[:user]
-    end
+  # Never trust parameters from the scary internet, only allow the white lis
+  # through.
+  def user_params
+    params[:user]
+  end
 end
