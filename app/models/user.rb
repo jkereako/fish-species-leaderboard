@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   ROLES = %w(administrator user)
 
-  has_many :memberships
+  has_many :memberships, inverse_of: 'user'
   has_many :competitions, through: 'memberships'
 
   has_one :victory, inverse_of: 'winner', class_name: 'Competition'

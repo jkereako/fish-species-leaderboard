@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20150527143124) do
 
   create_table "catches", force: :cascade do |t|
+    t.integer  "competition_id"
     t.integer  "user_id"
     t.string   "species",              default: "", null: false
     t.integer  "length_in_inches",     default: 0,  null: false
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150527143124) do
     t.datetime "updated_at",                        null: false
   end
 
+  add_index "catches", ["competition_id"], name: "index_catches_on_competition_id"
   add_index "catches", ["species"], name: "index_catches_on_species"
   add_index "catches", ["user_id"], name: "index_catches_on_user_id"
 
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150527143124) do
     t.boolean  "is_active",            default: true, null: false
     t.integer  "winner_catches_count", default: 0,    null: false
     t.integer  "users_count",          default: 0,    null: false
+    t.integer  "catches_count",        default: 0,    null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

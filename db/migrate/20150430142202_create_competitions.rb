@@ -12,6 +12,8 @@ class CreateCompetitions < ActiveRecord::Migration
       t.integer :winner_catches_count, default: 0, null: false
       # Magic columns
       t.integer :users_count, default: 0, null: false
+      # Total catches among all competitors
+      t.integer :catches_count, default: 0, null: false
       t.timestamps null: false
     end
     add_index :competitions, :winner_id

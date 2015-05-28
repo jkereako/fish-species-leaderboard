@@ -9,7 +9,10 @@ class Competition < ActiveRecord::Base
              class_name: 'User',
              foreign_key: 'winner_id'
 
-  has_many :memberships
+  # A catch must be associated with a competition. Each competition will have
+  # the same catches.
+  has_many :catches, inverse_of: 'competition'
+  has_many :memberships, inverse_of: 'competition'
   has_many :users, through: 'memberships'
 
   # Allows us to associate multiple User objects with 1 Competition object
