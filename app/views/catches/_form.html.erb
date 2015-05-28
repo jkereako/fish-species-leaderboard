@@ -1,6 +1,6 @@
 <%= form_for @catch do |f| %>
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-md-5 col-md-offset-1">
       <% if @catch.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@catch.errors.count, "error") %> prohibited this catch from being saved:</h2>
@@ -32,6 +32,9 @@
                       class: 'form-control',
                       required: true,
                       placeholder: t('page.catch.form.placeholder.length_in_inches') %>
+        <p class="small help-block">
+          Leave blank (0) if you didn't measure the catch.
+        </p>
       </div>
 
       <div class="form-group">
@@ -43,7 +46,7 @@
                           placeholder: t('page.catch.form.placeholder.bait_used') %>
       </div>
   </div><!-- /.col-sm-6 -->
-  <div class="col-sm-6">
+  <div class="col-md-5">
 
         <div class="form-group">
           <%= f.label :location_description,
@@ -70,7 +73,7 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="actions">
-      <%= f.submit t('generic.term.submit'), class: 'btn btn-primary' %>
+      <%= f.submit 'Add catch', class: 'btn btn-lg btn-primary center-block' %>
     </div>
   </div>
 </div>

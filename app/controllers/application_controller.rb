@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   before_action :set_client_data
-  before_action :set_json_response, only: [:create, :update]
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

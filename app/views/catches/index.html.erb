@@ -7,47 +7,62 @@
 </div>
 
 <div class="row">
-  <div class="col-md-3">
+  <!-- <div class="col-md-3">
     things
-  </div>
-  <div class="col-md-9">
-
-      <% unless @catches.any? %>
-      <p class="lead">
-        There aren't any.
-      </p>
-      <p>
-        <%= link_to 'Log in', new_user_session_path %> and add a bunch.
-      </p>
-      <% else %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Species</th>
-            <th>Length</th>
-            <th>Angler</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @catches.each do |catch| %>
+  </div> -->
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% if @catches.any? %>
+        <table class="table">
+          <thead>
             <tr>
-              <td><%= link_to catch.species, catch %></td>
-              <td><%= catch.length_in_inches %></td>
-              <td><%= catch.user.name %></td>
-              <td>thumbnail</td>
+              <th>Species</th>
+              <th>Length</th>
+              <th>Angler</th>
+              <th></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <% end %>
-      <footer>
-        <% if policy(:catch).new? %>
-        <p>
-          <%= link_to 'New Catch', new_catch_path, class: 'btn btn-default'  %>
+          </thead>
+
+          <tbody>
+            <% @catches.each do |catch| %>
+              <tr>
+                <td><%= link_to catch.species, catch %></td>
+                <td><%= catch.length_in_inches %></td>
+                <td><%= catch.user.name %></td>
+                <td>thumbnail</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% else %>
+        <p class="lead">
+          No catches yet.
         </p>
-        <% end %>
+        <p>
+          <% unless user_signed_in? %>
+          Log in and add some catches.
+          <% else %>
+          Click on the button below to add a catch
+          <% end %>
+        </p>
+      </div><!-- ./panel-body-->
+      <div class="panel-footer">
+        <p>
+          <% unless user_signed_in? %>
+          <%= link_to 'Log in', new_user_session_path, class: 'btn btn-lg btn-primary' %>
+          <% else %>
+          <% if policy(:catch).new? %>
+          <%= link_to 'New Catch', new_catch_path, class: 'btn btn-lg btn-primary'  %>
+          <% end %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <% end %>
+      <footer>
+
+
       </footer>
   </div>
 </div>
