@@ -16,12 +16,6 @@ class ApplicationController < ActionController::Base
     redirect_to url_for new_user_session_path
   end
 
-  protected
-
-  def set_json_response
-    @json_response = { status: 'success', data: { notice: '' } }
-  end
-
   private
 
   # Pass the name of the controller to the client.
