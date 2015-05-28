@@ -1,5 +1,5 @@
 class Species
-  FILE_NAME = 'species.yml'
+  FILE_PATH = Rails.root.join('config', 'data', 'species.yml')
 
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -20,7 +20,7 @@ class Species
   end
 
   def self.all
-    YAML.load_file Rails.root.join('config', 'data', FILE_NAME)
+    YAML.load_file FILE_PATH
   end
 
 end
