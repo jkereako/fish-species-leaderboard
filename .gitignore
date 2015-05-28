@@ -1,42 +1,33 @@
-# Generic files
+#-- Generic
 *~
 *.DS_Store
 *.swp
+*.out
 *.log
 Thumbs.db
 
-#-- Bower assets
-# These files need to be present for deploying on Heroku
-# /vendor/assets/components
-
-#-- Development files
-db/seeds/development.rb
-
+#-- Rails
 *.rbc
 capybara-*.html
 /log
 /tmp
 /db/*.sqlite3
-/db/*.sqlite3-journal
 /public/system
-/coverage/
+/coverage
 /spec/tmp
 **.orig
 rerun.txt
 pickle-email-*.html
 
-#-- Secrets
-config/initializers/secret_token.rb
+#-- Sidekiq
+dump.rdb
 
-## Environment normalisation:
+#-- Bundler
 /.bundle
 /vendor/bundle
 
-# these should all be checked in to normalise the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+#-- Ruby version manager (RVM)
 .rvmrc
 
-# Ignore pow environment settings
-.powenv
+#-- Foreman
+.env
