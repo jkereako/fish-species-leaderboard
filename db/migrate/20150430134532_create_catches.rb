@@ -2,8 +2,8 @@ class CreateCatches < ActiveRecord::Migration
   def change
     create_table :catches do |t|
       #-- Foreign keys
-      t.references :competition, index: true, foreign_key: true
-      t.references :user, index: true, foreign_key: true
+      t.belongs_to :competition, index: true, foreign_key: true, null: false
+      t.belongs_to :user, index: true, foreign_key: true, null: false
 
       t.string :species, null: false, default: ''
       t.integer :length_in_inches, null: false, default: 0

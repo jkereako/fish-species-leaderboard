@@ -1,0 +1,53 @@
+.page-footer {
+  margin-top: 20px;
+  padding: 40px 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+$animation_duration: 1000ms;
+
+// .glyphicon-refresh-animate {
+//     animation: spin .7s infinite linear;
+//     -webkit-animation: spin2 .7s infinite linear;
+// }
+
+.glyphicon-refresh-animate {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: $animation_duration;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: $animation_duration;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: $animation_duration;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+
+    animation-name: spin;
+    animation-duration: $animation_duration;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}

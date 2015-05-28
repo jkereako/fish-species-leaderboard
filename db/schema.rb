@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20150527143124) do
 
   create_table "catches", force: :cascade do |t|
-    t.integer  "competition_id"
-    t.integer  "user_id"
+    t.integer  "competition_id",                    null: false
+    t.integer  "user_id",                           null: false
     t.string   "species",              default: "", null: false
     t.integer  "length_in_inches",     default: 0,  null: false
     t.string   "bait_used",            default: "", null: false

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= I18n.locale %>">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,10 +31,17 @@
             </div>
           </div><!-- /.row-->
         </header>
-      </section>
-      
-      <%= yield %>
 
+        <%= yield %>
+
+        <footer class="page-footer small">
+          <div class="row">
+            <div class="col-xs-12">
+              Footer
+            </div>
+          </div>
+        </footer>
+      </section>
     </div><!-- /.container -->
   </body>
 </html>
