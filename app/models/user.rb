@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_one :victory, inverse_of: 'winner', class_name: 'Competition'
   has_many :catches, inverse_of: 'user'
 
+  validates :name, presence: true
   validates :role, inclusion: { in: ROLES,
                                 message: "%{value} is an invalid role type" }
 

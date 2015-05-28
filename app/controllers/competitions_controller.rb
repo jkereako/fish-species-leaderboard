@@ -30,21 +30,16 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new
 
-    # REVIEW: Allow for XHR responses and save state when errors occur
-    unless competition_params_present?
-      render :new
-      return
-    end
-
     @competition.name = competition_params[:name]
     @competition.prize = competition_params[:prize]
     @competition.begins_at = Date.parse competition_params[:begins_at]
     @competition.ends_at = Date.parse competition_params[:ends_at]
 
-    # @see http://stackoverflow.com/questions/8929230/why-is-the-first-element-always-blank-in-my-rails-multi-select-using-an-embedde
-    @competition.users = User.find competition_params[:users]
-
-    exit unless @competition.valid?
+    begin
+      @competition.users = User.find_by_id competition_params[:users]
+    rescue NoMethodError
+      puts 'nah'
+    end
 
     respond_to do |format|
       if @competition.save!
@@ -100,17 +95,6 @@ class CompetitionsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_competition
     @competition = Competition.find_by_id params[:id]
-  end
-
-  def competition_params_present?
-    return false if nil == competition_params[:name]
-    return false if nil == competition_params[:prize]
-    return false if nil == competition_params[:begins_at]
-    return false if nil == competition_params[:ends_at]
-    return false if nil == competition_params[:users]
-    return false if nil == competition_params[:name]
-
-    true
   end
 
 end

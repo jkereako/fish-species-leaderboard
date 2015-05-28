@@ -70,6 +70,7 @@ class CatchesController < ApplicationController
   end
 
   private
+
   def authorize_catch
     authorize :catch
   end

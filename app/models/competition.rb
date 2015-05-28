@@ -15,6 +15,14 @@ class Competition < ActiveRecord::Base
   has_many :memberships, inverse_of: 'competition'
   has_many :users, through: 'memberships'
 
+  validates :name, presence: true, uniqueness: true
+  validates :prize, presence: true
+  validates :begins_at, presence: true
+  validates :ends_at, presence: true
+  validate :begins_at_is_not_in_the_past
+  validate :ends_at_is_greater_than_begins_at
+  validates :users, presence: true
+
   # Allows us to associate multiple User objects with 1 Competition object
   # when updating
   accepts_nested_attributes_for :users
@@ -22,5 +30,19 @@ class Competition < ActiveRecord::Base
   # Overidden
   def to_param
     "#{id} #{name}".parameterize
+  end
+
+  private
+
+  def begins_at_is_not_in_the_past
+    if Time.zone.today > begins_at
+      errors.add(:begins_at, 'must be today or in the future')
+    end
+  end
+
+  def ends_at_is_greater_than_begins_at
+    if ends_at <= begins_at
+      errors.add(:ends_at, 'must be greater than beginning date')
+    end
   end
 end
