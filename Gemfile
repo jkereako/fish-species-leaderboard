@@ -21,7 +21,6 @@ gem 'pundit'            # Define user polcies
 gem 'sdoc', group: :doc
 
 group :development, :test do
-  gem 'letter_opener'       # Preview mailer templates in development
   gem 'sqlite3'
   gem 'byebug'              # Call `byebug` anywhere in code to stop execution
   gem 'better_errors'       # Display robust errors in the browser
@@ -29,6 +28,10 @@ group :development, :test do
   gem 'spring'
   gem 'factory_girl_rails'  # Generate models and by-passing validation
   gem 'rspec-rails'         # The most popular testing framework
+end
+
+group :development, :staging do
+  gem 'letter_opener'       # Preview mailer templates in development
 end
 
 group :production do
