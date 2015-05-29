@@ -11,6 +11,10 @@ Rails.application.routes.draw do
         as: 'edit_user_registration'
     put 'users/:id' => 'devise/registrations#update',
         as: 'user_registration'
+    put 'users/:id/toggle_activation' => 'users#toggle_activation',
+        as: 'toggle_user_activation',
+        format: 'json',
+        constraints: -> (req) { req.xhr? }
   end
 
   # Restrict updating catches to users

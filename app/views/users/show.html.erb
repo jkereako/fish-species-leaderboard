@@ -21,10 +21,36 @@
           Last log in <strong><time datetime="<%= @user.last_sign_in_at.to_formatted_s :db %>"><%= time_ago_or_never_in_words @user.last_sign_in_at %></time></strong>
         </p>
         <% end %>
+      </div>
+    </div>
+
+    <% unless @user == current_user %>
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        Activation
+      </div>
+      <div class="panel-body">
+        <p class="help-block">
+          If you deactivate this user, he will no longer be able to log in.
+        </p>
+
+        <p>
+          <%= link_to is_active_in_words(@user.is_active).upcase,
+                    toggle_user_activation_path(@user),
+                    { class: "btn btn-danger",
+                      id:'toggle-activation',
+                      aria:{pressed: false},
+                      data:{confirm: "Are you certain you want to alter #{@user.name}?", toggle: 'button'},
+                      method: 'put',
+                      remote: true
+                    } %>
+        </p>
 
       </div>
     </div>
-  </div>
+    <% end %>
+  </div><!-- /.col-md-6-->
+
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
