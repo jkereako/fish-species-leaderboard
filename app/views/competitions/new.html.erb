@@ -1,11 +1,22 @@
-<article class="article">
-  <header role="heading">
-    <h1 class="page-header" itemprop="name"><%=t 'page.competition.new.title' %></h1>
-  </header>
-  <%= render 'form' %>
-  <footer>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header" itemprop="name">
+      <%=t 'page.competition.new.title' %>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= render 'form' %>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
     <p>
       <%= link_to 'Back', competitions_path %>
     </p>
-  </footer>
-</article>
+  </div>
+</div>

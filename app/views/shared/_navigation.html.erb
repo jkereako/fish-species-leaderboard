@@ -5,7 +5,7 @@
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<%= url_for leaderboard_path  %>">
+      <a class="navbar-brand" href="<%= leaderboard_url  %>">
         <%= t 'project.name' %>
       </a>
     </div>
@@ -14,12 +14,30 @@
         <li class="<%= css_class_for controller: 'leaderboard' %>" role="presentation">
           <%= link_to t('nav.leaderboard'), leaderboard_path  %>
         </li>
-        <li class="<%= css_class_for controller: 'catches' %>" role="presentation">
-          <%= link_to t('nav.catches'), catches_path  %>
-        </li>
-        <% if user_signed_in? %>
+        <% if policy(:catch).create? %>
+        <li class="dropdown">
+          <a href="<%= competitions_url  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <%= t('nav.catches') %> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <%= link_to t('nav.catches'),
+                          catches_path,
+                          role: 'menuitem'  %>
+            </li>
+            <li role="presentation">
+              <%= link_to 'Add catch',
+                          new_catch_path,
+                          role: 'menuitem'  %>
+            </li>
+          </ul>
+        </li><!--/.dropdown-->
         <li class="<%= css_class_for controller: 'competitions' %>" role="presentation">
           <%= link_to t('nav.competitions'), competitions_path  %>
+        </li>
+        <% else %>
+        <li class="<%= css_class_for controller: 'catches' %>" role="presentation">
+          <%= link_to t('nav.catches'), catches_path  %>
         </li>
         <% end %>
       </ul>
@@ -34,7 +52,7 @@
         <% if user_signed_in? %>
         <% if policy(:user).show? %>
         <li class="dropdown">
-          <a href="<%= url_for users_path  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          <a href="<%= users_url  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <%= t 'nav.users.name' %> <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">

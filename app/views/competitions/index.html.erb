@@ -1,49 +1,61 @@
-<div class="col-xs-12">
-  <article class="article">
-    <header role="heading">
-      <h1 class="page-header" itemprop="name">
-        <%=t 'page.competition.index.title' %>
-      </h1>
-    </header>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header" itemprop="name">
+      <%=t 'page.competition.index.title' %>
+    </h1>
+  </div>
+</div>
 
-    <% unless @competitions.any? %>
-    <p class="lead">
-      There aren't any.
-    </p>
-    <p>
-      <%= link_to 'Log in', new_user_session_path %> and add one.
-    </p>
-    <% else %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Prize</th>
-          <th>Start</th>
-          <th>Competitors</th>
-        </tr>
-      </thead>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% unless @competitions.any? %>
+        <p class="lead">
+          There aren't any.
+        </p>
+        <p>
+          <%= link_to 'Log in', new_user_session_path %> and add one.
+        </p>
+        <% else %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Prize</th>
+              <th>Start</th>
+              <th>Competitors</th>
+              <th></th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <% @competitions.each do |competition| %>
-          <tr>
-            <td><%= link_to competition.name, competition %></td>
-            <td><%= competition.prize %></td>
-            <td><%= competition.begins_at %></td>
-            <td><%= competition.users.count %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% end  %>
-    <footer>
+          <tbody>
+            <% @competitions.each do |competition| %>
+              <tr>
+                <td><%= link_to competition.name, competition %></td>
+                <td><%= competition.prize %></td>
+                <td><%= competition.begins_at %></td>
+                <td><%= competition.users.count %></td>
+                <td>
+                  <span class="label <%= bs_is_active_label_class competition.active? %>">
+                    <%= competition_status_in_words(competition).upcase %>
+                  </span>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% end  %>
+      </div><!-- /.panel-body-->
       <% if policy(:competition).new? %>
-      <p>
-        <%= link_to 'New Competition',
-                    new_competition_path,
-                    class: 'btn btn-default' %>
-      </p>
+      <div class="panel-footer">
+        <p>
+          <%= link_to 'New Competition',
+                  new_competition_path,
+                  class: 'btn btn-default' %>
+        </p>
+      </div>
       <% end %>
-    </footer>
-  </article>
+    </div>
+  </div>
 </div>

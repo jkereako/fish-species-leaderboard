@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def bs_is_active_label_class(is_active)
+    if is_active then 'label-success' else 'label-danger' end
+  end
+
   def css_class_for(controller:)
     'active' if params[:controller] == controller
   end

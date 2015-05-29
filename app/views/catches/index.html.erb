@@ -7,9 +7,6 @@
 </div>
 
 <div class="row">
-  <!-- <div class="col-md-3">
-    things
-  </div> -->
   <div class="col-xs-12">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -35,34 +32,20 @@
             <% end %>
           </tbody>
         </table>
-        <% else %>
+        <% end %>
         <p class="lead">
           No catches yet.
         </p>
-        <p>
-          <% unless user_signed_in? %>
-          Log in and add some catches.
-          <% else %>
-          Click on the button below to add a catch
-          <% end %>
-        </p>
       </div><!-- ./panel-body-->
+      <% if policy(:catch).new? %>
       <div class="panel-footer">
-        <p>
-          <% unless user_signed_in? %>
-          <%= link_to 'Log in', new_user_session_path, class: 'btn btn-lg btn-primary' %>
-          <% else %>
-          <% if policy(:catch).new? %>
-          <%= link_to 'New Catch', new_catch_path, class: 'btn btn-lg btn-primary'  %>
-          <% end %>
-          <% end %>
+        <%= link_to 'Add a catch', new_catch_path, class: 'btn btn-default'  %>
+        <p class="small help-block">
+          NOTE: You can add a catch only if you're already competing.
         </p>
       </div>
-    </div>
-    <% end %>
-      <footer>
+      <% end %>
+    </div><!-- /.panel -->
 
-
-      </footer>
   </div>
 </div>

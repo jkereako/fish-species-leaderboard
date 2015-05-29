@@ -6,18 +6,9 @@
   </header>
     <div class="row">
       <div class="col-sm-6">
-        <h2>Prize</h2>
-        <p>
-          <%= @competition.prize %>
-        </p>
-        <h2>Start</h2>
-        <p>
-          <%= @competition.begins_at %>
-        </p>
-        <h2>End</h2>
-        <p>
-          <%= @competition.ends_at %>
-        </p>
+        <h2>Prize <small><%= @competition.prize %></small></h2>
+        <h2>Start <small><%= @competition.begins_at %></small></h2>
+        <h2>End <small><%= @competition.ends_at %></small></h2>
       </div>
       <div class="col-sm-6">
         <h2>Competitors</h2>

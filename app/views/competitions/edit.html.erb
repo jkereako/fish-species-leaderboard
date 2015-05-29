@@ -1,25 +1,39 @@
-<div class="col-md-6 col-md-offset-3">
-  <header role="heading">
-    <h1 class="page-header" itemprop="name"><%=t 'page.competition.new.title' %></h1>
-  </header>
-
-<%= render 'form' %>
-
-<div class="panel panel-danger">
-  <div class="panel-heading">
-    <h3 class="panel-title" id="panel-title">
-      <%= t('generic.term.delete') %>
-      <a class="anchorjs-link" href="#panel-title"><span class="anchorjs-icon"></span></a>
-    </h3>
-  </div>
-  <div class="panel-body">
-    <%= link_to t('action.delete'),
-                @competition,
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header" itemprop="name">
+      Editing competition
+    </h1>
   </div>
 </div>
 
-<%= link_to 'Show', @competition %> |
-<%= link_to 'Back', competitions_path %>
+<div class="row">
+  <div class="col-md-9">
+    <%= render 'form' %>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title" id="panel-title">
+          Delete competition
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p class="small help-block">
+          if you delete this compeition, all data associated with it is going as well.
+        </p>
+        <%= link_to t('generic.term.delete'),
+                    @competition,
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to 'Show', @competition %> |
+    <%= link_to 'Back', competitions_path %>
+  </div>
 </div>

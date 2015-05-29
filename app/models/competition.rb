@@ -32,6 +32,10 @@ class Competition < ActiveRecord::Base
     "#{id} #{name}".parameterize
   end
 
+  def active?
+    is_active
+  end
+
   private
 
   def begins_at_is_not_in_the_past
