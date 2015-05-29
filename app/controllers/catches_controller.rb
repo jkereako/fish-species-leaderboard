@@ -40,7 +40,11 @@ class CatchesController < ApplicationController
         format.json { render :show, status: :created, location: @catch }
       else
         format.html { render :new }
-        format.json { render json: @catch.errors, status: :unprocessable_entity }
+        format.json do
+          render 'shared/error',
+                 locals: { errors: @catch.errors },
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -54,7 +58,11 @@ class CatchesController < ApplicationController
         format.json { render :show, status: :ok, location: @catch }
       else
         format.html { render :edit }
-        format.json { render json: @catch.errors, status: :unprocessable_entity }
+        format.json do
+          render 'shared/error',
+                 locals: { errors: @catch.errors },
+                 status: :unprocessable_entity
+        end
       end
     end
   end

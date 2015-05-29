@@ -42,7 +42,7 @@ class CompetitionsController < ApplicationController
     end
 
     respond_to do |format|
-      if @competition.save!
+      if @competition.save
         format.html { redirect_to @competition,
                       notice: 'Competition was successfully created.' }
         format.json { render :show,
@@ -50,8 +50,12 @@ class CompetitionsController < ApplicationController
                       location: @competition}
       else
         format.html { render :new }
-        format.json { render json: @competition.errors,
-                             status: :unprocessable_entity }
+        format.json do
+          render 'shared/error',
+                 locals: { errors: @competition.errors,
+                           notice: 'Data missing or invalid'},
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -65,7 +69,12 @@ class CompetitionsController < ApplicationController
         format.json { render :show, status: :ok, location: @competition }
       else
         format.html { render :edit }
-        format.json { render json: @competition.errors, status: :unprocessable_entity }
+        format.json do
+          render 'shared/error',
+                 locals: { errors: @competition.errors,
+                           notice: 'Invalid data' },
+                 status: :unprocessable_entity
+        end
       end
     end
   end

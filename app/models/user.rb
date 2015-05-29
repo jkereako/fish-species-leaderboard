@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
   has_many :catches, inverse_of: 'user'
 
   validates :name, presence: true
-  validates :role, inclusion: { in: ROLES,
-                                message: "%{value} is an invalid role type" }
+  validates :role, inclusion: { in: ROLES }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

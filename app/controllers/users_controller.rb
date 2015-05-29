@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   private
+  
   def authorize_user
     authorize :user
   end

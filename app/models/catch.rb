@@ -10,7 +10,7 @@ class Catch < ActiveRecord::Base
   validates :location_description, presence: true
   validates :length_in_inches,
             presence: true,
-            numericality: { only_integer: true },
+            numericality: { only_integer: true, greater_than_or_equal_to: 0 },
             allow_blank: true
 
   # Overidden
@@ -18,11 +18,3 @@ class Catch < ActiveRecord::Base
     "#{id} #{species}".parameterize
   end
 end
-
-# t.integer  "competition_id",                    null: false
-# t.integer  "user_id",                           null: false
-# t.string   "species",              default: "", null: false
-# t.integer  "length_in_inches",     default: 0,  null: false
-# t.string   "bait_used",            default: "", null: false
-# t.string   "location_description", default: "", null: false
-# t.datetime "caught_at",                         null: false

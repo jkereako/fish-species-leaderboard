@@ -1,0 +1,11 @@
+<% if errors.any? %>
+ <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>Error!</h4>
+    <% errors.full_messages.each do |message| %>
+    <p>
+      <%= message %>
+    </p>
+    <% end %>
+ </div>
+<% end %>
