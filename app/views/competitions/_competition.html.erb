@@ -1,0 +1,10 @@
+<p class="lead">
+  <%= link_to competition.name, competition_path(competition) %>
+</p>
+<hr>
+<p>
+  Began on <strong><time datetime="<%= competition.begins_at.to_formatted_s :db %>"><%= competition.begins_at.to_formatted_s :month_day_year %></time></strong> and ends on <strong><time datetime="<%= competition.ends_at.to_formatted_s :db %>"><%= competition.ends_at.to_formatted_s :month_day_year %></time></strong>
+</p>
+<p>
+  The winner gets <strong><%= competition.prize %></strong>
+</p>

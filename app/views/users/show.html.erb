@@ -1,11 +1,49 @@
-<article class="">
-  <header role="heading">
+<div class="row">
+  <div class="col-xs-12">
     <h1 class="page-header" itemprop="name">
       <%= @user.name %>
     </h1>
-  </header>
-    <div class="row">
-      <div class="col-xs-12">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Profile
+      </div>
+      <div class="panel-body">
+        <p>
+          Memember since <strong><time datetime="<%= @user.invitation_accepted_at.to_formatted_s :db %>"><%= time_ago_or_never_in_words @user.invitation_accepted_at %></time></strong>
+        </p>
+        <% if @user.last_sign_in_at.present? %>
+        <p>
+          Last log in <strong><time datetime="<%= @user.last_sign_in_at.to_formatted_s :db %>"><%= time_ago_or_never_in_words @user.last_sign_in_at %></time></strong>
+        </p>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Current competitions
+      </div>
+      <div class="panel-body">
+        <% if @user.competitions.active.any? %>
+        <%= render @user.competitions.active %>
+        <% else %>
+        Currently not competiting
+        <% end %>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Recent catches
+      </div>
+      <div class="panel-body">
+        <% if @user.catches.any? %>
         <table class="table">
           <thead>
             <tr>
@@ -21,15 +59,13 @@
             </tr>
           </thead>
           <tbody>
-          <% @user.catches.each do |catch| %>
-          <tr>
-            <td><%= catch.species %></th>
-            <td><%= catch.bait_used %></td>
-            <td><%= catch.caught_at %></td>
-          </tr>
-          <% end %>
+          <%= render @user.catches.recent.top_10 %>
           </tbody>
         </table>
+        <% else %>
+        No catches on file
+        <% end %>
       </div>
     </div>
-</article>
+  </div>
+</div>

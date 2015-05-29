@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
   def admin?
     role == ROLES.first
   end
+
+  def active?
+    is_active
+  end
 end
