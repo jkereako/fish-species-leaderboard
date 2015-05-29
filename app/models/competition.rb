@@ -1,6 +1,8 @@
 class Competition < ActiveRecord::Base
   scope :active, -> { where is_active: true }
 
+  attr_accessor :skip_validate_begins_at_is_not_in_the_past
+
   # Creates the method `winner` which is associated with the model `User` and
   # the column name `winner_id`. And so, `@competition.winner` returns a `User`
   # object.
@@ -19,7 +21,7 @@ class Competition < ActiveRecord::Base
   validates :prize, presence: true
   validates :begins_at, presence: true
   validates :ends_at, presence: true
-  validate :begins_at_is_not_in_the_past
+  validate :begins_at_is_not_in_the_past, unless: :skip_validate_begins_at_is_not_in_the_past
   validate :ends_at_is_greater_than_begins_at
   validates :users, presence: true
 

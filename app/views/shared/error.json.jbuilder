@@ -1,5 +1,7 @@
 json.status :failure
 json.data do
-  json.errors errors.full_messages
-  json.notice notice
+  json.notice do
+    json.title notice
+    json.messages errors.full_messages
+  end
 end

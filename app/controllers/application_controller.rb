@@ -17,8 +17,10 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Pass the name of the controller to the client.
+  # Pass the name of the controller to the client. Derriving the controller name
+  # from the URL is not reliable since the URL endpoint doesn't have to match
+  # the name of the controller or action.
   def set_client_data
-    @client_data = params.slice :controller
+    @client_data = { controller: controller_name }
   end
 end

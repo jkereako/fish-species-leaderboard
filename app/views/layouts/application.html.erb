@@ -24,8 +24,9 @@
               <%= render 'shared/navigation' %>
               <%= render 'shared/messages' %>
               <!--  For use with the client only -->
-              <div id="asynchronous-flash" class="alert fade in alert-dismissible hide" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div id="asynchronous-flash" class="alert fade in alert-dismissible" role="alert" style="display:none;">
+                <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4></h4>
                 <div class="message"></div>
               </div>
             </div>

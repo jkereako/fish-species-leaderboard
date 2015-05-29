@@ -10,6 +10,7 @@
             <br />
             <%= f.text_field :name,
                               class: 'form-control',
+                              disabled: (if action_name == 'edit' then true else false end),
                               autofocus: true,
                               required: true,
                               placeholder: t('page.competition.form.placeholder.name') %>
@@ -26,10 +27,12 @@
           <div class="form-group">
             <%= f.label :begins_at, t('page.competition.form.label.begins_at') %>
             <div class="input-group">
+
                 <%= f.date_field :begins_at,
                                       class: 'form-control',
                                       data: {'date-format'=> 'mm/dd/yyyy'},
-                                      min: Date.today,
+                                      disabled: (if action_name == 'edit' then true else false end),
+                                      min: (if action_name == 'edit' then @competition.begins_at else Date.today end),
                                       required: true,
                                       placeholder:
                                         t('page.competition.form.placeholder.begins_at') %>

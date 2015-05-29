@@ -1,6 +1,7 @@
 class CompetitionsController < ApplicationController
   before_action :authorize_competition, except: [:index, :show]
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
+  before_action :set_users, only: [:create, :update]
 
   # GET /competitions
   # GET /competitions.json
@@ -64,9 +65,19 @@ class CompetitionsController < ApplicationController
   # PATCH/PUT /competitions/1.json
   def update
     respond_to do |format|
-      if @competition.update(competition_params)
+      @competition.ends_at = competition_params[:ends_at]
+      @competition.prize = competition_params[:prize]
+      @competition.users = @users
+
+      if @competition.update(skip_validate_begins_at_is_not_in_the_past: true)
         format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
-        format.json { render :show, status: :ok, location: @competition }
+        format.json do
+          render :show,
+                 locals: { competition: @competition,
+                           notice: "Successfully updated #{@competition.name}" },
+                 location: @competition,
+                 status: :ok
+          end
       else
         format.html { render :edit }
         format.json do
@@ -101,9 +112,16 @@ class CompetitionsController < ApplicationController
     authorize :competition
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_competition
     @competition = Competition.find_by_id params[:id]
   end
 
+  def set_users
+    # Since @users is expected to be an array, make it so.
+    if competition_params[:users].blank?
+      @users = []
+    else
+      @users = User.find competition_params[:users]
+    end
+  end
 end

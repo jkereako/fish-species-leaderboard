@@ -1,44 +1,36 @@
 class Competition
-  # Define the minimum number of competitors per competition
-  @competitorMinimum = 2
+  @flashDiv: null
 
   constructor: (@form) ->
-    selectedCompetitorsCount = 0
-    # Add Bootstrap Multiselect to the competitor selection field. This method
-    # assumes `@competitorsField` is an HTML `select` element.
+    # Bind the unobtrusive JavaScript (UJS) events to our instance methods
+    @form.bind 'ajax:success', ajaxSuccess
+    @form.bind 'ajax:error', ajaxError
+    @form.bind 'ajax:complete', ajaxComplete
 
-    submitButton = @form.find 'input[type="submit"]'
-    multiSelectField = @form.find 'select'
+  ajaxSuccess = (event, data, textStatus, jqXHR) =>
+    @flashDiv
+    .removeClass()
+    .addClass 'alert alert-success'
 
-    do multiSelectField.multiselect
-        # onChange: (option, isChecked, el) =>
-        #   selectedCompetitorsCount += if isChecked then 1 else -1
-        #   # If the selected number of competitors is greater than the required
-        #   # minimum, then enable the submit button.
-        #   if selectedCompetitorsCount >= COMPETITOR_MIN
-        #     submitButton.attr "disabled", false
-        #     submitButton.disabled = false
-        #   else
-        #     submitButton.attr "disabled", true
-        #     submitButton.disabled = true
+  ajaxError = (event, jqXHR, textStatus, errorThrown) =>
+    @flashDiv
+    .removeClass()
+    .addClass 'alert alert-danger'
 
-    # submitButton.click (event) =>
-    #   do event.preventDefault
-    #   if false not in (@validate obj for obj in @form.find '.form-control')
-    #     console.log 'Everything is okay'
-    #
-    # @validate = (field) ->
-    #     retVal = true
-    #
-    #     if field.value is ''
-    #       retVal = false
-    #     else
-    #       if field.type is 'email'
-    #         pattern = ///[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?///
-    #
-    #         if not field.value.match pattern
-    #           retVal = false
-    #     retVal
+  ajaxComplete = (event, jqXHR, textStatus) =>
+    data = jqXHR.responseJSON
+
+    @flashDiv.find 'h4'
+    .text data.data.notice.title
+
+    do @flashDiv.find 'div.message'
+    .empty
+
+    if 'messages' of data.data.notice
+      @flashDiv.find 'div.message'
+      .text data.data.notice.messages
+
+    @flashDiv.fadeIn 'slow'
 
 ready = ->
   json = do $ 'script#client-data'
@@ -47,6 +39,7 @@ ready = ->
   if json?
     clientData = JSON.parse json
     if 'competitions' is clientData.controller
+      Competition.flashDiv = $ 'div#asynchronous-flash'
       competition = new Competition $ 'form'
 
 $ document
