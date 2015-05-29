@@ -1,18 +1,17 @@
 class Catch
-  constructor: (@clientData, @speciesDiv) ->
-    if 'species' of @clientData
-      # bloodhound = new Bloodhound
-      #   datumTokenizer: Bloodhound.tokenizers.obj.whitespace
-      #   queryTokenizer: Bloodhound.tokenizers.whitespace
-      #   local: @clientData.species
+  constructor: (@speciesList, @inputField) ->
+    bloodhound = new Bloodhound
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace
+      queryTokenizer: Bloodhound.tokenizers.whitespace
+      local: @speciesList
 
-      $ @speciesDiv
-        .typeahead
-          hint: true
-          highlight: true
-          minLength: 2
-          {name: 'species_sugs'
-          source: @clientData.species}
+    $ @inputField
+      .typeahead
+        hint: true
+        highlight: true
+        minLength: 2
+        {name: 'species'
+        source: bloodhound}
 
 # The code below is boilerplate for use with TurboLinks
 # see: http://stackoverflow.com/questions/18770517/rails-4-how-to-use-document-ready-with-turbo-links#18770589
@@ -24,8 +23,8 @@ ready = ->
     clientData = JSON.parse json
 
     # Only load this JavaScript if the corresponding controller is showing.
-    if 'catches' is clientData.controller
-      aCatch = new Catch clientData, $ 'input#catch_species'
+    if 'catches' is clientData.controller and 'species' of clientData
+      aCatch = new Catch clientData.species, $ 'input#catch_species'
 
 $ document
 .ready ready
