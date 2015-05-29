@@ -7,7 +7,13 @@ class CreateCompetitions < ActiveRecord::Migration
       t.string :prize, null: false, default: ''
       t.datetime :begins_at, null: false
       t.datetime :ends_at, null: false
-      t.boolean :is_active, null: false,  default: true
+      # Run a nightly schedule to check if each active competition has or will
+      # expire.
+      t.boolean :has_expired, null: false,  default: false
+
+      # Allow suspension of competitions to prevent them from expiring while
+      # competitors take a break
+      t.boolean :is_suspended, null: false,  default: false
       # The number of catches the winner has
       t.integer :winner_catches_count, default: 0, null: false
       # Magic columns

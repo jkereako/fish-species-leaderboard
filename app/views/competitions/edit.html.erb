@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <h1 class="page-header" itemprop="name">
-      Editing competition
+      <%= @competition.name %>
     </h1>
   </div>
 </div>
@@ -11,23 +11,41 @@
     <%= render 'form' %>
   </div>
   <div class="col-md-3">
-    <div class="panel panel-danger">
+    <div class="panel panel-warning">
       <div class="panel-heading">
         <h3 class="panel-title" id="panel-title">
-          Delete competition
+          Warning zone
         </h3>
       </div>
       <div class="panel-body">
         <p class="small help-block">
-          if you delete this compeition, all data associated with it is going as well.
+          Suspend a competition if you and the other competitors need a haiatus.
         </p>
-        <%= link_to t('generic.term.delete'),
-                    @competition,
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' },
-                    class: 'btn btn-danger' %>
+
+        <p class="small help-block">
+          Suspending a compeition prevents everyone from recording new catches.
+        </p>
+        <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target=".suspension-confirmation">
+          Suspend competition
+        </button>
       </div>
-    </div>
+    </div><!-- /.panel -->
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title" id="panel-title">
+          Danger zone
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p class="small help-block">
+          if you delete this compeition, all data associated with it is going as
+          well and you won't be able to recover a damn thing.
+        </p>
+        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target=".deletion-confirmation">
+          Delete competition
+        </button>
+      </div>
+    </div><!-- /.panel -->
   </div>
 </div>
 
@@ -37,3 +55,21 @@
     <%= link_to 'Back', competitions_path %>
   </div>
 </div>
+
+<!--  Modal confirmation for suspend -->
+<%= render 'shared/modal_confirmation',
+           identifier: 'suspension-confirmation',
+           method: 'put',
+           remote: false,
+           title: 'Suspend',
+           message: 'Are you certain you want to suspend this competition?',
+           path: competition_suspend_path(@competition) %>
+
+<!--  Modal confirmation for destroy -->
+<%= render 'shared/modal_confirmation',
+           identifier: 'deletion-confirmation',
+           method: 'delete',
+           remote: false,
+           title: 'Delete',
+           message: 'Are you certain you want to delete this competition?',
+           path: competition_path(@competition) %>

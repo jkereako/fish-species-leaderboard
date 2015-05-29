@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :competitions
+  resources :competitions do
+    # REVIEW: Reverse the order from /competitions/:competition_id/suspend
+    # to /competitions/suspend/:competition_id
+    put :suspend
+  end
+
   resources :catches
 
   # Prevent new users from registering new accounts.

@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable,
          :rememberable, :trackable, :validatable
 
+  # Class methods
   def self.administrator_role
     ROLES.first
   end
@@ -28,11 +29,12 @@ class User < ActiveRecord::Base
     ROLES.last
   end
 
-  # Overidden
+  # ActiveRecord override
   def to_param
     "#{id} #{name}".parameterize
   end
 
+  # Helpers
   def admin?
     role == ROLES.first
   end
@@ -40,4 +42,5 @@ class User < ActiveRecord::Base
   def active?
     is_active
   end
+  
 end

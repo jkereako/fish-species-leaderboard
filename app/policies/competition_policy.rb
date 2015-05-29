@@ -1,21 +1,17 @@
 class CompetitionPolicy < ApplicationPolicy
-  def index?
-    true
-  end
-
-  def show?
-    true
-  end
-
-  def new?
-    create?
-  end
-
   def create?
-    user.present?
+    user.present? && user.admin?
   end
 
   def update?
-    user.present?
+    user.present? && user.admin?
+  end
+
+  def destroy?
+    user.present? && user.admin?
+  end
+
+  def suspend?
+    user.present? && user.admin?
   end
 end

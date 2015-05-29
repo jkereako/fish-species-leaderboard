@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   # from the URL is not reliable since the URL endpoint doesn't have to match
   # the name of the controller or action.
   def set_client_data
-    @client_data = { controller: controller_name }
+    @client_data = { controller: controller_name, action: action_name }
   end
 end

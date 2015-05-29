@@ -3,6 +3,15 @@ class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
   before_action :set_users, only: [:create, :update]
 
+  def suspend
+    # REVIEW This is throwing an error.
+    format.json do
+      render 'shared/error',
+             locals: { errors: @competition.errors,
+                       notice: 'Data missing or invalid'},
+             status: :unprocessable_entity
+    end
+  end
   # GET /competitions
   # GET /competitions.json
   def index
@@ -35,6 +44,7 @@ class CompetitionsController < ApplicationController
     @competition.prize = competition_params[:prize]
     @competition.begins_at = Date.parse competition_params[:begins_at]
     @competition.ends_at = Date.parse competition_params[:ends_at]
+    @competition.users = @users
 
     begin
       @competition.users = User.find_by_id competition_params[:users]

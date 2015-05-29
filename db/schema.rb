@@ -14,15 +14,16 @@
 ActiveRecord::Schema.define(version: 20150527143124) do
 
   create_table "catches", force: :cascade do |t|
-    t.integer  "competition_id",                    null: false
-    t.integer  "user_id",                           null: false
-    t.string   "species",              default: "", null: false
-    t.integer  "length_in_inches",     default: 0,  null: false
-    t.string   "bait_used",            default: "", null: false
-    t.string   "location_description", default: "", null: false
-    t.datetime "caught_at",                         null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.integer  "competition_id",                      null: false
+    t.integer  "user_id",                             null: false
+    t.string   "species",              default: "",   null: false
+    t.integer  "length_in_inches",     default: 0,    null: false
+    t.string   "bait_used",            default: "",   null: false
+    t.string   "location_description", default: "",   null: false
+    t.boolean  "was_released",         default: true, null: false
+    t.datetime "caught_at",                           null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "catches", ["competition_id"], name: "index_catches_on_competition_id"
@@ -30,17 +31,18 @@ ActiveRecord::Schema.define(version: 20150527143124) do
   add_index "catches", ["user_id"], name: "index_catches_on_user_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.integer  "winner_id",            default: 0,    null: false
-    t.string   "name",                 default: "",   null: false
-    t.string   "prize",                default: "",   null: false
-    t.datetime "begins_at",                           null: false
-    t.datetime "ends_at",                             null: false
-    t.boolean  "is_active",            default: true, null: false
-    t.integer  "winner_catches_count", default: 0,    null: false
-    t.integer  "users_count",          default: 0,    null: false
-    t.integer  "catches_count",        default: 0,    null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "winner_id",            default: 0,     null: false
+    t.string   "name",                 default: "",    null: false
+    t.string   "prize",                default: "",    null: false
+    t.datetime "begins_at",                            null: false
+    t.datetime "ends_at",                              null: false
+    t.boolean  "has_expired",          default: false, null: false
+    t.boolean  "is_suspended",         default: false, null: false
+    t.integer  "winner_catches_count", default: 0,     null: false
+    t.integer  "users_count",          default: 0,     null: false
+    t.integer  "catches_count",        default: 0,     null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "competitions", ["name"], name: "index_competitions_on_name", unique: true

@@ -1,22 +1,17 @@
 class UsersController < ApplicationController
-  before_action :authorize_user, except: 'show'
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_activation]
+  before_action :authorize_all_users, except: [:show, :toggle_activation]
+  before_action :authorize_individual_user, except: [:show, :toggle_activation]
 
 
   # XHR requests only
   def toggle_activation
-    if current_user == @user
-      render 'shared/error',
-              locals: { errors: @user.errors,
-              notice: "You can't deactivate yourself." },
-              status: :method_not_allowed
-    end
-
    @user.is_active = !@user.active?
+
    if @user.save
      # TODO: Notify the user that his account has been activated/deactivated
      render :show,
-            locals: { competition: @user,
+            locals: { user: @user,
                       notice: "Successfully toggled #{@user.name}" },
             location: @user,
             status: :ok
@@ -32,19 +27,19 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
+  private
+
+  def authorize_all_users
+    authorize :user
+  end
+
+  def authorize_individual_user
     if @user.present?
       # Pass the object @user to Pundit to check against @current_user
       authorize @user
     else
-      authorize_user
+      authorize_all_users
     end
-  end
-
-  private
-
-  def authorize_user
-    authorize :user
   end
 
   # Use callbacks to share common setup or constraints between actions.

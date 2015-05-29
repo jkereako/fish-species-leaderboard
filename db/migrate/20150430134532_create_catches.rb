@@ -9,6 +9,7 @@ class CreateCatches < ActiveRecord::Migration
       t.integer :length_in_inches, null: false, default: 0
       t.string :bait_used, null: false, default: ''
       t.string :location_description, null: false, default: ''
+      t.boolean :was_released, null: false,  default: true
       t.datetime :caught_at, null: false
       t.timestamps null: false
     end

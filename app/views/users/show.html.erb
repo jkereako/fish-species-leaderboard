@@ -35,15 +35,9 @@
         </p>
 
         <p>
-          <%= link_to is_active_in_words(@user.is_active).upcase,
-                    toggle_user_activation_path(@user),
-                    { class: "btn btn-danger",
-                      id:'toggle-activation',
-                      aria:{pressed: false},
-                      data:{confirm: "Are you certain you want to alter #{@user.name}?", toggle: 'button'},
-                      method: 'put',
-                      remote: true
-                    } %>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".activation-confirmation">
+            Toggle activation
+          </button>
         </p>
 
       </div>
@@ -95,3 +89,12 @@
     </div>
   </div>
 </div>
+
+<!--  Modal confirmation -->
+<%= render 'shared/modal_confirmation',
+           identifier: 'activation-confirmation',
+           method: 'put',
+           remote: true,
+           title: 'Are you sure?',
+           message: 'Are you certain you want to deactivate this user?',
+           path: toggle_user_activation_path(@user) %>

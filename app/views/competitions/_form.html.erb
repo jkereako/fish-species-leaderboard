@@ -34,8 +34,7 @@
                                       disabled: (if action_name == 'edit' then true else false end),
                                       min: (if action_name == 'edit' then @competition.begins_at else Date.today end),
                                       required: true,
-                                      placeholder:
-                                        t('page.competition.form.placeholder.begins_at') %>
+                                      value: (if action_name == 'new' then Date.today else '' end) %>
                 <span class="input-group-addon">to</span>
                 <%= f.date_field :ends_at,
                                       class: 'form-control',

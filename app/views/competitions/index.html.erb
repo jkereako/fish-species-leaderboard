@@ -12,10 +12,7 @@
       <div class="panel-body">
         <% unless @competitions.any? %>
         <p class="lead">
-          There aren't any.
-        </p>
-        <p>
-          <%= link_to 'Log in', new_user_session_path %> and add one.
+          No competitions yet.
         </p>
         <% else %>
         <table class="table">
@@ -23,7 +20,8 @@
             <tr>
               <th>Name</th>
               <th>Prize</th>
-              <th>Start</th>
+              <th>From</th>
+              <th>To</th>
               <th>Competitors</th>
               <th></th>
             </tr>
@@ -34,11 +32,20 @@
               <tr>
                 <td><%= link_to competition.name, competition %></td>
                 <td><%= competition.prize %></td>
-                <td><%= competition.begins_at %></td>
+                <td>
+                  <time datetime="<%= competition.begins_at.to_formatted_s :db %>">
+                    <%= competition.begins_at.to_formatted_s :month_day_year %>
+                  </time>
+                </td>
+                <td>
+                  <time datetime="<%= competition.ends_at.to_formatted_s :db %>">
+                    <%= competition.ends_at.to_formatted_s :month_day_year %>
+                  </time>
+                </td>
                 <td><%= competition.users.count %></td>
                 <td>
                   <span class="label <%= bs_is_active_label_class competition.active? %>">
-                    <%= is_active_in_words(competition.active?).upcase %>
+                    <%= competition_status_in_words(competition.active?).upcase %>
                   </span>
                 </td>
               </tr>

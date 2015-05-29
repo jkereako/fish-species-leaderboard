@@ -1,3 +1,4 @@
+<% if @competitions.any? %>
 <div class="row">
   <div class="col-xs-12">
     <h1 class="page-header" itemprop="name" role="heading">
@@ -5,7 +6,6 @@
     </h1>
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-3">
     <p class="small help-block">
@@ -16,3 +16,15 @@
     <%= render partial: 'competition', collection: @competitions %>
   </div>
 </div>
+<% else %>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header" itemprop="name" role="heading">
+      There's nothing here!
+    </h1>
+    <p>
+      This app was probably just installed so no data exists yet.
+    </p>
+  </div>
+</div>
+<% end %>

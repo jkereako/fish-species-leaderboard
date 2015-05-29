@@ -72,6 +72,12 @@
                                   required: true,
                                   placeholder: t('page.catch.form.placeholder.caught_at') %>
               </div>
+
+              <div class="checkbox">
+                <%= f.label :was_released do %>
+                  <%= f.check_box :was_released %> Did you throw it back?
+                <% end %>
+              </div>
         </div><!-- /.col-sm-6 -->
       </div><!-- /.row -->
 
