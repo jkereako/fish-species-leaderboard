@@ -1,5 +1,6 @@
 class Competition < ActiveRecord::Base
   scope :active, -> { where is_active: true }
+  scope :inactive, -> { where is_active: false }
 
   attr_accessor :skip_validate_begins_at_is_not_in_the_past
 
