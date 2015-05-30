@@ -1,0 +1,43 @@
+<div class="modal fade" id="<%= identifier %>" tabindex="-1" role="dialog" aria-labelledby="<%= identifier %>" aria-hidden="true" data-remote="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <%= form_for @catch do |f| %>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          Select a competition
+        </h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Since you're competing in multiple competitions, tell us which
+          competition this catch is for.
+        </p>
+
+
+        <div class="form-group">
+          <%= f.collection_radio_buttons(:competition,
+                                         current_user.competitions.active,
+                                         :id,
+                                         :name) do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+          <% end %>
+        </div><!-- /.form-group -->
+
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <%= f.submit 'Save', class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div>
+</div>

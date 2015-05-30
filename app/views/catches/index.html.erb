@@ -42,9 +42,16 @@
       </div><!-- ./panel-body-->
       <% if policy(:catch).new? %>
       <div class="panel-footer">
+        <% if @catch.present? %>
+        <% unless controller_name == 'catches' && action_name === 'create' %>
         <%= link_to 'Add a catch', new_catch_path, class: 'btn btn-default',
                     data: { toggle: 'modal',
                             target: '#competition-selection'}  %>
+        <% end %>
+        <% else %>
+        <%= link_to 'Add a catch', new_catch_path, class: 'btn btn-default' %>
+        <% end %>
+
         <p class="small help-block">
           NOTE: You can add a catch only if you're already competing.
         </p>
