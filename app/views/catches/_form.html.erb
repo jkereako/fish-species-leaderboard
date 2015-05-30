@@ -1,21 +1,10 @@
 <div class="well bs-component">
   <%= form_for @catch do |f| %>
+  <%= render 'shared/form_error_messages', errors: @catch.errors %>
     <fieldset>
       <legend>Catch</legend>
       <div class="row">
         <div class="col-md-6">
-            <% if @catch.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@catch.errors.count, "error") %> prohibited this catch from being saved:</h2>
-
-                <ul>
-                <% @catch.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-                </ul>
-              </div>
-            <% end %>
-
             <div class="form-group">
               <%= f.label :species, t('page.catch.form.label.species') %>
               <br />

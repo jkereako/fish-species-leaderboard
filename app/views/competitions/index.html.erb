@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-xs-12">
+    <ol class="breadcrumb hidden-xs">
+      <li class="active"><%= link_to 'Competitions', competitions_path %></li>
+    </ol>
     <h1 class="page-header" itemprop="name">
       <%=t 'page.competition.index.title' %>
     </h1>
@@ -23,7 +26,7 @@
               <th>From</th>
               <th>To</th>
               <th>Competitors</th>
-              <th></th>
+              <th colspan="2"></th>
             </tr>
           </thead>
 
@@ -44,9 +47,14 @@
                 </td>
                 <td><%= competition.users.count %></td>
                 <td>
-                  <span class="label <%= bs_is_active_label_class competition.active? %>">
+                  <span class="label <%= bs_class_for_competition_status competition %>">
                     <%= competition_status_in_words(competition).upcase %>
                   </span>
+                </td>
+                <td>
+                  <%= link_to 'Edit',
+                              edit_competition_path(competition),
+                              class: 'btn btn-default btn-xs btn-block' %>
                 </td>
               </tr>
             <% end %>

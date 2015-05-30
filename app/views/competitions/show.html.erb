@@ -1,5 +1,9 @@
 <article class="">
   <header role="heading">
+    <ol class="breadcrumb hidden-xs">
+      <li><%= link_to 'Competitions', competitions_path %></li>
+      <li class="active"><%= link_to @competition.name, competition_path(@competition) %></li>
+    </ol>
     <h1 class="page-header" itemprop="name">
       <%= @competition.name %>
     </h1>

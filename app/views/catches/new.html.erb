@@ -1,5 +1,9 @@
 <div class="row">
   <div class="col-xs-12">
+    <ol class="breadcrumb hidden-xs">
+      <li><%= link_to 'Catches', catches_path %></li>
+      <li class="active"><%= link_to 'New', new_catch_path(@catch) %></li>
+    </ol>
     <h1 class="page-header" itemprop="name">
       <%=t 'page.catch.new.title' %> for <%= current_user.name %>
     </h1>
