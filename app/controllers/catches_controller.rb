@@ -17,6 +17,9 @@ class CatchesController < ApplicationController
   def new
     @client_data[:species] = Species.all
     @catch = Catch.new
+    if current_user.competitions.count == 1
+      @catch.competition = current_user.competitions.first
+    end
   end
 
   # GET /catches/1/edit

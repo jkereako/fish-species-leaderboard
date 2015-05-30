@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   before_action :set_client_data
+  before_action :user_competing_in_multiple_competitions?
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -16,6 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def user_competing_in_multiple_competitions?
+    if user_signed_in? && current_user.competitions.count > 1 && @catch.nil?
+      @catch = Catch.new
+    end
+  end
 
   # Pass the name of the controller to the client. Derriving the controller name
   # from the URL is not reliable since the URL endpoint doesn't have to match
