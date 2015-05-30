@@ -1,7 +1,12 @@
 class Competition < ActiveRecord::Base
+  # Active scopes
   scope :active, -> { where has_expired: false, is_suspended: false }
+  scope :begun, -> { where('begins_at < ?', Time.zone.now) }
+
+  # Inactive scopes
   scope :expired, -> { where has_expired: true }
   scope :suspended, -> { where is_suspended: true }
+  scope :yet_to_begin, -> { where('begins_at > ?', Time.zone.now) }
 
   attr_accessor :skip_validate_begins_at_is_not_in_the_past
 
@@ -37,7 +42,11 @@ class Competition < ActiveRecord::Base
   end
 
   def active?
-    !has_expired && !is_suspended
+    !has_expired && !is_suspended && begins_at < Time.zone.now
+  end
+
+  def yet_to_begin?
+    begins_at > Time.zone.now
   end
 
   def suspended?
