@@ -19,7 +19,7 @@ class CatchesController < ApplicationController
   def new
     @client_data[:species] = Species.all
     @catch = Catch.new
-    competitions = current_user.competitions.active
+    competitions = current_user.competitions.active.begun
 
     if competitions.count == 1
       @catch.competition = competitions.first

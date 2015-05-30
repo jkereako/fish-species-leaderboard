@@ -19,7 +19,7 @@
 
         <div class="form-group">
           <%= f.collection_radio_buttons(:competition,
-                                         current_user.competitions.active,
+                                         current_user.competitions.active.begun,
                                          :id,
                                          :name) do |b| %>
           <div class="radio">
