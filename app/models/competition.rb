@@ -1,6 +1,7 @@
 class Competition < ActiveRecord::Base
-  scope :active, -> { where has_expired: false }
+  scope :active, -> { where has_expired: false, is_suspended: false }
   scope :expired, -> { where has_expired: true }
+  scope :suspended, -> { where is_suspended: true }
 
   attr_accessor :skip_validate_begins_at_is_not_in_the_past
 
@@ -36,7 +37,15 @@ class Competition < ActiveRecord::Base
   end
 
   def active?
-    !has_expired
+    !has_expired && !is_suspended
+  end
+
+  def suspended?
+    is_suspended
+  end
+
+  def expired?
+    has_expired
   end
 
   private

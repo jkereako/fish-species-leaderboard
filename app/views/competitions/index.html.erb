@@ -45,7 +45,7 @@
                 <td><%= competition.users.count %></td>
                 <td>
                   <span class="label <%= bs_is_active_label_class competition.active? %>">
-                    <%= competition_status_in_words(competition.active?).upcase %>
+                    <%= competition_status_in_words(competition).upcase %>
                   </span>
                 </td>
               </tr>

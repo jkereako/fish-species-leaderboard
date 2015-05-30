@@ -1,16 +1,29 @@
 class CompetitionsController < ApplicationController
   before_action :authorize_competition, except: [:index, :show]
-  before_action :set_competition, only: [:show, :edit, :update, :destroy]
+  before_action :set_competition, only: [:show, :edit, :update, :destroy, :suspend]
   before_action :set_users, only: [:create, :update]
 
   def suspend
-    # REVIEW This is throwing an error.
-    format.json do
-      render 'shared/error',
-             locals: { errors: @competition.errors,
-                       notice: 'Data missing or invalid'},
-             status: :unprocessable_entity
+    @competition.is_suspended = !@competition.suspended?
+
+    if @competition.save
+      respond_to do |format|
+        format.html do
+          redirect_to competitions_url,
+          notice: 'Competition was successfully suspended.'
+        end
+        format.json { head :no_content }
+      end
+    else
+      format.html { render :new }
+      format.json do
+        render 'shared/error',
+               locals: { errors: @competition.errors,
+                         notice: 'Data missing or invalid'},
+               status: :unprocessable_entity
+      end
     end
+
   end
   # GET /competitions
   # GET /competitions.json
@@ -45,12 +58,6 @@ class CompetitionsController < ApplicationController
     @competition.begins_at = Date.parse competition_params[:begins_at]
     @competition.ends_at = Date.parse competition_params[:ends_at]
     @competition.users = @users
-
-    begin
-      @competition.users = User.find_by_id competition_params[:users]
-    rescue NoMethodError
-      puts 'nah'
-    end
 
     respond_to do |format|
       if @competition.save

@@ -16,7 +16,7 @@
         </li>
         <% if policy(:catch).create? %>
         <li class="dropdown">
-          <a href="<%= competitions_url  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          <a href="<%= catches_path  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <%= t('nav.catches') %> <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
@@ -32,12 +32,32 @@
             </li>
           </ul>
         </li><!--/.dropdown-->
-        <li class="<%= css_class_for controller: 'competitions' %>" role="presentation">
-          <%= link_to t('nav.competitions'), competitions_path  %>
-        </li>
         <% else %>
         <li class="<%= css_class_for controller: 'catches' %>" role="presentation">
           <%= link_to t('nav.catches'), catches_path  %>
+        </li>
+        <% end %>
+        <% if policy(:competition).create? %>
+        <li class="dropdown">
+          <a href="<%= competitions_path  %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <%= t('nav.competitions') %> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="presentation">
+              <%= link_to t('nav.competitions'),
+                          competitions_path,
+                          role: 'menuitem'  %>
+            </li>
+            <li role="presentation">
+              <%= link_to 'Add competition',
+                          new_competition_path,
+                          role: 'menuitem'  %>
+            </li>
+          </ul>
+        </li><!--/.dropdown-->
+        <% else %>
+        <li class="<%= css_class_for controller: 'competitions' %>" role="presentation">
+          <%= link_to t('nav.competitions'), competitions_path  %>
         </li>
         <% end %>
       </ul>

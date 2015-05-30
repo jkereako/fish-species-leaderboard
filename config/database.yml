@@ -19,12 +19,12 @@ test:
 
 staging:
   adapter: postgresql
-  host: localhost
+  database: fsl_staging
   encoding: unicode
-  database: fsl
-  pool: 5
+  host: localhost
   username: JKereakoglow
   password:
+  pool: 5
 
 production:
   adapter: postgresql

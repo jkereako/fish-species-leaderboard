@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :competitions do
     # REVIEW: Reverse the order from /competitions/:competition_id/suspend
     # to /competitions/suspend/:competition_id
-    put :suspend
+    put :suspend, on: :member
   end
 
   resources :catches
