@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def user_competing_in_multiple_competitions?
-    if user_signed_in? && current_user.competitions.count > 1 && @catch.nil?
+    if user_signed_in? && current_user.competitions.active.count > 1 && @catch.nil?
       @catch = Catch.new
     end
   end

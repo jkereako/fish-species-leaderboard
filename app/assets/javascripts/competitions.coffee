@@ -42,7 +42,5 @@ ready = ->
       Competition.flashDiv = $ 'div#asynchronous-flash'
       competition = new Competition $ 'form'
 
-$ document
-.ready ready
-$ document
-.on 'page:load', ready
+$(document).ready(ready)
+$(document).on('page:load', ready)

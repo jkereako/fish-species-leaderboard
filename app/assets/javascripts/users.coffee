@@ -42,7 +42,5 @@ ready = ->
       User.flashDiv = $ 'div#asynchronous-flash'
       user = new User $ '*[data-remote="true"]'
 
-$ document
-.ready ready
-$ document
-.on 'page:load', ready
+$(document).ready(ready)
+$(document).on('page:load', ready)

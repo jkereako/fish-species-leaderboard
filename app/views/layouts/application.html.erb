@@ -48,51 +48,11 @@
     </div><!-- /.container -->
 
     <% if @catch.present? %>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#select-competition">
-      Launch competition selection modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="select-competition" tabindex="-1" role="dialog" aria-labelledby="select-competitionLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <%= form_for @catch do |f| %>
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">
-              Select a competition
-            </h4>
-          </div>
-          <div class="modal-body">
-            <p>
-              Since you're competing in multiple competitions, tell us which
-              competition this catch is for.
-            </p>
-
-
-            <div class="form-group">
-              <%= f.collection_radio_buttons(:competition_id,
-                                             current_user.competitions,
-                                             :id,
-                                             :name) do |b| %>
-              <div class="radio">
-                <%= b.label { b.radio_button + b.text } %>
-              </div>
-              <% end %>
-            </div><!-- /.form-group -->
-
-          </div>
-          <div class="modal-footer">
-            <div class="form-group">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <%= f.submit 'Save', class: 'btn btn-primary', data:{dismiss: 'modal'} %>
-            </div>
-          </div>
-          <% end %>
-        </div><!-- /.modal-content -->
-      </div>
-    </div>
+    <% unless controller_name == 'catches' && action_name === 'create' %>
+    <!-- Modal: competition selection -->
+    <%= render 'shared/modal_competition_selection',
+               identifier: 'competition-selection' %>
+    <% end %>
     <% end %>
   </body>
 </html>

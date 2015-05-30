@@ -1,6 +1,8 @@
 class CatchesController < ApplicationController
+  before_action :check_catch_params, only: [:create]
   before_action :authorize_catch, except: [:index, :show]
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
+  before_action :set_competition, only: [:create]
 
   # GET /catches
   # GET /catches.json
@@ -17,8 +19,10 @@ class CatchesController < ApplicationController
   def new
     @client_data[:species] = Species.all
     @catch = Catch.new
-    if current_user.competitions.count == 1
-      @catch.competition = current_user.competitions.first
+    competitions = current_user.competitions.active
+
+    if competitions.count == 1
+      @catch.competition = competitions.first
     end
   end
 
@@ -30,12 +34,22 @@ class CatchesController < ApplicationController
   # POST /catches.json
   def create
     @catch = Catch.new
+    @catch.competition = @competition
+    @catch.user = current_user
+
+    # We must check if the request came from a controller that wasn't Catches
+    if catch_params.count == 1
+      respond_to do |format|
+        format.html { render :new }
+      end
+      return
+    end
+
     @catch.species = catch_params[:species]
     @catch.bait_used = catch_params[:bait_used]
     @catch.length_in_inches = catch_params[:length_in_inches]
     @catch.location_description = catch_params[:location_description]
     @catch.caught_at = Date.parse catch_params[:caught_at]
-    @catch.user = current_user
 
     respond_to do |format|
       if @catch.save
@@ -82,8 +96,20 @@ class CatchesController < ApplicationController
 
   private
 
+  # Use callbacks to share common setup or constraints between actions.
+  def check_catch_params
+    return if catch_params.present?
+    redirect_to request.referrer,
+                notice: 'Select a competition BEFORE adding a catch'
+  end
+
   def authorize_catch
     authorize :catch
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def catch_params
+    params[:catch]
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -91,8 +117,7 @@ class CatchesController < ApplicationController
     @catch = Catch.find_by_id params[:id]
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def catch_params
-    params[:catch]
+  def set_competition
+    @competition = Competition.find_by_id catch_params[:competition]
   end
 end

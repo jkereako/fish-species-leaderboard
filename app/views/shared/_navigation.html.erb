@@ -28,6 +28,8 @@
             <li role="presentation">
               <%= link_to 'Add catch',
                           new_catch_path,
+                          data: { toggle: 'modal',
+                                  target: '#competition-selection'},
                           role: 'menuitem'  %>
             </li>
           </ul>

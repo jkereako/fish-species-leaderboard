@@ -10,7 +10,5 @@ class Flash
 ready = ->
   flash = new Flash $ 'div#asynchronous-flash'
 
-$ document
-.ready ready
-$ document
-.on 'page:load', ready
+$(document).ready(ready)
+$(document).on('page:load', ready)
