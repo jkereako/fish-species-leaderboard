@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150527143124) do
     t.string   "name",                   default: "",   null: false
     t.string   "role",                   default: "",   null: false
     t.boolean  "is_active",              default: true, null: false
+    t.string   "reason",                 default: "",   null: false
     t.integer  "catches_count",          default: 0,    null: false
   end
 
