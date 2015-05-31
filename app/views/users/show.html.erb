@@ -1,9 +1,12 @@
+
 <div class="row">
   <div class="col-xs-12">
+    <% if policy(@user).index? %>
     <ol class="breadcrumb hidden-xs">
       <li><%= link_to 'Anglers', users_path %></li>
       <li class="active"><%= link_to @user.name, user_path(@user) %></li>
     </ol>
+    <% end %>
     <h1 class="page-header" itemprop="name">
       <%= @user.name %>
     </h1>
