@@ -20,29 +20,37 @@
               <th>Species</th>
               <th>Length</th>
               <th>Angler</th>
-              <th></th>
+
             </tr>
           </thead>
 
           <tbody>
             <% @catches.each do |catch| %>
               <tr>
-                <td><%= link_to catch.species, catch %></td>
-                <td><%= catch.length_in_inches %></td>
-                <td><%= catch.user.name %></td>
-                <td>thumbnail</td>
+                <td>
+                  <%= link_to catch do %>
+                    <p>
+                      <%= catch.species %>
+                    </p>
+                    <img class="img-responsive img-thumbnail" src="http://placehold.it/50/dfd7ca/000000" alt="" />
+                  <% end %>
+                </td>
+                <td><%= length_in_words catch.length_in_inches %></td>
+                <td><%= link_to catch.user.name, catch.user %></td>
+
               </tr>
             <% end %>
           </tbody>
         </table>
-        <% end %>
+        <% else %>
         <p class="lead">
           No catches yet.
         </p>
+        <% end %>
       </div><!-- ./panel-body-->
       <% if policy(:catch).new? %>
       <div class="panel-footer">
-        <% if @catch.present? %>
+        <% if @app_catch.present? %>
         <% unless controller_name == 'catches' && action_name === 'create' %>
         <%= link_to 'Add a catch', new_catch_path, class: 'btn btn-default',
                     data: { toggle: 'modal',

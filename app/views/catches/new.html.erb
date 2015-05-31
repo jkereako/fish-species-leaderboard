@@ -2,7 +2,16 @@
   <div class="col-xs-12">
     <ol class="breadcrumb hidden-xs">
       <li><%= link_to 'Catches', catches_path %></li>
+
+      <% if @app_catch.present? %>
+      <li class="active">
+        <%= link_to 'New', new_catch_path(@catch),
+                    data: { toggle: 'modal',
+                            target: '#competition-selection'} %>
+      </li>
+      <% else %>
       <li class="active"><%= link_to 'New', new_catch_path(@catch) %></li>
+      <% end %>
     </ol>
     <h1 class="page-header" itemprop="name">
       <%=t 'page.catch.new.title' %> for <%= link_to @catch.competition.name, competition_path(@catch.competition) %>
@@ -11,9 +20,3 @@
 </div>
 
 <%= render 'form' %>
-
-<div class="row">
-  <div class="col-xs-12">
-    <%= link_to 'Back', catches_path %>
-  </div>
-</div>

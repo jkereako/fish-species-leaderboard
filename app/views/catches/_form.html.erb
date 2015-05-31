@@ -6,6 +6,8 @@
       <div class="row">
         <div class="col-md-6">
             <div class="form-group">
+              <%# Pass the competition_id to the controller %>
+              <%= f.hidden_field :competition, value: @competition.id %>
               <%= f.label :species, t('page.catch.form.label.species') %>
               <br />
               <%= f.text_field :species,

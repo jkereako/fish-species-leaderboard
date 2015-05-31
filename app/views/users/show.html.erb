@@ -91,7 +91,7 @@
             </tr>
           </thead>
           <tbody>
-          <%= render @user.catches.recent.top_10 %>
+          <%= render partial: 'catch', collection: @user.catches.recent.top_10 %>
           </tbody>
         </table>
         <% else %>
