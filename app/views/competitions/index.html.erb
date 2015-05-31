@@ -22,11 +22,12 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Prize</th>
+              <th class="hidden-xs">Prize</th>
               <th>From</th>
               <th>To</th>
               <th>Competitors</th>
-              <th colspan="2"></th>
+              <th class="hidden-xs"></th>
+              <th class="hidden-xs"></th>
             </tr>
           </thead>
 
@@ -34,7 +35,7 @@
             <% @competitions.each do |competition| %>
               <tr>
                 <td><%= link_to competition.name, competition %></td>
-                <td><%= competition.prize %></td>
+                <td class="hidden-xs"><%= competition.prize %></td>
                 <td>
                   <time datetime="<%= competition.begins_at.to_formatted_s :db %>">
                     <%= competition.begins_at.to_formatted_s :month_day_year %>
@@ -46,12 +47,12 @@
                   </time>
                 </td>
                 <td><%= competition.users.count %></td>
-                <td>
+                <td class="hidden-xs">
                   <span class="label <%= bs_class_for_competition_status competition %>">
                     <%= competition_status_in_words(competition).upcase %>
                   </span>
                 </td>
-                <td>
+                <td class="hidden-xs">
                   <%= link_to 'Edit',
                               edit_competition_path(competition),
                               class: 'btn btn-default btn-xs btn-block' %>

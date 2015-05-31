@@ -27,15 +27,14 @@
         </p>
         <% if policy(@user).change_password? %>
         <p>
-          <%= link_to 'Change your password', edit_user_registration_path,
-class: 'small' %>
+          <%= link_to 'Change your password', edit_user_registration_path %>
         </p>
         <% end %>
         <% end %>
       </div>
     </div>
 
-    <% unless @user == current_user %>
+    <% if policy(@user).toggle_activation? %>
     <div class="panel panel-danger">
       <div class="panel-heading">
         Activation
@@ -63,7 +62,9 @@ class: 'small' %>
       </div>
       <div class="panel-body">
         <% if @user.competitions.active.any? %>
-        <%= render @user.competitions.active %>
+        <%= render partial: 'competition',
+                   collection: @user.competitions.active,
+                   spacer_template: 'spacer' %>
         <% else %>
         Currently not competiting
         <% end %>
@@ -101,7 +102,8 @@ class: 'small' %>
   </div>
 </div>
 
-<!--  Modal confirmation -->
+<% if policy(@user).toggle_activation? %>
+<!--  Modal: activation confirmation -->
 <%= render 'shared/modal_confirmation',
            identifier: 'activation-confirmation',
            method: 'put',
@@ -109,3 +111,4 @@ class: 'small' %>
            title: 'Are you sure?',
            message: 'Are you certain you want to deactivate this user?',
            path: toggle_user_activation_path(@user) %>
+<% end %>

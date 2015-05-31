@@ -4,8 +4,11 @@
   </div>
   <div class="panel-body">
     <h4>
-      Began on <%= competition.begins_at.to_formatted_s :month_day_year %>
-      <small><%= (competition.ends_at - competition.begins_at) %> days left</small>
+      <%= competition.begins_at.to_formatted_s :month_day_year %> - <%= competition.ends_at.to_formatted_s :month_day_year %>
+      <br>
+      <small>
+        <%= distance_of_time_in_words(competition.begins_at, competition.ends_at) %> left
+      </small>
     </h4>
 
     <table class="table">
