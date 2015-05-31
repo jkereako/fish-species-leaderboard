@@ -10,6 +10,7 @@
   </div>
 </div>
 
+<!--  Profile -->
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
@@ -24,6 +25,12 @@
         <p>
           Last log in <strong><time datetime="<%= @user.last_sign_in_at.to_formatted_s :db %>"><%= time_ago_or_never_in_words @user.last_sign_in_at %></time></strong>
         </p>
+        <% if policy(@user).change_password? %>
+        <p>
+          <%= link_to 'Change your password', edit_user_registration_path,
+class: 'small' %>
+        </p>
+        <% end %>
         <% end %>
       </div>
     </div>

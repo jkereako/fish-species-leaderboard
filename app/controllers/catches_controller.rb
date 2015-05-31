@@ -1,6 +1,6 @@
 class CatchesController < ApplicationController
-  before_action :check_catch_params, only: [:new, :create]
   before_action :authorize_catch, except: [:index, :show]
+  before_action :check_catch_params, only: [:new, :create]
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
   before_action :set_competition, only: [:create]
 
