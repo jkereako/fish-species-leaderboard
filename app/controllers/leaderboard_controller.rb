@@ -1,5 +1,5 @@
 class LeaderboardController < ApplicationController
   def index
-    @competitions = Competition.active.begun
+    @competitions = Competition.active
   end
 end

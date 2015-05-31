@@ -19,7 +19,7 @@ class CatchesController < ApplicationController
   def new
     @client_data[:species] = Species.all
     @catch = Catch.new
-    competitions = current_user.competitions.active.begun
+    competitions = current_user.competitions.active
 
     if competitions.count == 1
       @catch.competition = competitions.first
@@ -96,9 +96,11 @@ class CatchesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  # If the user is competing in multiple competitions, make sure he has indicated
+  # which competition this catch is for.
   def check_catch_params
     return if catch_params.present?
+    return if current_user.competitions.active.count == 1
     redirect_to request.referrer,
                 notice: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
   end

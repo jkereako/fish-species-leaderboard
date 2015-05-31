@@ -1,6 +1,5 @@
 class Competition < ActiveRecord::Base
   # Active scopes
-  scope :active, -> { where has_expired: false, is_suspended: false }
   scope :begun, -> { where('begins_at < ?', Time.zone.now) }
 
   # Inactive scopes
@@ -35,6 +34,13 @@ class Competition < ActiveRecord::Base
   # Allows us to associate multiple User objects with 1 Competition object
   # when updating
   accepts_nested_attributes_for :users
+
+  # Scope
+  # Finds all on-going competitions
+  def self.active
+    where(has_expired: false, is_suspended: false)
+      .where('begins_at < ?', Time.zone.now)
+  end
 
   # Overidden
   def to_param
