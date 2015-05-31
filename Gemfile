@@ -21,6 +21,7 @@ gem 'pundit'            # Define user polcies
 gem 'sdoc', group: :doc
 
 group :development, :test do
+  gem 'quiet_assets'        # Disallow assets in the log
   gem 'sqlite3'
   gem 'byebug'              # Call `byebug` anywhere in code to stop execution
   gem 'better_errors'       # Display robust errors in the browser

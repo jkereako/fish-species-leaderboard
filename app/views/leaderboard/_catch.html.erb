@@ -1,3 +1,5 @@
 <% unless catch.nil? %>
-<%= catch.species %>, <small>caught <%= time_ago_in_words catch.caught_at %> ago</small>
+<%= link_to catch.species, catch %>
+<br>
+<small><%= time_ago_in_words catch.caught_at %> ago</small>
 <% end %>

@@ -1,6 +1,7 @@
 class Catch < ActiveRecord::Base
   scope :recent, -> { order 'caught_at DESC' }
   scope :top_10, -> { limit 10 }
+  scope :for_competition, ->(competition) { where competition: competition }
 
   belongs_to :competition, inverse_of: 'catches', counter_cache: true
   belongs_to :user, inverse_of: 'catches', counter_cache: true

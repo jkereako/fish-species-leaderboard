@@ -19,7 +19,9 @@
         <th>Last catch made</th>
       </thead>
       <tbody>
-        <%= render partial: 'competitor', collection: competition.users %>
+        <%= render partial: 'competitor',
+                   collection: competition.users.leaders,
+                   locals:{ competition: competition } %>
       </tbody>
     </table>
   </div>
