@@ -12,6 +12,9 @@ gem 'jquery-rails'  # jQuery library
 gem 'turbolinks'
 gem 'jbuilder'      # Easily build JSON
 
+#-- File upload
+gem 'paperclip'
+
 #-- User management
 gem 'devise'            # Complete user management
 gem 'devise_invitable'  # Add user invitation s to Devise

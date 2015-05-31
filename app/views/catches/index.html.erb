@@ -32,7 +32,8 @@
                     <p>
                       <%= catch.species %>
                     </p>
-                    <img class="img-responsive img-thumbnail" src="http://placehold.it/50/dfd7ca/000000" alt="" />
+                    <%= image_tag catch.image.url(:thumbnail),
+                                  class: 'img-thumbnail img-responsive img-rounded' %>
                   <% end %>
                 </td>
                 <td><%= length_in_words catch.length_in_inches %></td>

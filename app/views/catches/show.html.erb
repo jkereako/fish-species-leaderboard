@@ -27,14 +27,7 @@
   </div>
   <div class="col-sm-6">
     <div class="thumbnail">
-      <img class="img-responsive img-rounded" src="http://placehold.it/1080/dfd7ca/000000" alt="" />
+      <%= image_tag @catch.image.url, class: 'img-responsive img-rounded' %>
     </div><!-- /.thumbnail -->
   </div>
-
-  <p>
-    <% if policy(:catch).edit? %>
-    <%= link_to 'Edit', edit_catch_path(@catch) %> |
-    <% end %>
-    <%= link_to 'Back', catches_path %>
-  </p>
 </div>

@@ -42,6 +42,7 @@ class CatchesController < ApplicationController
     end
 
     @catch.species = catch_params[:species]
+    @catch.image = catch_params[:image]
     @catch.bait_used = catch_params[:bait_used]
     @catch.length_in_inches = catch_params[:length_in_inches]
     @catch.location_description = catch_params[:location_description]

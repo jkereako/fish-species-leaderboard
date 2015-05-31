@@ -1,5 +1,5 @@
 <div class="well bs-component">
-  <%= form_for @catch do |f| %>
+  <%= form_for @catch,  html: { multipart: true } do |f| %>
   <%= render 'shared/form_error_messages', errors: @catch.errors %>
     <fieldset>
       <legend>Catch</legend>
@@ -71,6 +71,17 @@
                 <p class="small help-block">
                   ...or did you murder it?
                 </p>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :image %>
+                <div class="btn btn-default btn-file">
+                  Upload image
+                  <%= f.file_field :image,
+                                   accept: 'image/png,image/gif,image/jpeg',
+                                   class: 'form-control',
+                                   required: true %>
+                </div>
               </div>
         </div><!-- /.col-sm-6 -->
       </div><!-- /.row -->
