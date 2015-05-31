@@ -2,7 +2,7 @@ class CatchesController < ApplicationController
   before_action :authorize_catch, except: [:index, :show]
   before_action :check_catch_params, only: [:new, :create]
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
-  before_action :set_competition, only: [:create]
+  before_action :set_competition, only: [:new, :create]
 
   # GET /catches
   # GET /catches.json
@@ -19,11 +19,7 @@ class CatchesController < ApplicationController
   def new
     @client_data[:species] = Species.all
     @catch = Catch.new
-    competitions = current_user.competitions.active
-
-    if competitions.count == 1
-      @catch.competition = competitions.first
-    end
+    @catch.competition = @competition
   end
 
   # GET /catches/1/edit
@@ -120,6 +116,15 @@ class CatchesController < ApplicationController
   end
 
   def set_competition
-    @competition = Competition.find_by_id catch_params[:competition]
+    # First, check if the user is competing in multiple competitions
+    competitions = current_user.competitions.active
+
+    if competitions.count == 1
+      @competition = competitions.first
+    else
+      if catch_params.key? :competition
+        @competition = Competition.find_by_id catch_params[:competition]
+      end
+    end
   end
 end

@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150527143124) do
     t.integer  "length_in_inches",     default: 0,    null: false
     t.string   "bait_used",            default: "",   null: false
     t.string   "location_description", default: "",   null: false
+    t.string   "image_url",            default: "",   null: false
     t.boolean  "was_released",         default: true, null: false
     t.datetime "caught_at",                           null: false
     t.datetime "created_at",                          null: false

@@ -9,6 +9,9 @@ class CreateCatches < ActiveRecord::Migration
       t.integer :length_in_inches, null: false, default: 0
       t.string :bait_used, null: false, default: ''
       t.string :location_description, null: false, default: ''
+      # This will serve as the base URL for the image associated with the catch.
+      # The actual file name will be derived by the Paperclip gem.
+      t.string :image_url, null: false, default: ''
       t.boolean :was_released, null: false,  default: true
       t.datetime :caught_at, null: false
       t.timestamps null: false
