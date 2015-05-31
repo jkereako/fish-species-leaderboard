@@ -27,7 +27,9 @@
               <th>To</th>
               <th>Competitors</th>
               <th class="hidden-xs"></th>
+              <% if policy(:competition).update? %>
               <th class="hidden-xs"></th>
+              <% end %>
             </tr>
           </thead>
 
@@ -52,11 +54,13 @@
                     <%= competition_status_in_words(competition).upcase %>
                   </span>
                 </td>
+                <% if policy(:competition).update? %>
                 <td class="hidden-xs">
                   <%= link_to 'Edit',
                               edit_competition_path(competition),
                               class: 'btn btn-default btn-xs btn-block' %>
                 </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>

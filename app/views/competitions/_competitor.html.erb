@@ -1,0 +1,8 @@
+<tr>
+  <th>
+    <%= link_to competitor.name, competitor %>
+  </th>
+  <td>
+    <%= competitor.catches.for_competition(competition).count %>
+  </td>
+</tr>

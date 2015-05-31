@@ -11,10 +11,19 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <h3>Length <small><%= @catch.length_in_inches %></small></h3>
-    <h3>Bait used <small><%= @catch.bait_used %></small></h3>
-    <h3>Date caught <small><%= @catch.caught_at %></small></h3>
-    <h3>Caught at <small><%= @catch.location_description %></small></h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Details
+      </div>
+      <div class="panel-body">
+        <h4>Length <small><%= length_in_words @catch.length_in_inches %></small></h4>
+        <h4>Bait used <small><%= @catch.bait_used %></small></h4>
+        <h4>Date caught <small><%= time_ago_in_words @catch.caught_at %> ago</small></h4>
+        <h4>Caught at <small><%= @catch.location_description %></small></h4>
+      </div>
+
+    </div>
+
   </div>
   <div class="col-sm-6">
     <div class="thumbnail">

@@ -1,5 +1,5 @@
-<article class="">
-  <header role="heading">
+<div class="row">
+  <div class="col-xs-12">
     <ol class="breadcrumb hidden-xs">
       <li><%= link_to 'Competitions', competitions_path %></li>
       <li class="active"><%= link_to @competition.name, competition_path(@competition) %></li>
@@ -7,15 +7,31 @@
     <h1 class="page-header" itemprop="name">
       <%= @competition.name %>
     </h1>
-  </header>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2>Prize <small><%= @competition.prize %></small></h2>
-        <h2>Start <small><%= @competition.begins_at %></small></h2>
-        <h2>End <small><%= @competition.ends_at %></small></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Details
       </div>
-      <div class="col-sm-6">
-        <h2>Competitors</h2>
+      <div class="panel-body">
+        <h4>Duration</h4>
+        From <%= @competition.begins_at.to_formatted_s :month_day_year %> to <%= @competition.ends_at.to_formatted_s :month_day_year %>
+
+        <h4>Prize</h4>
+        <p><%= @competition.prize %></p>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Competitors
+      </div>
+      <div class="panel-body">
         <table class="table">
           <thead>
             <tr>
@@ -28,27 +44,12 @@
             </tr>
           </thead>
           <tbody>
-          <% @competition.users.each do |competitor| %>
-          <tr>
-            <th>
-              <%= link_to competitor.name, competitor %>
-            </th>
-            <th>
-              <%= competitor.catches.count %>
-            </th>
-          </tr>
-
-          <% end %>
+          <%= render partial: 'competitor',
+                     collection: @competition.users.leaders,
+                     locals: { competition: @competition } %>
           </tbody>
         </table>
       </div>
     </div>
-  <footer>
-    <p>
-      <% if policy(:competition).edit? %>
-      <%= link_to 'Edit', edit_competition_path(@competition) %> |
-      <% end %>
-      <%= link_to 'Back', competitions_path %>
-    </p>
-  </footer>
-</article>
+  </div><!-- /.col-sm-6 -->
+</div>
