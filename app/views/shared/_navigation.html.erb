@@ -26,14 +26,12 @@
                           role: 'menuitem'  %>
             </li>
             <li role="presentation">
-              <% if @catch.present? %>
-              <% unless controller_name == 'catches' && action_name === 'create' %>
+              <% if @app_catch.present? %>
               <%= link_to 'Add catch',
                           new_catch_path,
                           data: { toggle: 'modal',
                                   target: '#competition-selection'},
                           role: 'menuitem'  %>
-              <% end %>
               <% else %>
               <%= link_to 'Add catch',
                           new_catch_path,

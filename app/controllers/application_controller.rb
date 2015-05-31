@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
 
   def user_competing_in_multiple_competitions?
     return unless user_signed_in?
-    return unless current_user.competitions.active.count > 1 && @catch.nil?
-    @catch = Catch.new
+    return unless current_user.competitions.active.count > 1 && @app_catch.nil?
+    @app_catch = Catch.new
   end
 
   # Pass the name of the controller to the client. Derriving the controller name

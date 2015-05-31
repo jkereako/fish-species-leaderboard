@@ -47,12 +47,11 @@
       </section>
     </div><!-- /.container -->
 
-    <% if @catch.present? %>
-    <% unless controller_name == 'catches' && action_name === 'create' %>
+    <% if @app_catch.present? %>
     <!-- Modal: competition selection -->
     <%= render 'shared/modal_competition_selection',
+               a_catch: @app_catch,
                identifier: 'competition-selection' %>
-    <% end %>
     <% end %>
   </body>
 </html>
