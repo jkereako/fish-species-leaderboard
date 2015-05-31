@@ -1,5 +1,5 @@
 class CatchesController < ApplicationController
-  before_action :check_catch_params, only: [:create]
+  before_action :check_catch_params, only: [:new, :create]
   before_action :authorize_catch, except: [:index, :show]
   before_action :set_catch, only: [:show, :edit, :update, :destroy]
   before_action :set_competition, only: [:create]
@@ -100,7 +100,7 @@ class CatchesController < ApplicationController
   def check_catch_params
     return if catch_params.present?
     redirect_to request.referrer,
-                notice: 'Select a competition BEFORE adding a catch'
+                notice: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
   end
 
   def authorize_catch
