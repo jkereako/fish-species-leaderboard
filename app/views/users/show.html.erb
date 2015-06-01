@@ -77,30 +77,28 @@
       <div class="panel-heading">
         Recent catches
       </div>
-      <div class="panel-body">
-        <% if @user.catches.any? %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>
-                Species
-              </th>
-              <th>
-                Bait used
-              </th>
-              <th>
-                Date caught
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-          <%= render partial: 'catch', collection: @user.catches.recent.top_10 %>
-          </tbody>
-        </table>
-        <% else %>
-        No catches on file
-        <% end %>
-      </div>
+      <% if @user.catches.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              Species
+            </th>
+            <th>
+              Bait used
+            </th>
+            <th>
+              Date caught
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= render partial: 'catch', collection: @user.catches.recent.top_10 %>
+        </tbody>
+      </table>
+      <% else %>
+      No catches on file
+      <% end %>
     </div>
   </div>
 </div>

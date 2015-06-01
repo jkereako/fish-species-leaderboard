@@ -3,27 +3,28 @@
     <ol class="breadcrumb hidden-xs">
       <li class="active"><%= link_to 'Anglers', users_path %></li>
     </ol>
-    <h1 class="page-header"><%= t 'page.user.title' %></h1>
+    <h1 class="page-header">All anglers</h1>
   </div>
 </div>
 
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th></th>
-              <th><%= t 'generic.term.last_logged_in' %></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <%= render @users %>
-          </tbody>
-        </table>
+      <div class="panel-heading">
+        Anglers
       </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th><%= t 'generic.term.last_logged_in' %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @users %>
+        </tbody>
+      </table>
       <div class="panel-footer">
         <%= link_to 'Invite someone',
                     new_user_invitation_path,

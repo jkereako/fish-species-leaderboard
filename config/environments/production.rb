@@ -86,6 +86,6 @@ Rails.application.configure do
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       s3_host_name: ENV['S3_HOST_NAME']
     },
-    path: '/uploads/images/:id/:style/:filename'
+    path: '/uploads/images/:class/:id/:style/:filename'
   }
 end

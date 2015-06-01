@@ -3,8 +3,8 @@ class Catch < ActiveRecord::Base
   scope :top_10, -> { limit 10 }
   scope :for_competition, ->(competition) { where competition: competition }
 
-  has_attached_file :image, styles: { medium: "300x300>",
-                                       thumbnail: "100x100>" },
+  has_attached_file :image, styles: { medium: '300x300#',
+                                      thumbnail: '60x60#' },
                             default_url: '/images/:style/missing.png'
 
   belongs_to :competition, inverse_of: 'catches', counter_cache: true

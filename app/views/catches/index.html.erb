@@ -4,7 +4,7 @@
       <li class="active"><%= link_to 'Catches', catches_path %></li>
     </ol>
     <h1 class="page-header" itemprop="name" role="heading">
-      <%=t 'page.catch.index.title' %>
+      All catches
     </h1>
   </div>
 </div>
@@ -12,43 +12,45 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <% if @catches.any? %>
-        <table class="table">
-          <thead>
+      <div class="panel-heading">
+        Catches
+      </div>
+      <% if @catches.any? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Species</th>
+            <th>Length</th>
+            <th>Angler</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @catches.each do |catch| %>
             <tr>
-              <th>Species</th>
-              <th>Length</th>
-              <th>Angler</th>
+              <td>
+                <%= link_to catch do %>
+                  <%= image_tag catch.image.url(:thumbnail),
+                                class: 'img-thumbnail img-responsive img-rounded' %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to catch.species, catch %>
+              </td>
+              <td><%= length_in_words catch.length_in_inches %></td>
+              <td><%= link_to catch.user.name, catch.user %></td>
 
             </tr>
-          </thead>
-
-          <tbody>
-            <% @catches.each do |catch| %>
-              <tr>
-                <td>
-                  <%= link_to catch do %>
-                    <p>
-                      <%= catch.species %>
-                    </p>
-                    <%= image_tag catch.image.url(:thumbnail),
-                                  class: 'img-thumbnail img-responsive img-rounded' %>
-                  <% end %>
-                </td>
-                <td><%= length_in_words catch.length_in_inches %></td>
-                <td><%= link_to catch.user.name, catch.user %></td>
-
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <% else %>
-        <p class="lead">
-          No catches yet.
-        </p>
-        <% end %>
-      </div><!-- ./panel-body-->
+          <% end %>
+        </tbody>
+      </table>
+      <% else %>
+      <p class="lead">
+        No catches yet.
+      </p>
+      <% end %>
       <% if policy(:catch).new? %>
       <div class="panel-footer">
         <% if @app_catch.present? %>
