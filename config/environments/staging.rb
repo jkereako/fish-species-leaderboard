@@ -85,15 +85,18 @@ Rails.application.configure do
   # Below is an example of how to pass environment variables to the Rails
   # server.
   #
-  # $ S3_BUCKET_NAME=gaylord_focker AWS_ACCESS_KEY_ID=hotdogfoobaralbuquerque /
-  #   AWS_SECRET_ACCESS_KEY=nananana-nananana-heyheyhey-goodbye rails s -e staging
+  # ~$ S3_HOST_NAME=s3.aws.com S3_BUCKET_NAME=gaylord_focker /
+  #    AWS_ACCESS_KEY_ID=hotdogfoobaralbuquerque /
+  #    AWS_SECRET_ACCESS_KEY=nananana-nananana-heyheyhey-goodbye /
+  #    rails s -e staging
   config.paperclip_defaults = {
     storage: 's3',
     s3_credentials: {
       bucket: ENV['S3_BUCKET_NAME'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+      s3_host_name: ENV['S3_HOST_NAME']
     },
-    path: '/uploads/images/:filename'
+    path: '/uploads/images/:id/:style/:filename'
   }
 end
