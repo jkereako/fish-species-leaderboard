@@ -42,4 +42,5 @@ group :production do
   gem 'pg'              # PostgreSQL
   gem 'puma'            # The Puma web server
   gem 'rails_12factor'  # Heroku
+  gem 'aws-sdk'         # Amazon Web Services
 end
