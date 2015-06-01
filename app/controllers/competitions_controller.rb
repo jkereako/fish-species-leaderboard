@@ -10,7 +10,7 @@ class CompetitionsController < ApplicationController
       respond_to do |format|
         format.html do
           redirect_to competitions_url,
-          notice: 'Competition was successfully suspended.'
+                      notice: 'Competition was successfully suspended.'
         end
         format.json { head :no_content }
       end
@@ -19,7 +19,7 @@ class CompetitionsController < ApplicationController
       format.json do
         render 'shared/error',
                locals: { errors: @competition.errors,
-                         notice: 'Data missing or invalid'},
+                         notice: 'Data missing or invalid' },
                status: :unprocessable_entity
       end
     end
@@ -53,25 +53,46 @@ class CompetitionsController < ApplicationController
   def create
     @competition = Competition.new
 
+    # REVIEW: The code below invalidates `begins_at` and `ends_at` while still
+    # satisfying the validators. If we were to pass nil, then an exception will
+    # be raised. Instead, we pass a valid date which will be invalid when passed
+    # to the validators.
+    begin
+      @competition.begins_at = DateTime.parse competition_params[:begins_at]
+    rescue ArgumentError
+      @competition.begins_at = DateTime.parse '1970-01-02 00:00:00'
+    end
+
+    # Make `ends_at` 1 day before `begins_at` to invalidate it.
+    begin
+      @competition.ends_at = DateTime.parse competition_params[:ends_at]
+    rescue ArgumentError
+      @competition.ends_at = DateTime.parse '1970-01-01 00:00:00'
+    end
+
     @competition.name = competition_params[:name]
     @competition.prize = competition_params[:prize]
-    @competition.begins_at = Date.parse competition_params[:begins_at]
-    @competition.ends_at = Date.parse competition_params[:ends_at]
     @competition.users = @users
 
     respond_to do |format|
       if @competition.save
-        format.html { redirect_to @competition,
-                      notice: 'Competition was successfully created.' }
-        format.json { render :show,
-                      status: :created,
-                      location: @competition}
+        format.html do
+          redirect_to @competition,
+                      notice: 'Competition was successfully created.'
+        end
+        format.json do
+          render :show,
+                 locals: { competition: @competition,
+                           notice: "Successfully created #{@competition.name}" },
+                 status: :created,
+                 location: @competition
+        end
       else
         format.html { render :new }
         format.json do
           render 'shared/error',
                  locals: { errors: @competition.errors,
-                           notice: 'Data missing or invalid'},
+                           notice: 'Data missing or invalid' },
                  status: :unprocessable_entity
         end
       end

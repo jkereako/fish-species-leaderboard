@@ -50,13 +50,23 @@ class CatchesController < ApplicationController
 
     respond_to do |format|
       if @catch.save
-        format.html { redirect_to @catch, notice: 'Catch was successfully created.' }
-        format.json { render :show, status: :created, location: @catch }
+        format.html do
+          redirect_to @catch,
+                      notice: 'Catch was successfully created.'
+        end
+        format.json do
+          render :show,
+                 locals: { a_catch: @catch,
+                           notice: "Successfully recorded #{@catch.species}" },
+                 status: :created,
+                 location: @catch
+        end
       else
         format.html { render :new }
         format.json do
           render 'shared/error',
-                 locals: { errors: @catch.errors },
+                 locals: { errors: @catch.errors,
+                           notice: 'Data missing or invalid' },
                  status: :unprocessable_entity
         end
       end

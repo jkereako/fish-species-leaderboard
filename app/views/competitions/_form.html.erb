@@ -10,7 +10,7 @@
             <br />
             <%= f.text_field :name,
                               class: 'form-control',
-                              readonly: (if action_name == 'edit' then true else false end),
+                              disabled: (if action_name == 'edit' then true else false end),
                               autofocus: true,
                               required: true,
                               placeholder: t('page.competition.form.placeholder.name') %>
@@ -31,7 +31,7 @@
                 <%= f.date_field :begins_at,
                                       class: 'form-control',
                                       data: {'date-format'=> 'mm/dd/yyyy'},
-                                      readonly: (if action_name == 'edit' then true else false end),
+                                      disabled: (if action_name == 'edit' then true else false end),
                                       min: (if action_name == 'edit' then @competition.begins_at else Date.today end),
                                       required: true,
                                       value: (if action_name == 'new' then Date.today else '' end) %>
