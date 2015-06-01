@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 
   # Make the leaderboard the home page
-  root 'leaderboard#index', as: :leaderboard
+  root 'leaderboard#index'
 end

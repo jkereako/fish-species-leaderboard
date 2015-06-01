@@ -21,7 +21,12 @@ module FishSpeciesLeaderboard
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Bower assets
+    #-- Devise
+    config.to_prepare do
+      Devise::Mailer.layout 'mailer.html.erb'
+    end
+
+    #-- Bower
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

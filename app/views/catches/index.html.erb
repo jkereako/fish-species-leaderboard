@@ -47,9 +47,11 @@
         </tbody>
       </table>
       <% else %>
-      <p class="lead">
-        No catches yet.
-      </p>
+      <div class="panel-body">
+        <p class="lead">
+          No catches yet.
+        </p>
+      </div>
       <% end %>
       <% if policy(:catch).new? %>
       <div class="panel-footer">

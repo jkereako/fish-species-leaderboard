@@ -16,9 +16,11 @@
         Competitions
       </div>
       <% unless @competitions.any? %>
-      <p class="lead">
-        No competitions yet.
-      </p>
+      <div class="panel-body">
+        <p class="lead">
+          No competitions yet.
+        </p>
+      </div>
       <% else %>
       <table class="table">
         <thead>

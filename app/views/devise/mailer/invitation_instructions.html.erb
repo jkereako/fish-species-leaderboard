@@ -1,7 +1,11 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<h1>You're invited</h1>
 
 <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
 
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
+<%= render 'shared/mailer/callout',
+            content: t("devise.mailer.invitation_instructions.ignore").html_safe
+            %>
 
-<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+<%= render 'shared/mailer/button',
+            title: 'Accept',
+            url: accept_invitation_url(@resource, invitation_token: @token) %>
