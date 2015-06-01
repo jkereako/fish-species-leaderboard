@@ -38,9 +38,13 @@ group :development, :staging do
   gem 'letter_opener'       # Preview mailer templates in development
 end
 
+# see: http://stackoverflow.com/questions/28374401/nameerror-uninitialized-constant-paperclipstorages3aws#28376678
+group :production, :staging do
+  gem 'aws-sdk', '< 2.0'        # Amazon Web Services
+end
+
 group :production do
   gem 'pg'              # PostgreSQL
   gem 'puma'            # The Puma web server
   gem 'rails_12factor'  # Heroku
-  gem 'aws-sdk'         # Amazon Web Services
 end

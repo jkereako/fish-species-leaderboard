@@ -14,7 +14,7 @@ class Catch < ActiveRecord::Base
   validates :user, presence: true
   validates :bait_used, presence: true
   validates :location_description, presence: true
-  validates :image, presence: true
+  validates_attachment_presence :image
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   validates :length_in_inches,
             presence: true,

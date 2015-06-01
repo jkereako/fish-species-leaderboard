@@ -77,4 +77,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #-- Paperclip
+  # You will have to define all of the environment variables on the command line
+  # to test this feature in staging.
+  #
+  # Below is an example of how to pass environment variables to the Rails
+  # server.
+  #
+  # $ S3_BUCKET_NAME=gaylord_focker AWS_ACCESS_KEY_ID=hotdogfoobaralbuquerque /
+  #   AWS_SECRET_ACCESS_KEY=nananana-nananana-heyheyhey-goodbye rails s -e staging
+  config.paperclip_defaults = {
+    storage: 's3',
+    s3_credentials: {
+      bucket: ENV['S3_BUCKET_NAME'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    path: '/uploads/images/:filename'
+  }
 end
