@@ -1,14 +1,44 @@
-<h2><%= t 'devise.invitations.edit.header' %></h2>
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="page-header" itemprop="name">
+      Accept invitation
+    </h1>
+  </div>
+</div>
 
-<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :invitation_token %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="well bs-component">
+      <%= form_for resource,
+                   url: invitation_path(resource),
+                   html: { method: 'put' } do |f| %>
+        <% devise_error_messages! %>
+        <fieldset>
+          <legend>Create account</legend>
+          <%= f.hidden_field :invitation_token %>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+          <div class="form-group">
+            <%= f.label :name %> <br>
+            <%= f.text_field :name, class: 'form-control',
+                             placeholder:'Joey jo-jo Jr. Shabadoo' %>
+          </div>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+          <div class="form-group">
+            <%= f.label :password %> <br>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
 
-  <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
-<% end %>
+          <div class="form-group">
+            <%= f.label :password_confirmation %> <br>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit 'Reset', class: 'btn btn-default', type: 'reset' %>
+            <%= f.submit t("devise.invitations.edit.submit_button"), class: 'btn btn-primary' %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</div>

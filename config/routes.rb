@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   # Prevent new users from registering new accounts.
   # This app is invite only.
   # devise_for :users, skip: 'registrations'
-  devise_for :users, skip: 'registrations'
+  devise_for :users, controllers: { invitations: 'invitations' },
+                     skip: 'registrations'
   as :user do
     get 'users/edit' => 'devise/registrations#edit',
         as: 'edit_user_registration'

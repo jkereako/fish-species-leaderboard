@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
     "#{id} #{name}".parameterize
   end
 
+  def inivited?
+    invitation_token.present?
+  end
+
   # Helpers
   def admin?
     role == ROLES.first
@@ -42,5 +46,9 @@ class User < ActiveRecord::Base
   def active?
     is_active
   end
-  
+
+  def suspended?
+    !is_active
+  end
+
 end

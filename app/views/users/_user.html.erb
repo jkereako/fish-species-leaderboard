@@ -6,7 +6,7 @@
     <%= time_ago_or_never_in_words user.last_sign_in_at %>
   </td>
   <td>
-    <span class="label <%= bs_user_role_label_class user.role %>"><%= user.role.upcase %></span>
-    <span class="label <%= bs_is_active_label_class user.active? %>"><%= is_active_in_words(user.active?).upcase %></span>
+    <span class="text-uppercase label <%= bs_class_for_user_role user %>"><%= user_role_in_words user %></span>
+    <span class="text-uppercase label <%= bs_class_for_user_status user %>"><%= user_status_in_words user %></span>
   </td>
 </tr>
