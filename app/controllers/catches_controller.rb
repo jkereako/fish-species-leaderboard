@@ -78,7 +78,10 @@ class CatchesController < ApplicationController
   def update
     respond_to do |format|
       if @catch.update(catch_params)
-        format.html { redirect_to @catch, notice: 'Catch was successfully updated.' }
+        format.html do
+          redirect_to @catch,
+                      notice: 'Catch was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @catch }
       else
         format.html { render :edit }
@@ -96,7 +99,10 @@ class CatchesController < ApplicationController
   def destroy
     @catch.destroy
     respond_to do |format|
-      format.html { redirect_to catches_url, notice: 'Catch was successfully destroyed.' }
+      format.html do
+        redirect_to catches_url,
+                    notice: 'Catch was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -109,7 +115,7 @@ class CatchesController < ApplicationController
     return if catch_params.present?
     return if current_user.competitions.active.count == 1
     redirect_to request.referrer,
-                notice: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
+                alert: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
   end
 
   def authorize_catch
