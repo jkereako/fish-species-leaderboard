@@ -1,6 +1,10 @@
 <tr>
   <td>
-    <%= link_to user.name, user %>
+    <% if user.accepted_or_not_invited? %>
+    <%= link_to user_identifier_in_words(user), user %>
+    <% else %>
+    <%= user_identifier_in_words user %>
+    <% end %>
   </td>
   <td>
     <%= time_ago_or_never_in_words user.last_sign_in_at %>
@@ -8,5 +12,8 @@
   <td>
     <span class="text-uppercase label <%= bs_class_for_user_role user %>"><%= user_role_in_words user %></span>
     <span class="text-uppercase label <%= bs_class_for_user_status user %>"><%= user_status_in_words user %></span>
+  </td>
+  <td>
+    <%= resend_user_invitation_link user -%>
   </td>
 </tr>

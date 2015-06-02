@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_activation]
+  before_action :set_user, only: [:show, :edit, :update, :destroy,
+                                  :toggle_activation]
   before_action :authorize_all_users, except: [:show, :toggle_activation]
   before_action :authorize_individual_user, except: [:show, :toggle_activation]
-
+  before_action :check_user_invite_status, only: [:show]
 
   # XHR requests only
   def toggle_activation
@@ -29,10 +30,12 @@ class UsersController < ApplicationController
 
   private
 
+  # Ensure that whoever is requesting the show action is, at least, logged in
   def authorize_all_users
     authorize :user
   end
 
+  # Allow users to see their own profile but prevent them from viewing others.
   def authorize_individual_user
     if @user.present?
       # Pass the object @user to Pundit to check against @current_user
@@ -42,13 +45,20 @@ class UsersController < ApplicationController
     end
   end
 
+  # Prevent the user's profile from being shown if the user has not set up his
+  # account yet.
+  def check_user_invite_status
+    return if @user.accepted_or_not_invited?
+
+    redirect_to users_path,
+                alert: 'This user has not accepted his invitation yet.'
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find_by_id params[:id]
   end
 
-  # Never trust parameters from the scary internet, only allow the white lis
-  # through.
   def user_params
     params[:user]
   end

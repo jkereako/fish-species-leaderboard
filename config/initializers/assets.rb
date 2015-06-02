@@ -1,7 +1,12 @@
 # Be sure to restart your server when you modify this file.
 
+#-- Prevent logging of asset
+Rails.application.config.assets.logger = false
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
+
+#-- Bower
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

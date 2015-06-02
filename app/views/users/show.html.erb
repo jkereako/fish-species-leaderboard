@@ -21,9 +21,11 @@
         Profile
       </div>
       <div class="panel-body">
+        <% if @user.invitation_accepted? %>
         <p>
           Memember since <strong><time datetime="<%= @user.invitation_accepted_at.to_formatted_s :db %>"><%= time_ago_or_never_in_words @user.invitation_accepted_at %></time></strong>
         </p>
+        <% end %>
         <% if @user.last_sign_in_at.present? %>
         <p>
           Last log in <strong><time datetime="<%= @user.last_sign_in_at.to_formatted_s :db %>"><%= time_ago_or_never_in_words @user.last_sign_in_at %></time></strong>

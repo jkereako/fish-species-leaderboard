@@ -7,7 +7,7 @@ class Flash
     @ujsElements.bind 'ajax:error', ajaxError
     @ujsElements.bind 'ajax:complete', ajaxComplete
 
-    @flashDiv.find 'button.close'
+    Flash.flashDiv.find 'button.close'
     .click (event) ->
       do event.preventDefault
       $ @
@@ -41,9 +41,13 @@ class Flash
     @flashDiv.fadeIn 'slow'
 
 ready = ->
-  Flash.flashDiv = $ 'div#asynchronous-flash'
-  # Find all UJS remote links and forms
-  flash = new Flash $ '*[data-remote="true"]'
+  ujsElements = $ '*[data-remote="true"]'
+
+  # If there are UJS elements, then create the Flash object. Otheriwse, skip it.
+  if ujsElements.length
+    Flash.flashDiv = $ 'div#asynchronous-flash'
+    # Find all UJS remote links and forms
+    flash = new Flash $ '*[data-remote="true"]'
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
