@@ -1,39 +1,24 @@
 FactoryGirl.define do
+  sequence(:name) { |n| "Species contest No. #{n}" }
+
   factory :competition do
-    name 'Species contest 2015'
+    name { generate :name }
     prize 'All expenses paid trip to Haverhill'
+    begins_at Time.zone.now
+    ends_at Time.zone.tomorrow
 
-    trait :past_competition do
-      begins_at DateTime.parse '2010-01-01 00:00:00 -0400'
-      ends_at DateTime.parse '2010-06-30 23:59:59 -0400'
+    # The values in the transient block will be availble in the callbacks
+    transient do
+      competitor_count 2
     end
 
-    trait :present_competition do
-      begins_at DateTime.parse '2015-06-01 00:00:00 -0400'
-      ends_at DateTime.parse '2015-12-31 23:59:59 -0400'
+    before :create do |competition, _evaluator|
+      competition.users << create(:competitor)
+      competition.users << create(:competitor)
+      # Although taken from the Getting Started guide, it doesn't fucking work
+      # competition.users << create_list(:competitor,
+      #                                  evaluator.competitor_count,
+      #                                  competitions: [competition])
     end
-
-    trait :future_competition do
-      begins_at DateTime.parse '2020-01-01 00:00:00 -0400'
-      ends_at DateTime.parse '2020-06-30 23:59:59 -0400'
-    end
-
-    factory :past_competition, traits: [:past_competition]
-    factory :present_competition, traits: [:present_competition]
-    factory :future_competition, traits: [:future_competition]
-
-    association :user, factory: :regular_user
   end
 end
-# t.integer  "winner_id",            default: 0,     null: false
-# t.string   "name",                 default: "",    null: false
-# t.string   "prize",                default: "",    null: false
-# t.datetime "begins_at",                            null: false
-# t.datetime "ends_at",                              null: false
-# t.boolean  "has_expired",          default: false, null: false
-# t.boolean  "is_suspended",         default: false, null: false
-# t.integer  "winner_catches_count", default: 0,     null: false
-# t.integer  "users_count",          default: 0,     null: false
-# t.integer  "catches_count",        default: 0,     null: false
-# t.datetime "created_at",                           null: false
-# t.datetime "updated_at",                           null: false
