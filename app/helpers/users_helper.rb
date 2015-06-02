@@ -1,13 +1,4 @@
 module UsersHelper
-  def resend_user_invitation_link(user)
-    return if user.accepted_or_not_invited?
-    link_to 'resend invitation',
-            resend_user_invitation_path(user),
-            class: 'btn btn-default btn-xs',
-            data: { remote: true },
-            format: 'json'
-  end
-
   # Convert status into words
   def user_identifier_in_words(user)
     return user.name if user.name.present?
