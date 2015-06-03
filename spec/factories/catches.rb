@@ -7,7 +7,9 @@ FactoryGirl.define do
     bait_used 'Bologna'
     location_description 'Flax Pond'
     image do
-      fixture_file_upload(Rails.root.join('spec/fixtures/pollock.jpg'), 'image/jpg')
+      fixture_file_upload(Rails.root.join('spec',
+                                          'fixtures',
+                                          'pollock.jpg'), 'image/jpg')
     end
     caught_at DateTime.parse '2015-06-01 20:52:31 -0400'
 
@@ -19,6 +21,5 @@ FactoryGirl.define do
     before :create do |a_catch|
       a_catch.user = a_catch.competition.users.first
     end
-
   end
 end

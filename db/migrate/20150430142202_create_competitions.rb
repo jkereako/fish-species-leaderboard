@@ -16,8 +16,10 @@ class CreateCompetitions < ActiveRecord::Migration
       t.boolean :is_suspended, null: false,  default: false
       # The number of catches the winner has
       t.integer :winner_catches_count, default: 0, null: false
-      # Magic columns
-      t.integer :users_count, default: 0, null: false
+
+      # Useless column, but why not.
+      t.integer :memberships_count, default: 0, null: false
+
       # Total catches among all competitors
       t.integer :catches_count, default: 0, null: false
       t.timestamps null: false
