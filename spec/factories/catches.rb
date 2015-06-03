@@ -11,8 +11,14 @@ FactoryGirl.define do
     end
     caught_at DateTime.parse '2015-06-01 20:52:31 -0400'
 
-    association :user, factory: 'competitor'
+    # Associate the competition factory with this catch. This expression is
+    # evaluated before the callbacks
     association :competition
-  end
 
+    # Associate one of the 2 users of the competition with this catch.
+    before :create do |a_catch|
+      a_catch.user = a_catch.competition.users.first
+    end
+
+  end
 end

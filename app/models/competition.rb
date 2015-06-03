@@ -27,9 +27,10 @@ class Competition < ActiveRecord::Base
   validates :prize, presence: true
   validates :begins_at, presence: true
   validates :ends_at, presence: true
+  validates :users, length: { minimum: 2,
+                             message: 'There must be at least 2 competitors' }
   validate :begins_at_is_not_in_the_past, unless: :skip_validate_begins_at_is_not_in_the_past
   validate :ends_at_is_greater_than_begins_at
-  validates :users, presence: true
 
   # Allows us to associate multiple User objects with 1 Competition object
   # when updating

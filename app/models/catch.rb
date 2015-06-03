@@ -11,8 +11,7 @@ class Catch < ActiveRecord::Base
   belongs_to :user, inverse_of: 'catches', counter_cache: true
 
   validates :competition, presence: true
-  validates :user, length: { minimum: 2,
-                             message: 'There must be at least 2 competitors' }
+  validates :user, presence: true
   validates :bait_used, presence: true
   validates :location_description, presence: true
   validates_attachment_presence :image

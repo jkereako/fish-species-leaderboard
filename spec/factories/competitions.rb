@@ -15,7 +15,8 @@ FactoryGirl.define do
     before :create do |competition, _evaluator|
       competition.users << create(:competitor)
       competition.users << create(:competitor)
-      # Although taken from the Getting Started guide, it doesn't fucking work
+      # Although the code below was taken from the Getting Started guide, it
+      # doesn't fucking work!
       # competition.users << create_list(:competitor,
       #                                  evaluator.competitor_count,
       #                                  competitions: [competition])

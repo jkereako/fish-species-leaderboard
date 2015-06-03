@@ -26,8 +26,6 @@ FactoryGirl.define do
     # (0.1ms)  begin transaction...
     # ```
     factory :regular_user, aliases: [:competitor], traits: [:user_role]
-
     factory :admin_user, aliases: [:admin], traits: [:admin_role]
-
   end
 end
