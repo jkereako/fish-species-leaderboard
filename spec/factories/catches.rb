@@ -21,5 +21,9 @@ FactoryGirl.define do
     before :create do |a_catch|
       a_catch.user = a_catch.competition.users.first
     end
+
+    after :build do |a_catch|
+      a_catch.user = a_catch.competition.users.first
+    end
   end
 end

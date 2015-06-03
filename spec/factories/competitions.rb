@@ -21,5 +21,10 @@ FactoryGirl.define do
       #                                  evaluator.competitor_count,
       #                                  competitions: [competition])
     end
+
+    after :build do |competition, _evaluator|
+      competition.users << build(:competitor)
+      competition.users << build(:competitor)
+    end
   end
 end
