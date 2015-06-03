@@ -10,9 +10,7 @@ RSpec.describe Catch, type: :model do
   end
 
   context 'object' do
-    let(:a_catch) { build :catch }
-
-    subject { a_catch }
+    subject { build :catch }
 
     #-- FactoryGirl
     it { is_expected.to be_valid }
@@ -39,5 +37,37 @@ RSpec.describe Catch, type: :model do
     #-- Test default values --
     specify { expect(subject.length_in_inches).to eq 0 }
     specify { expect(subject.was_released).to eq true }
+
+    ##-- Test validations
+    context 'invalidates' do
+      context 'length_in_inches' do
+        #-- length_in_inches
+        it 'with strings' do
+          subject.length_in_inches = '$3 bill!'
+          expect(subject).to_not be_valid
+        end
+
+        it 'with negative integers' do
+          subject.length_in_inches = -36
+          expect(subject).to_not be_valid
+        end
+      end
+
+      #-- bait_used
+      it 'nil for "bait_used"' do
+        subject.bait_used = nil
+        expect(subject).to_not be_valid
+      end
+      #-- location_description
+      it 'nil for "location_description"' do
+        subject.bait_used = nil
+        expect(subject).to_not be_valid
+      end
+      #-- image
+      it 'nil for "image"' do
+        subject.image = nil
+        expect(subject).to_not be_valid
+      end
+    end
   end
 end

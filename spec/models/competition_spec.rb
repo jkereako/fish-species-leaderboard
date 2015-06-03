@@ -11,9 +11,7 @@ RSpec.describe Competition, type: :model do
   end
 
   context 'object' do
-    let(:competition) { build :competition }
-
-    subject { competition }
+    subject { build :competition }
 
     # Is the factory configured correctly?
     it { is_expected.to be_valid }
@@ -36,5 +34,43 @@ RSpec.describe Competition, type: :model do
     #-- Timestamps
     it { is_expected.to respond_to :created_at }
     it { is_expected.to respond_to :updated_at }
+
+    #-- Test validations
+    context 'invalidates' do
+      #-- name
+      it 'identical values for "name"' do
+        other_competition = create :competition
+        subject.name = other_competition.name
+        expect(subject).to_not be_valid
+      end
+      #-- prize
+      it 'nil for "prize"' do
+        subject.prize = nil
+        expect(subject).to_not be_valid
+      end
+      #-- begins_at
+      context 'begins_at' do
+        it 'with nil' do
+          subject.begins_at = nil
+          expect(subject).to_not be_valid
+        end
+        it 'with past date' do
+          subject.begins_at = Time.zone.now - 1.days
+          expect(subject).to_not be_valid
+        end
+      end
+      #-- ends_at
+      context 'ends_at' do
+        it 'with nil' do
+          subject.ends_at = nil
+          expect(subject).to_not be_valid
+        end
+        it 'with date older than "begins_at"' do
+          subject.begins_at = Time.zone.now
+          subject.ends_at = Time.zone.now - 1.days
+          expect(subject).to_not be_valid
+        end
+      end
+    end
   end
 end
