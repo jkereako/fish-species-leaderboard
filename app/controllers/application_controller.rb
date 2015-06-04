@@ -13,7 +13,12 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_to url_for new_user_session_path
+
+    if current_user.nil?
+      redirect_to url_for new_user_session_path
+    else
+      redirect_to url_for root_path
+    end
   end
 
   private

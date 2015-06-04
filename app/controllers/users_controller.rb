@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy,
                                   :toggle_activation]
   before_action :authorize_all_users, except: [:show, :toggle_activation]
-  before_action :authorize_individual_user, except: [:show, :toggle_activation]
+  before_action :authorize_individual_user, only: [:show, :toggle_activation]
   before_action :check_user_invite_status, only: [:show]
 
   # XHR requests only

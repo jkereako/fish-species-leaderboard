@@ -29,9 +29,18 @@ class User < ActiveRecord::Base
     ROLES.last
   end
 
-  # ActiveRecord override
+  #-- ActiveRecord override
   def to_param
     "#{id} #{name}".parameterize
+  end
+
+  #-- Devise override
+  def active_for_authentication?
+    super && is_active
+  end
+
+  def inactive_message
+    is_active ? super : 'Your account has been suspended.'
   end
 
   def inivited?
