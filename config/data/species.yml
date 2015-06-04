@@ -1,28 +1,38 @@
-- American Shad
-- Atlantic Cod
-- Atlantic herring
-- Atlantic Mackerel
-- Atlantic salmon
-- Atlantic Tom Cod
-- Bluefish
-- Cunner
-- Cusk
-- Haddock
-- Hake
-- Longhorn sculpin
-- Monkfish
-- Ocean pout
-- Pollock
-- Rainbow Smelt
-- Redfish
-- Sea-run brown trout
-- Skates
-- Spiny Dogfish
-- Striped Bass
-- Summer flounder
-- Tautog
-- White perch
-- Windowpane flounder
-- Winter Flounder
-- Wolffish
-- Yellowtail flounder
+freshwater:
+ - Black Crappie
+ - Blue Catfish
+ - Blue Gill
+ - Bowfin
+ - Brook Trout
+ - Brown Trout
+ - Chain Pickerel
+ - Channel Catfish
+ - Chubsucker
+ - Common Carp
+ - Eel
+ - Flathead Catfish
+ - Grass Carp
+ - Green Sunfish
+ - Lamprey
+ - Largemouth Bass
+ - Longnose Gar
+ - Musky
+ - Northern Pike
+ - Pumpkin Seed
+ - Rainbow Trout
+ - Redbreast Sunfish
+ - Redfin Pickerel
+ - Redeye Bass
+ - Rock Bass
+ - Smallmouth Bass
+ - Striped Bass
+ - Walleye
+ - White Bass
+ - White Catfish
+ - White Crappie
+ - White Perch
+ - Yellow Perch
+saltwater:
+ - Black SeaBass
+ - Gray Triggerfish
+ - Spottail Pinfish
