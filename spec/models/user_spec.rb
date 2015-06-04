@@ -12,9 +12,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'object' do
-    let(:competitor) { build :competitor }
-
-    subject { competitor }
+    subject { build :competitor }
 
     # Is the factory configured correctly?
     it { is_expected.to be_valid }
@@ -63,11 +61,11 @@ RSpec.describe User, type: :model do
     it { is_expected.to respond_to :updated_at }
 
     #-- Test default values --
-    specify { expect(competitor.is_active).to eq true }
-    specify { expect(competitor.reason).to eq '' }
+    specify { expect(subject.is_active).to eq true }
+    specify { expect(subject.reason).to eq '' }
 
     it 'only supports the roles "administrator" or "user"' do
-      competitor.role = 'bananas'
+      subject.role = 'bananas'
       is_expected.to_not be_valid
     end
 
