@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :competition do
     name { generate :name }
     prize 'All expenses paid trip to Haverhill'
-    begins_at Time.zone.now
-    ends_at Time.zone.tomorrow
+    begins_at Time.now.utc.to_date
+    ends_at Time.now.utc.to_date + 1.days
 
     # The values in the transient block will be availble in the callbacks
     transient do

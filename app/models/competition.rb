@@ -31,9 +31,14 @@ class Competition < ActiveRecord::Base
                              message: 'There must be at least 2 competitors' }
   validate :begins_at_is_not_in_the_past,
            unless: :skip_validate_begins_at_is_not_in_the_past,
-           if: proc { |c| c.begins_at.is_a? Date }
+           if: (proc do |c|
+             c.begins_at.is_a?(Date) || c.begins_at.is_a?(Time)
+           end)
   validate :ends_at_is_greater_than_begins_at,
-           if: proc { |c| c.begins_at.is_a?(Date) && c.ends_at.is_a?(Date) }
+           if: (proc do |c|
+             (c.begins_at.is_a?(Date) || c.begins_at.is_a?(Time)) &&
+               (c.ends_at.is_a?(Date) || c.ends_at.is_a?(Time))
+           end)
 
   # Allows us to associate multiple User objects with 1 Competition object
   # when updating
@@ -70,12 +75,12 @@ class Competition < ActiveRecord::Base
   private
 
   def begins_at_is_not_in_the_past
-    return if Time.zone.today < begins_at
+    return if begins_at.utc.to_date >= Time.now.utc.to_date
     errors.add(:begins_at, 'must be today or in the future')
   end
 
   def ends_at_is_greater_than_begins_at
-    return if ends_at > begins_at
+    return if begins_at.utc.to_date < ends_at.utc.to_date
     errors.add(:ends_at, 'must be greater than beginning date')
   end
 end

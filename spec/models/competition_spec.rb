@@ -41,34 +41,34 @@ RSpec.describe Competition, type: :model do
       it 'identical values for "name"' do
         other_competition = create :competition
         subject.name = other_competition.name
-        expect(subject).to_not be_valid
+        expect(subject).not_to be_valid
       end
       #-- prize
       it 'nil for "prize"' do
         subject.prize = nil
-        expect(subject).to_not be_valid
+        expect(subject).not_to be_valid
       end
       #-- begins_at
       context 'begins_at' do
         it 'with nil' do
           subject.begins_at = nil
-          expect(subject).to_not be_valid
+          expect(subject).not_to be_valid
         end
         it 'with past date' do
-          subject.begins_at = Time.zone.now - 1.days
-          expect(subject).to_not be_valid
+          subject.begins_at = Time.now.utc.to_date - 1.days
+          expect(subject).not_to be_valid
         end
       end
       #-- ends_at
       context 'ends_at' do
         it 'with nil' do
           subject.ends_at = nil
-          expect(subject).to_not be_valid
+          expect(subject).not_to be_valid
         end
         it 'with date older than "begins_at"' do
-          subject.begins_at = Time.zone.now
-          subject.ends_at = Time.zone.now - 1.days
-          expect(subject).to_not be_valid
+          subject.begins_at = Time.now.utc.to_date
+          subject.ends_at = Time.now.utc.to_date - 1.days
+          expect(subject).not_to be_valid
         end
       end
     end
