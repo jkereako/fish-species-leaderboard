@@ -142,7 +142,7 @@ class CompetitionsController < ApplicationController
 
   #-- Helpers
   def competition_params
-    params[:competition]
+    params[:competition] if params[:competition].present?
   end
 
   #-- Callbacks

@@ -114,7 +114,7 @@ class CatchesController < ApplicationController
   def check_catch_params
     return if catch_params.present?
     return if current_user.competitions.active.count == 1
-    redirect_to request.referrer,
+    redirect_to request.referrer || root_path,
                 alert: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
   end
 
@@ -139,7 +139,7 @@ class CatchesController < ApplicationController
     if competitions.count == 1
       @competition = competitions.first
     else
-      if catch_params.key? :competition
+      if catch_params[:competition].present?
         @competition = Competition.find_by_id catch_params[:competition]
       end
     end
