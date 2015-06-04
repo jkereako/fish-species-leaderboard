@@ -7,8 +7,6 @@ class Competition < ActiveRecord::Base
   scope :suspended, -> { where is_suspended: true }
   scope :yet_to_begin, -> { where('begins_at > ?', Time.zone.now) }
 
-  attr_accessor :skip_validate_begins_at_is_not_in_the_past
-
   # Creates the method `winner` which is associated with the model `User` and
   # the column name `winner_id`. And so, `@competition.winner` returns a `User`
   # object.
@@ -28,12 +26,13 @@ class Competition < ActiveRecord::Base
   validates :begins_at, presence: true
   validates :ends_at, presence: true
   validates :users, length: { minimum: 2,
-                             message: 'There must be at least 2 competitors' }
+                              message: 'There must be at least 2 competitors' }
   validate :begins_at_is_not_in_the_past,
-           unless: :skip_validate_begins_at_is_not_in_the_past,
+           on: :create,
            if: (proc do |c|
              c.begins_at.is_a?(Date) || c.begins_at.is_a?(Time)
            end)
+  # Only perform validation if the incoming object are Date or Time objects.
   validate :ends_at_is_greater_than_begins_at,
            if: (proc do |c|
              (c.begins_at.is_a?(Date) || c.begins_at.is_a?(Time)) &&
@@ -74,6 +73,10 @@ class Competition < ActiveRecord::Base
 
   private
 
+  # Convert each Date or Time object to a UTC date and compare it against
+  # today's UTC date.
+  #
+  # The beginning date for a competition is expected to never be changed.
   def begins_at_is_not_in_the_past
     return if begins_at.utc.to_date >= Time.now.utc.to_date
     errors.add(:begins_at, 'must be today or in the future')

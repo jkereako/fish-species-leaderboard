@@ -107,7 +107,7 @@ class CompetitionsController < ApplicationController
       @competition.prize = competition_params[:prize]
       @competition.users = @users
 
-      if @competition.update(skip_validate_begins_at_is_not_in_the_past: true)
+      if @competition.update
         format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
         format.json do
           render :show,
