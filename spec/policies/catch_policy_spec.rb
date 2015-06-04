@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-describe UserInvitationPolicy do
-
+describe CatchPolicy do
   let (:user) { build :regular_user }
   let (:administrator) { build :admin }
 
@@ -9,12 +8,11 @@ describe UserInvitationPolicy do
 
   permissions :create? do
     it { is_expected.to permit administrator }
-    it { is_expected.not_to permit user }
+    it { is_expected.to permit user }
   end
 
   permissions :update? do
     it { is_expected.to permit administrator }
     it { is_expected.to permit user }
   end
-
 end

@@ -1,4 +1,4 @@
-class UserInvitationPolicy < ApplicationPolicy
+class InvitationPolicy < ApplicationPolicy
   # Only administrators can manage user invitations
    def create?
      user.present? && user.admin?

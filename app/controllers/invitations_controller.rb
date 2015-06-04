@@ -1,9 +1,11 @@
 class InvitationsController < Devise::InvitationsController
+  before_action :authorize_invitation, except: [:show]
   before_action :set_params, only: 'update'
   before_action :set_sanitized_params, only: 'update'
 
   # PUT /resource/invitation
   def update
+    self.resource = resource_class.where(invitation_token: invitation_token).first
     respond_to do |format|
       format.js do
         invitation_token = Devise.token_generator.digest(resource_class,
@@ -19,6 +21,10 @@ class InvitationsController < Devise::InvitationsController
   end
 
   private
+
+  def authorize_invitation
+    authorize :invitation
+  end
 
   #-- Helpers
   def user_params

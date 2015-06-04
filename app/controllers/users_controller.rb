@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy,
                                   :toggle_activation]
-  before_action :authorize_all_users, except: [:show, :toggle_activation]
-  before_action :authorize_individual_user, only: [:show, :toggle_activation]
+  before_action :authorize_users, except: [:show, :toggle_activation]
+  before_action :authorize_user, only: [:show, :toggle_activation]
   before_action :check_user_invite_status, only: [:show]
 
   # XHR requests only
@@ -31,17 +31,17 @@ class UsersController < ApplicationController
   private
 
   # Ensure that whoever is requesting the show action is, at least, logged in
-  def authorize_all_users
+  def authorize_users
     authorize :user
   end
 
   # Allow users to see their own profile but prevent them from viewing others.
-  def authorize_individual_user
+  def authorize_user
     if @user.present?
       # Pass the object @user to Pundit to check against @current_user
       authorize @user
     else
-      authorize_all_users
+      authorize_users
     end
   end
 
