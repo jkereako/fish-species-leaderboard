@@ -24,6 +24,7 @@ gem 'pundit'            # Define user polcies
 gem 'sdoc', group: :doc
 
 group :development, :test do
+  gem 'brakeman'
   gem 'quiet_assets'        # Disallow assets in the log
   gem 'sqlite3'
   gem 'byebug'              # Call `byebug` anywhere in code to stop execution
