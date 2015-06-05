@@ -27,31 +27,11 @@ RSpec.describe CatchesController, type: :controller do
     end
 
     context 'when logged in' do
-      context 'as an administrator' do
-        before :each do
-          @user = create :admin
-          sign_in @user
-        end
-        # A catch may only be added if a compeition exists. If it does not, then
-        # the user is redirected to the referrer or the root path
-        context 'without an active competition' do
-          before :each do
-            request.env['HTTP_REFERER'] = 'where_you_come_from'
-            @user.competitions = []
-          end
-          it { is_expected.to redirect_to 'where_you_come_from' }
-        end
-
-        context 'with an active competition' do
-          before :each do
-            competition = create :competition
-            competition.users << @user
-          end
-
-          it { is_expected.to render_template :new }
-        end
+      before :each do
+        request.env['HTTP_REFERER'] = 'where_you_come_from'
       end
-
+      # We assume that admins have more rights than users, hence, the test for
+      # admins has been removed.
       context 'as a user' do
         before :each do
           @user = create :regular_user
@@ -66,13 +46,21 @@ RSpec.describe CatchesController, type: :controller do
           it { is_expected.to redirect_to 'where_you_come_from' }
         end
 
-        context 'with an active competition' do
+        context 'with 1 active competition' do
           before :each do
-            competition = create :competition
-            competition.users << @user
+            @user.competitions << create(:competition)
           end
 
           it { is_expected.to render_template :new }
+        end
+
+        context 'with multiple active competitions' do
+          before :each do
+            @user.competitions << create(:competition)
+            @user.competitions << create(:competition)
+          end
+
+          it { is_expected.to redirect_to 'where_you_come_from' }
         end
       end
     end
@@ -91,15 +79,6 @@ RSpec.describe CatchesController, type: :controller do
       before :each do
         request.env['HTTP_REFERER'] = 'where_you_come_from'
       end
-      context 'as an administrator' do
-        before :each do
-          @user = create :admin
-          sign_in @user
-        end
-
-        it { is_expected.to render_template :show }
-      end
-
       context 'as a user' do
         before :each do
           @user = create :regular_user
