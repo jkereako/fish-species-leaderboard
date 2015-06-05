@@ -3,9 +3,9 @@ class InvitationsController < Devise::InvitationsController
   before_action :set_params, only: 'update'
   before_action :set_sanitized_params, only: 'update'
 
+  # See: https://github.com/scambra/devise_invitable/wiki/How-To:-Allow-updating-additional-attributes-when-accepting-invitation
   # PUT /resource/invitation
   def update
-    self.resource = resource_class.where(invitation_token: invitation_token).first
     respond_to do |format|
       format.js do
         invitation_token = Devise.token_generator.digest(resource_class,
@@ -27,8 +27,10 @@ class InvitationsController < Devise::InvitationsController
   end
 
   #-- Helpers
+
   def user_params
-    params[:user]
+    params.require(:user).permit(:name, :role,:invitation_token, :password,
+                                 :password_confirmation)
   end
 
   #-- Callbacks

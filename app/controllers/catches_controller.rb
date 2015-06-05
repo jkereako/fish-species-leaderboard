@@ -112,8 +112,9 @@ class CatchesController < ApplicationController
   # If the user is competing in multiple competitions, make sure he has indicated
   # which competition this catch is for.
   def check_catch_params
-    return if catch_params.present?
     return if current_user.competitions.active.count == 1
+    # REVIEW: This will raise an exception. Figure out the best way to handle it
+    return if catch_params.present?
     redirect_to request.referrer || root_path,
                 alert: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
   end
@@ -124,7 +125,9 @@ class CatchesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def catch_params
-    params[:catch]
+    params.require(:catch).permit(:species, :image, :bait_used,
+                                  :length_in_inches, :location_description,
+                                  :caught_at, :competition)
   end
 
   # Use callbacks to share common setup or constraints between actions.

@@ -142,7 +142,8 @@ class CompetitionsController < ApplicationController
 
   #-- Helpers
   def competition_params
-    params[:competition] if params[:competition].present?
+    params.require(:competition).permit(:name, :begins_at, :ends_at, :prize,
+                                        users:[])
   end
 
   #-- Callbacks
