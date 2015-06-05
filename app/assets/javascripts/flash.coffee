@@ -49,5 +49,4 @@ ready = ->
     # Find all UJS remote links and forms
     flash = new Flash $ '*[data-remote="true"]'
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).on('ready page:load', ready)

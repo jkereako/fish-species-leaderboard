@@ -26,5 +26,4 @@ ready = ->
     if 'catches' is clientData.controller and 'species' of clientData
       aCatch = new Catch clientData.species, $ 'input#catch_species'
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).on('ready page:load', ready)
