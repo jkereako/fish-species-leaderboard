@@ -115,7 +115,7 @@ class CatchesController < ApplicationController
     return if current_user.competitions.active.count == 1
     # REVIEW: This will raise an exception. Figure out the best way to handle it
     return if catch_params.present?
-    redirect_to request.referrer || root_path,
+    redirect_to :back,
                 alert: 'Select a competition BEFORE adding a catch. If no competitions exist yet, add one, then add a catch.'
   end
 

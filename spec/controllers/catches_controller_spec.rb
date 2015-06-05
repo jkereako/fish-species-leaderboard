@@ -35,7 +35,11 @@ RSpec.describe CatchesController, type: :controller do
         # A catch may only be added if a compeition exists. If it does not, then
         # the user is redirected to the referrer or the root path
         context 'without an active competition' do
-          it { is_expected.to redirect_to root_path }
+          before :each do
+            request.env['HTTP_REFERER'] = 'where_you_come_from'
+            @user.competitions = []
+          end
+          it { is_expected.to redirect_to 'where_you_come_from' }
         end
 
         context 'with an active competition' do
@@ -55,7 +59,11 @@ RSpec.describe CatchesController, type: :controller do
         end
 
         context 'without an active competition' do
-          it { is_expected.to redirect_to root_path }
+          before :each do
+            request.env['HTTP_REFERER'] = 'where_you_come_from'
+            @user.competitions = []
+          end
+          it { is_expected.to redirect_to 'where_you_come_from' }
         end
 
         context 'with an active competition' do
@@ -71,10 +79,6 @@ RSpec.describe CatchesController, type: :controller do
   end #new
 
   describe '#create' do
-    # context 'with bad data' do
-    #   subject { post :create, { catch: {no_such_prop: true} } }
-    #   it { is_expected.to redirect_to new_user_session_path }
-    # end
     let(:a_catch) { create :catch }
 
     subject { post :create, catch: a_catch }
@@ -84,6 +88,9 @@ RSpec.describe CatchesController, type: :controller do
     end
 
     context 'when logged in' do
+      before :each do
+        request.env['HTTP_REFERER'] = 'where_you_come_from'
+      end
       context 'as an administrator' do
         before :each do
           @user = create :admin
@@ -98,7 +105,10 @@ RSpec.describe CatchesController, type: :controller do
           @user = create :regular_user
           sign_in @user
         end
-
+        context 'and sending unexpected parameters' do
+          subject { post :create, bad_param: true }
+          it { is_expected.to redirect_to 'where_you_come_from' }
+        end
         it { is_expected.to render_template :show }
       end
     end

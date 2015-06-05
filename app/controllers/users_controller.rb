@@ -54,8 +54,8 @@ class UsersController < ApplicationController
                 alert: 'This user has not accepted his invitation yet.'
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user
+    # see: http://guides.rubyonrails.org/security.html#sql-injection-countermeasures
     @user = User.find_by_id params[:id]
   end
 

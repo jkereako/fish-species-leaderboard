@@ -29,7 +29,7 @@ class InvitationsController < Devise::InvitationsController
   #-- Helpers
 
   def user_params
-    params.require(:user).permit(:name, :role,:invitation_token, :password,
+    params.require(:user).permit(:name, :role, :invitation_token, :password,
                                  :password_confirmation)
   end
 

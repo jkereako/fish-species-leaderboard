@@ -29,15 +29,12 @@ class ApplicationController < ActionController::Base
   def parameter_missing
     flash[:alert] = 'Something is wrong. Did you not specify a competition when adding a catch?'
 
-    redirect_to url_for request.referrer
+    redirect_to :back
   end
 
   def unpermitted_parameters
+    flash[:alert] = 'Something is wrong.'
     respond_to do |format|
-      format.html do
-        flash[:alert] = 'Something is wrong.'
-        redirect_to url_for request.referrer
-      end
       format.json do
         render 'shared/error',
                locals: { errors: nil,
@@ -45,10 +42,7 @@ class ApplicationController < ActionController::Base
                status: :unprocessable_entity
       end
     end
-
-    flash[:alert] = 'Something is wrong.'
-
-    redirect_to url_for request.referrer
+    redirect_to :back
   end
 
   def user_competing_in_multiple_competitions?
