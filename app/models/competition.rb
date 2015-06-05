@@ -1,5 +1,6 @@
 class Competition < ActiveRecord::Base
   # Active scopes
+  COMPETITOR_MINIMUM = 2
   scope :begun, -> { where('begins_at < ?', Time.zone.now) }
 
   # Inactive scopes
@@ -25,7 +26,10 @@ class Competition < ActiveRecord::Base
   validates :prize, presence: true
   validates :begins_at, presence: true
   validates :ends_at, presence: true
-  validates :users, length: { minimum: 2,
+
+  # see: https://github.com/rails/rails/issues/10733
+  # This won't fucking validate when updating a competition.
+  validates :users, length: { minimum: COMPETITOR_MINIMUM,
                               message: 'There must be at least 2 competitors' }
   validate :begins_at_is_not_in_the_past,
            on: :create,
@@ -38,10 +42,6 @@ class Competition < ActiveRecord::Base
              (c.begins_at.is_a?(Date) || c.begins_at.is_a?(Time)) &&
                (c.ends_at.is_a?(Date) || c.ends_at.is_a?(Time))
            end)
-
-  # Allows us to associate multiple User objects with 1 Competition object
-  # when updating
-  accepts_nested_attributes_for :users
 
   # Scope
   # Finds all on-going competitions

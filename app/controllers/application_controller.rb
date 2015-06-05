@@ -9,9 +9,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Handle the exception raised by Pundit when a user is unauthorized
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
+  rescue_from ActionController::ParameterMissing, with: :parameter_missing
+  rescue_from ActionController::UnpermittedParameters,
+              with: :unpermitted_parameters
 
-  def user_not_authorized
+  private
+
+  def not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
 
     if current_user.nil?
@@ -21,7 +26,30 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
+  def parameter_missing
+    flash[:alert] = 'Something is wrong. Did you not specify a competition when adding a catch?'
+
+    redirect_to url_for request.referrer
+  end
+
+  def unpermitted_parameters
+    respond_to do |format|
+      format.html do
+        flash[:alert] = 'Something is wrong.'
+        redirect_to url_for request.referrer
+      end
+      format.json do
+        render 'shared/error',
+               locals: { errors: nil,
+                         notice: 'Data missing or invalid' },
+               status: :unprocessable_entity
+      end
+    end
+
+    flash[:alert] = 'Something is wrong.'
+
+    redirect_to url_for request.referrer
+  end
 
   def user_competing_in_multiple_competitions?
     return unless user_signed_in?

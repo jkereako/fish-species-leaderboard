@@ -51,11 +51,10 @@
           <div class="form-group">
             <%= f.label :users, 'Competing Anglers' %>
             <br />
-            <%= f.collection_select :users,
-                          User.all, :id, :name,
-                          {prompt: false, include_hidden: false},
-                          {class: 'form-control',
-                          multiple: true} %>
+            <%= f.select :users,
+                         @competition.users.collect {|u| [ u.name, u.id ] },
+                         { prompt: false, include_hidden: false},
+                         { class: 'form-control', multiple: true } %>
             <p class="small help-block">
               You must select at least 2 anglers.
             </p>

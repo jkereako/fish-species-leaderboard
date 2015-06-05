@@ -5,25 +5,23 @@ class CompetitionsController < ApplicationController
 
   def suspend
     @competition.is_suspended = !@competition.suspended?
-
-    if @competition.save
-      respond_to do |format|
+    respond_to do |format|
+      if @competition.save
         format.html do
           redirect_to competitions_url,
                       notice: 'Competition was successfully suspended.'
         end
         format.json { head :no_content }
-      end
-    else
-      format.html { render :new }
-      format.json do
-        render 'shared/error',
-               locals: { errors: @competition.errors,
-                         notice: 'Data missing or invalid' },
-               status: :unprocessable_entity
+      else
+        format.html { render :new }
+        format.json do
+          render 'shared/error',
+                 locals: { errors: @competition.errors,
+                           notice: 'Data missing or invalid' },
+                 status: :unprocessable_entity
+        end
       end
     end
-
   end
   # GET /competitions
   # GET /competitions.json
@@ -39,20 +37,19 @@ class CompetitionsController < ApplicationController
   # GET /competitions/new
   def new
     @competition = Competition.new
-    # Although there is multiple competitors for a competition, we only need 1
-    # competitor so that we can show the user a form
-    @competition.users << User.new
+    @competition.users.build User.all.active.as_json
+
   end
 
   # GET /competitions/1/edit
   def edit
+    @competition.users.build User.all.active.as_json
   end
 
   # POST /competitions
   # POST /competitions.json
   def create
     @competition = Competition.new
-
     # REVIEW: The code below invalidates `begins_at` and `ends_at` while still
     # satisfying the validators. If we were to pass nil, then an exception will
     # be raised. Instead, we pass a valid date which will be invalid when passed
@@ -107,15 +104,18 @@ class CompetitionsController < ApplicationController
       @competition.prize = competition_params[:prize]
       @competition.users = @users
 
-      if @competition.update
-        format.html { redirect_to @competition, notice: 'Competition was successfully updated.' }
+      if @competition.save
+        format.html do
+          redirect_to @competition,
+                      notice: 'Competition was successfully updated.'
+        end
         format.json do
           render :show,
                  locals: { competition: @competition,
                            notice: "Successfully updated #{@competition.name}" },
                  location: @competition,
                  status: :ok
-          end
+        end
       else
         format.html { render :edit }
         format.json do
@@ -133,7 +133,10 @@ class CompetitionsController < ApplicationController
   def destroy
     @competition.destroy
     respond_to do |format|
-      format.html { redirect_to competitions_url, notice: 'Competition was successfully destroyed.' }
+      format.html do
+        redirect_to competitions_url,
+                    notice: 'Competition was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -143,7 +146,7 @@ class CompetitionsController < ApplicationController
   #-- Helpers
   def competition_params
     params.require(:competition).permit(:name, :begins_at, :ends_at, :prize,
-                                        users:[])
+                                        users: [])
   end
 
   #-- Callbacks
@@ -156,11 +159,12 @@ class CompetitionsController < ApplicationController
   end
 
   def set_users
+    filtered_params = competition_params
     # Since @users is expected to be an array, make it so.
-    if competition_params[:users].blank?
+    if filtered_params[:users].blank?
       @users = []
     else
-      @users = User.find competition_params[:users]
+      @users = User.find filtered_params[:users]
     end
   end
 end
