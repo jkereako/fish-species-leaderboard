@@ -25,7 +25,7 @@
       <div class="panel-body">
         <h4>Length <small><%= length_in_words @catch.length_in_inches %></small></h4>
         <h4>Bait used <small><%= @catch.bait_used %></small></h4>
-        <h4>Date caught <small><%= time_ago_in_words @catch.caught_at %> ago</small></h4>
+        <h4>Date caught <small><%= @catch.caught_at.to_formatted_s :month_day_year %></small></h4>
         <h4>Caught at <small><%= @catch.location_description %></small></h4>
       </div>
 

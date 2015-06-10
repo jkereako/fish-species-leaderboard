@@ -92,12 +92,12 @@
               Bait used
             </th>
             <th>
-              Date caught
+              Caught
             </th>
           </tr>
         </thead>
         <tbody>
-        <%= render partial: 'catch', collection: @user.catches.recent.top_10 %>
+        <%= render partial: 'catch', collection: @user.catches.recent.top_5 %>
         </tbody>
       </table>
       <% else %>

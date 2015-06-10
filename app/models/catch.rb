@@ -1,5 +1,6 @@
 class Catch < ActiveRecord::Base
   scope :recent, -> { order 'caught_at DESC' }
+  scope :top_5, -> { limit 5 }
   scope :top_10, -> { limit 10 }
   scope :for_competition, ->(competition) { where competition: competition }
 

@@ -1,5 +1,5 @@
 <tr data-species="<%= catch.species.dasherize.downcase %>">
   <td><%= link_to catch.species, catch %></td>
   <td><%= catch.bait_used %></td>
-  <td><%= catch.caught_at.to_formatted_s :month_day_year %></td>
+  <td><%= time_ago_in_words catch.caught_at %> ago</td>
 </tr>
