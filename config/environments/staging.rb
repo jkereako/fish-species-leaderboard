@@ -97,8 +97,7 @@ Rails.application.configure do
       secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       s3_host_name: ENV['S3_HOST_NAME']
     },
-
-    # uploads/images/catches/12/thumbnail/cod.jpg
-    path: '/uploads/images/:class/:id/:style/:filename'
+    hash_secret: ENV['SECRET_KEY_BASE'],
+    path: '/uploads/images/:class/:id/:style/:hash.:extension'
   }
 end

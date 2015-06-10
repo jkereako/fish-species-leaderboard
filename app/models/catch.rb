@@ -18,6 +18,7 @@ class Catch < ActiveRecord::Base
   validates :location_description, presence: true
   validates_attachment_presence :image
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_file_name :image, matches: [/png\Z/, /jpe?g\Z/]
   validates :length_in_inches,
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 },

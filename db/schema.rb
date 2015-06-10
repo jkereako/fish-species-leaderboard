@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150531225346) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "image_fingerprint",    default: "",   null: false
   end
 
   add_index "catches", ["competition_id"], name: "index_catches_on_competition_id"

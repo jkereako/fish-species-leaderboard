@@ -18,7 +18,6 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
-/db/seeds.rb
 
 #-- Sidekiq
 dump.rdb
