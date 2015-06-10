@@ -72,6 +72,10 @@ class Competition < ActiveRecord::Base
     has_expired
   end
 
+  def winner?
+    winner_id != 0
+  end
+
   private
 
   # Convert each Date or Time object to a UTC date and compare it against
