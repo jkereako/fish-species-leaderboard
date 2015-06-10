@@ -54,21 +54,12 @@ class CompetitionsController < ApplicationController
     # satisfying the validators. If we were to pass nil, then an exception will
     # be raised. Instead, we pass a valid date which will be invalid when passed
     # to the validators.
-    begin
-      @competition.begins_at = DateTime.parse competition_params[:begins_at]
-    rescue ArgumentError
-      @competition.begins_at = DateTime.parse '1970-01-02 00:00:00'
-    end
-
-    # Make `ends_at` 1 day before `begins_at` to invalidate it.
-    begin
-      @competition.ends_at = DateTime.parse competition_params[:ends_at]
-    rescue ArgumentError
-      @competition.ends_at = DateTime.parse '1970-01-01 00:00:00'
-    end
+    set_begins_at
+    set_ends_at
 
     @competition.name = competition_params[:name]
     @competition.prize = competition_params[:prize]
+    @competition.bonus = competition_params[:bonus]
     @competition.users = @users
 
     respond_to do |format|
@@ -100,11 +91,7 @@ class CompetitionsController < ApplicationController
   # PATCH/PUT /competitions/1.json
   def update
     respond_to do |format|
-      @competition.ends_at = competition_params[:ends_at]
-      @competition.prize = competition_params[:prize]
-      @competition.users = @users
-
-      if @competition.save
+      if @competition.update competition_params
         format.html do
           redirect_to @competition,
                       notice: 'Competition was successfully updated.'
@@ -143,10 +130,23 @@ class CompetitionsController < ApplicationController
 
   private
 
+  def set_begins_at
+    @competition.begins_at = Time.parse competition_params[:begins_at]
+    rescue ArgumentError
+      @competition.begins_at = Time.zone.parse '1970-01-02 00:00:00'
+  end
+
+  # Make `ends_at` 1 day before `begins_at` to invalidate it.
+  def set_ends_at
+    @competition.ends_at = Time.zone.parse competition_params[:ends_at]
+    rescue ArgumentError
+      @competition.ends_at = Time.zone.parse '1970-01-01 00:00:00'
+  end
+
   #-- Helpers
   def competition_params
-    params.require(:competition).permit(:name, :begins_at, :ends_at, :prize,
-                                        users: [])
+    params.require(:competition).permit(:bonus, :name, :begins_at, :ends_at,
+                                        :prize, users: [])
   end
 
   #-- Callbacks

@@ -1,16 +1,16 @@
 # Administrator
-user = User.new
-user.email = 'admin@developmentuser.com'
-user.name = 'Admin User'
-user.password = 'password'
-user.password_confirmation = 'password'
-user.role = User.administrator_role
-user.invitation_created_at = Time.zone.now
-user.invitation_sent_at = Time.zone.now
-user.invitation_accepted_at = Time.zone.now
-user.save
+admin = User.new
+admin.email = 'admin@developmentuser.com'
+admin.name = 'Admin User'
+admin.password = 'password'
+admin.password_confirmation = 'password'
+admin.role = User.administrator_role
+admin.invitation_created_at = Time.zone.now
+admin.invitation_sent_at = Time.zone.now
+admin.invitation_accepted_at = Time.zone.now
+admin.save
 
-# Regular user
+# User
 user = User.new
 user.email = 'user@developmentuser.com'
 user.name = 'Regular user'

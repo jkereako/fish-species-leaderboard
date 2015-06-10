@@ -4,7 +4,7 @@
     <legend>Competition</legend>
     <%= render 'shared/form_error_messages', errors: @competition.errors %>
     <div class="row">
-      <div class="col-sm-7">
+      <div class="col-sm-4">
           <div class="form-group">
             <%= f.label :name, t('page.competition.form.label.name') %>
             <br />
@@ -24,6 +24,14 @@
                               required: true,
                               placeholder: t('page.competition.form.placeholder.prize') %>
           </div>
+
+          <div class="form-group">
+            <%= f.label :bonus, t('page.competition.form.label.bonus') %>
+            <br />
+            <%= f.text_field :bonus, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-8">
           <div class="form-group">
             <%= f.label :begins_at, t('page.competition.form.label.begins_at') %>
             <div class="input-group">
@@ -46,8 +54,6 @@
 
             </div>
           </div>
-        </div>
-        <div class="col-sm-5">
           <div class="form-group">
             <%= f.label :users, 'Competing Anglers' %>
             <br />

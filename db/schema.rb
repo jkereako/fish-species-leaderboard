@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150531225346) do
     t.integer  "winner_id",            default: 0,     null: false
     t.string   "name",                 default: "",    null: false
     t.string   "prize",                default: "",    null: false
+    t.string   "bonus",                default: "",    null: false
     t.datetime "begins_at",                            null: false
     t.datetime "ends_at",                              null: false
     t.boolean  "has_expired",          default: false, null: false

@@ -5,7 +5,7 @@
       <li class="active"><%= link_to @competition.name, competition_path(@competition) %></li>
     </ol>
     <h1 class="page-header" itemprop="name">
-      <%= @competition.name %>
+      <%= link_to @competition.name %>
     </h1>
   </div>
 </div>
@@ -22,6 +22,11 @@
 
         <h4>Prize</h4>
         <p><%= @competition.prize %></p>
+
+        <% if @competition.bonus? %>
+        <h4>Bonus</h4>
+        <p><%= @competition.bonus %></p>
+        <% end %>
       </div>
 
     </div>
