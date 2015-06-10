@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { invitations: 'invitations' },
                      skip: 'registrations'
   as :user do
-    get 'users/edit' => 'devise/registrations#edit',
+    get 'users/:id/profile/edit' => 'users#edit',
+        as: 'edit_user_profile'
+    patch 'users/:id/profile' => 'users#update',
+        as: 'user_profile'
+    get 'users/:id/change-password' => 'devise/registrations#edit',
         as: 'edit_user_registration'
     put 'users/:id' => 'devise/registrations#update',
         as: 'user_registration'

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-xs-12">
+    <ol class="breadcrumb hidden-xs">
+      <% if policy(@user).index? %>
+      <li><%= link_to 'Anglers', users_path %></li>
+      <% end %>
+      <li><%= link_to @user.name, user_path %></li>
+      <li class="active"><%= link_to 'Edit profile', edit_user_profile_path %></li>
+    </ol>
+    <h1 class="page-header" itemprop="name">
+      <%= @user.name %>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="well bs-component">
+      <%= form_for @user, url: user_profile_path do |f| %>
+        <fieldset>
+          <legend>Edit profile</legend>
+
+          <div class="form-group">
+            <%= f.label :name %> <br>
+            <%= f.text_field :name, autocomplete: false,
+                             autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit 'Save changes', class: 'btn btn-primary' %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div><!-- /.well -->
+  </div>
+  <div class="col-md-3">
+    <p class="small help-block">
+      Currently, the only field you can edit is your name.
+    </p>
+  </div>
+</div>

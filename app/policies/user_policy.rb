@@ -10,6 +10,11 @@ class UserPolicy < ApplicationPolicy
   end
 
   # Disallow admins from changing passwords.
+  def update?
+    user.present? && user == record
+  end
+
+  # Disallow admins from changing passwords.
   def change_password?
     user.present? && user == record
   end

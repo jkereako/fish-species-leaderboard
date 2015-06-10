@@ -1,31 +1,52 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy,
                                   :toggle_activation]
-  before_action :authorize_users, except: [:show, :toggle_activation]
-  before_action :authorize_user, only: [:show, :toggle_activation]
+  before_action :authorize_users, except: [:show, :edit, :update, :toggle_activation]
+  before_action :authorize_user, only: [:show, :edit, :update, :toggle_activation]
   before_action :check_user_invite_status, only: [:show]
 
   # XHR requests only
   def toggle_activation
    @user.is_active = !@user.active?
 
-   if @user.save
-     # TODO: Notify the user that his account has been activated/deactivated
-     render :show,
+    if @user.save
+      # TODO: Notify the user that his account has been activated/deactivated
+      render :show,
             locals: { user: @user,
                       notice: "Successfully toggled #{@user.name}" },
             location: @user,
             status: :ok
-   else
-     render 'shared/error',
+    else
+      render 'shared/error',
             locals: { errors: @user.errors,
                       notice: "Unable to toggle user's activation" },
             status: :internal_server_error
-   end
- end
+    end
+  end
 
   def index
     @users = User.all
+  end
+
+  # PATCH/PUT /catches/1
+  # PATCH/PUT /catches/1.json
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html do
+          redirect_to @user,
+                      notice: 'Profile was successfully updated.'
+        end
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json do
+          render 'shared/error',
+                 locals: { errors: @user.errors },
+                 status: :unprocessable_entity
+        end
+      end
+    end
   end
 
   private
@@ -60,6 +81,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user)
+    params.require(:user).permit(:name)
   end
 end
