@@ -8,7 +8,7 @@ describe InvitationPolicy do
 
   permissions :create? do
     it { is_expected.to permit administrator }
-    it { is_expected.to permit user }
+    it { is_expected.not_to permit user }
   end
 
   permissions :update? do

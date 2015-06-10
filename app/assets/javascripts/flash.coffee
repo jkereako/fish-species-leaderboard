@@ -41,6 +41,7 @@ class Flash
     @flashDiv.fadeIn 'slow'
 
 ready = ->
+  # Find all remote links and buttons
   ujsElements = $ '*[data-remote="true"]'
 
   # If there are UJS elements, then create the Flash object. Otheriwse, skip it.

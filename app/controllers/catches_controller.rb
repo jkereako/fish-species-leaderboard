@@ -125,9 +125,10 @@ class CatchesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def catch_params
-    params.require(:catch).permit(:species, :image, :bait_used,
-                                  :length_in_inches, :location_description,
-                                  :caught_at, :competition)
+    params[:catch]
+    # params.require(:catch).permit(:species, :image, :bait_used,
+    #                               :length_in_inches, :image, :location_description,
+    #                               :caught_at, :competition)
   end
 
   # Use callbacks to share common setup or constraints between actions.

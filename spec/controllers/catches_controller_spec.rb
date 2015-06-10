@@ -65,41 +65,4 @@ RSpec.describe CatchesController, type: :controller do
       end
     end
   end #new
-
-  describe '#create' do
-    let(:a_catch) { create :catch }
-
-    subject { post :create, catch: a_catch }
-
-    context 'when not logged in' do
-      it { is_expected.to redirect_to new_user_session_path }
-    end
-
-    context 'when logged in' do
-      before :each do
-        request.env['HTTP_REFERER'] = 'where_you_come_from'
-      end
-      context 'as a user' do
-        before :each do
-          @user = create :regular_user
-          sign_in @user
-        end
-        context 'and sending unexpected parameters' do
-          subject { post :create, bad_param: true }
-          it { is_expected.to redirect_to 'where_you_come_from' }
-        end
-        it { is_expected.to render_template :show }
-      end
-    end
-  end #create
-
-  describe '#update' do
-    let(:a_catch) { create :catch }
-
-    subject { put :update, id: a_catch.id }
-
-    context 'when not logged in' do
-      it { is_expected.to redirect_to new_user_session_path }
-    end
-  end #update
 end
