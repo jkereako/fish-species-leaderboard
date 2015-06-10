@@ -7,7 +7,7 @@
       <%= competition.begins_at.to_formatted_s :month_day_year %> - <%= competition.ends_at.to_formatted_s :month_day_year %>
       <br>
       <small>
-        <%= distance_of_time_in_words(competition.begins_at, competition.ends_at) %> left
+        <%= distance_of_time_in_words(Time.zone.now, competition.ends_at) %> left
       </small>
     </h4>
   </div>
