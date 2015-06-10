@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
 
   # Handle the exception raised by Pundit when a user is unauthorized
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
-  rescue_from ActionController::ParameterMissing, with: :parameter_missing
-  rescue_from ActionController::UnpermittedParameters,
-              with: :unpermitted_parameters
+  # rescue_from ActionController::ParameterMissing, with: :parameter_missing
+  # rescue_from ActionController::UnpermittedParameters,
+  #             with: :unpermitted_parameters
 
   private
 
@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
                          notice: 'Data missing or invalid' },
                status: :unprocessable_entity
       end
+      format.html { redirect_to :back }
     end
-    redirect_to :back
   end
 
   def user_competing_in_multiple_competitions?

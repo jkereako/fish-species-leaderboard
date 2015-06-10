@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Class methods
+  def self.roles
+    ROLES
+  end
+
   def self.administrator_role
     ROLES.first
   end
