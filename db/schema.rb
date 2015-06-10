@@ -54,12 +54,10 @@ ActiveRecord::Schema.define(version: 20150531225346) do
   add_index "competitions", ["winner_id"], name: "index_competitions_on_winner_id"
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "competition_id",                null: false
-    t.integer  "user_id",                       null: false
-    t.integer  "competition_count", default: 0, null: false
-    t.integer  "users_count",       default: 0, null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "competition_id", null: false
+    t.integer  "user_id",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "memberships", ["competition_id"], name: "index_memberships_on_competition_id"
