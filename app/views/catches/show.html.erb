@@ -2,6 +2,13 @@
   <div class="col-xs-12">
     <ol class="breadcrumb hidden-xs">
       <li><%= link_to 'Catches', catches_path %></li>
+      <li>
+      <% if policy(:user).show? %>
+      <%= link_to @catch.user.name, @catch.user %>
+      <% else %>
+      <%= @catch.user.name %>
+      <% end %>
+      </li>
       <li class="active"><%= link_to @catch.species, catch_path(@catch) %></li>
     </ol>
     <h1 class="page-header" itemprop="name">

@@ -40,7 +40,13 @@
                 <%= link_to catch.species, catch %>
               </td>
               <td><%= length_in_words catch.length_in_inches %></td>
-              <td><%= link_to catch.user.name, catch.user %></td>
+              <td>
+                <% if policy(:user).show? %>
+                <%= link_to catch.user.name, catch.user %>
+                <% else %>
+                <%= catch.user.name %>
+                <% end %>
+              </td>
 
             </tr>
           <% end %>

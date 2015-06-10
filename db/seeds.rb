@@ -69,7 +69,7 @@ Catch.create(species: 'Lamprey',
              caught_at: Time.zone.parse('2015-05-22'),
              bait_used: 'Net',
              location_description: 'Parker River',
-             image: File.open('Lamprey - 5-22-2015.JPG '))
+             image: File.open('Lamprey - 5-22-2015.JPG'))
 
 Catch.create(species: 'Largemouth Bass',
              user: admin, competition: competition,
@@ -120,6 +120,7 @@ Catch.create(species: 'Smallmouth Bass',
              location_description: 'Wachusett River',
              image: File.open('Small Mouth 2 - 5-15-2015.JPG'))
 
+# This is the only catch that's saving: why?
 Catch.create(species: 'White Perch',
              user: admin, competition: competition,
              caught_at: Time.zone.parse('2015-05-23'),
