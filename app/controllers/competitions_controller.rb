@@ -1,6 +1,6 @@
 class CompetitionsController < ApplicationController
-  before_action :authorize_competition, except: [:index, :show]
   before_action :set_competition, only: [:show, :edit, :update, :destroy, :suspend]
+  before_action :authorize_competition, except: [:index, :show]
   before_action :set_users, only: [:create, :update]
 
   def suspend
@@ -151,7 +151,11 @@ class CompetitionsController < ApplicationController
 
   #-- Callbacks
   def authorize_competition
-    authorize :competition
+    if @competition.present?
+      authorize @competition
+    else
+      authorize :competition
+    end
   end
 
   def set_competition

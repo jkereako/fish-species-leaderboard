@@ -4,7 +4,7 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && user.admin?
+    (user.present? && user.admin?) && record.active?
   end
 
   def destroy?
