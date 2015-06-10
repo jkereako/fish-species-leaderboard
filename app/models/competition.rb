@@ -48,6 +48,7 @@ class Competition < ActiveRecord::Base
   def self.active
     where(has_expired: false, is_suspended: false)
       .where('begins_at < ?', Time.zone.now)
+      .where('ends_at > ?', Time.zone.now)
   end
 
   # Overidden
