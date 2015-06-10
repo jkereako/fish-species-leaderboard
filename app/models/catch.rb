@@ -3,6 +3,8 @@ class Catch < ActiveRecord::Base
   scope :top_10, -> { limit 10 }
   scope :for_competition, ->(competition) { where competition: competition }
 
+  attr_reader :image_remote_url
+
   has_attached_file :image, styles: { medium: '300x300#',
                                       thumbnail: '60x60#' },
                             default_url: '/images/:style/missing.png'
@@ -24,5 +26,14 @@ class Catch < ActiveRecord::Base
   # Overidden
   def to_param
     "#{id} #{species}".parameterize
+  end
+
+  # see: https://github.com/thoughtbot/paperclip/wiki/Attachment-downloaded-from-a-URL
+  def image_remote_url=(url_value)
+    self.image = URI.parse url_value
+    # Assuming url_value is http://example.com/photos/face.png
+    # avatar_file_name == "face.png"
+    # avatar_content_type == "image/png"
+    @image_remote_url = url_value
   end
 end
