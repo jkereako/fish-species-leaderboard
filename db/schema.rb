@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150531225346) do
+ActiveRecord::Schema.define(version: 20150619203011) do
 
   create_table "catches", force: :cascade do |t|
     t.integer  "competition_id",                      null: false
     t.integer  "user_id",                             null: false
     t.string   "species",              default: "",   null: false
-    t.integer  "length_in_inches",     default: 0,    null: false
+    t.float    "length_in_inches",     default: 0.0,  null: false
     t.string   "bait_used",            default: "",   null: false
     t.string   "location_description", default: "",   null: false
     t.boolean  "was_released",         default: true, null: false

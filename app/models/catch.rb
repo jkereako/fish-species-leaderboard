@@ -22,7 +22,7 @@ class Catch < ActiveRecord::Base
   validates_attachment_file_name :image, matches: [/png\Z/i, /jpe?g\Z/i]
   validates :length_in_inches,
             presence: true,
-            numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+            numericality: { greater_than_or_equal_to: 0 },
             allow_blank: true
 
   # Overidden
