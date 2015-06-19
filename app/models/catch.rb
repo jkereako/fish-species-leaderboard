@@ -6,7 +6,7 @@ class Catch < ActiveRecord::Base
 
   attr_reader :remote_image_url
 
-  has_attached_file :image, styles: { medium: '300x300#',
+  has_attached_file :image, styles: { medium_square: '300x300#',
                                       thumbnail: '60x60#' },
                             default_url: '/images/:style/missing.png'
 
