@@ -19,8 +19,27 @@ class Species
     false
   end
 
+  # Return the species list as 1 array
   def self.all
+    (self.freshwater + self.saltwater).sort
+  end
+
+  # Find only the saltwater species
+  def self.saltwater
+    load_data['saltwater'].sort
+  end
+
+  # Find only the freshwater species
+  def self.freshwater
+    load_data['freshwater'].sort
+  end
+
+  private
+
+  def self.load_data
     YAML.load_file FILE_PATH
   end
 
+  # Raise an exception if this method is called from a public context
+  private_class_method :load_data
 end
