@@ -40,6 +40,22 @@ RSpec.describe Catch, type: :model do
 
     ##-- Test validations
     context 'invalidates' do
+      context 'caught_at' do
+        it 'with future date' do
+          subject.caught_at = Time.zone.now + 100.years
+          expect(subject).to_not be_valid
+        end
+
+        it 'with invalid date string' do
+          subject.caught_at = "Where's the beef?!"
+          expect(subject).to_not be_valid
+        end
+
+        it 'with nil' do
+          subject.caught_at = nil
+          expect(subject).to_not be_valid
+        end
+      end
       context 'length_in_inches' do
         #-- length_in_inches
         it 'with strings' do

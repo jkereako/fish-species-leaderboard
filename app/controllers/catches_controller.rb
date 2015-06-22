@@ -131,6 +131,14 @@ class CatchesController < ApplicationController
     #                               :caught_at, :competition)
   end
 
+  # Try to parse the incomming date string. If it's invalid, then set
+  # `caught_at` to nil to trigger the `presence` validator.
+  def set_caught_at
+    @catch.caught_at = Time.zone.parse competition_params[:caught_at]
+    rescue ArgumentError
+      @competition.caught_at = nil
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_catch
     @catch = Catch.find_by_id params[:id]

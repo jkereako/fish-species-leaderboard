@@ -131,16 +131,16 @@ class CompetitionsController < ApplicationController
   private
 
   def set_begins_at
-    @competition.begins_at = Time.parse competition_params[:begins_at]
+    @competition.begins_at = Time.zone.parse competition_params[:begins_at]
     rescue ArgumentError
-      @competition.begins_at = Time.zone.parse '1970-01-02 00:00:00'
+      @competition.begins_at = nil
   end
 
   # Make `ends_at` 1 day before `begins_at` to invalidate it.
   def set_ends_at
     @competition.ends_at = Time.zone.parse competition_params[:ends_at]
     rescue ArgumentError
-      @competition.ends_at = Time.zone.parse '1970-01-01 00:00:00'
+      @competition.ends_at = nil
   end
 
   #-- Helpers

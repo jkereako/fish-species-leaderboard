@@ -14,6 +14,7 @@ class Catch < ActiveRecord::Base
   belongs_to :user, inverse_of: 'catches', counter_cache: true
 
   validates :competition, presence: true
+  validates :caught_at, presence: true
   validates :user, presence: true
   validates :bait_used, presence: true
   validates :location_description, presence: true
@@ -24,6 +25,10 @@ class Catch < ActiveRecord::Base
             presence: true,
             numericality: { greater_than_or_equal_to: 0 },
             allow_blank: true
+  validate :caught_at_is_not_in_the_future,
+           if: (proc do |c|
+             c.caught_at.is_a?(Date) || c.caught_at.is_a?(Time)
+           end)
 
   # Overidden
   def to_param
@@ -37,5 +42,12 @@ class Catch < ActiveRecord::Base
     # avatar_file_name == "face.png"
     # avatar_content_type == "image/png"
     @remote_image_url = url_value
+  end
+
+  private
+
+  def caught_at_is_not_in_the_future
+    return if caught_at.utc.to_date <= Time.now.utc.to_date
+    errors.add(:caught_at, 'cannot be a future date')
   end
 end

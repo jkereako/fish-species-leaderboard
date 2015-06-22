@@ -122,6 +122,11 @@ RSpec.describe Competition, type: :model do
       end
       #-- begins_at
       context '"begins_at"' do
+        it 'with invalid date string' do
+          subject.begins_at = 'Time to make the donuts'
+          expect(subject).not_to be_valid
+        end
+
         it 'with nil' do
           subject.begins_at = nil
           expect(subject).not_to be_valid
@@ -136,6 +141,11 @@ RSpec.describe Competition, type: :model do
       end
       #-- ends_at
       context '"ends_at"' do
+        it 'with invalid date string' do
+          subject.ends_at = 'I doubt it!'
+          expect(subject).not_to be_valid
+        end
+
         it 'with nil' do
           subject.ends_at = nil
           expect(subject).not_to be_valid
