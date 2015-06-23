@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-xs-12">
+    <ol class="breadcrumb hidden-xs">
+      <li class="active"><%= link_to 'Species', species_path %></li>
+    </ol>
+    <h1 class="page-header">All species</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Species
+      </div>
+      <table class="table">
+        <% @species.each do |species| %>
+        <tr>
+          <td>
+            <%= species %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

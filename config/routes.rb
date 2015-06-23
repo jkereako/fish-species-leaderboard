@@ -27,8 +27,9 @@ Rails.application.routes.draw do
         constraints: -> (req) { req.xhr? }
   end
 
-  # Restrict updating catches to users
   resources :users, only: [:index, :show]
+  # resources :species, only: [:index]
+  get :species, to: 'species#index'
 
   # Make the leaderboard the home page
   root 'leaderboard#index'
