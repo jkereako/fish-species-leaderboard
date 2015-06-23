@@ -61,7 +61,7 @@ class Competition < ActiveRecord::Base
   end
 
   def yet_to_begin?
-    begins_at > Time.zone.now
+    begins_at.utc > Time.now.utc
   end
 
   def suspended?
@@ -72,7 +72,7 @@ class Competition < ActiveRecord::Base
     has_expired
   end
 
-  def winner?
+  def won?
     winner_id != 0
   end
 

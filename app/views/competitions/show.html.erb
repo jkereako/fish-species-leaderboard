@@ -28,7 +28,7 @@
         <p><%= @competition.bonus %></p>
         <% end %>
 
-        <% if @competition.winner? %>
+        <% if @competition.won? %>
         <h4>Winner</h4>
         <p><%= @competition.winner.name %></p>
         <% end %>
