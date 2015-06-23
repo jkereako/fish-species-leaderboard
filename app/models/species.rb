@@ -21,7 +21,7 @@ class Species
 
   # Return the species list as 1 array
   def self.all
-    (self.freshwater + self.saltwater).sort
+    (freshwater + saltwater).sort
   end
 
   # Find only the saltwater species
