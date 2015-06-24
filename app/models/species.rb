@@ -1,3 +1,7 @@
+# Species
+#
+# The data source for this model is a static YAML file located in
+# `config/data/species.yml`
 class Species
   FILE_PATH = Rails.root.join('config', 'data', 'species.yml')
 

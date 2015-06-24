@@ -26,14 +26,20 @@ The polices which govern what each role can do in the app is defined in code
 with the gem, [Pundit](https://github.com/elabs/pundit). As the app evolves, the
 polices will change and doing so will not require a database migration.
 
+# Species
+This app maintains a list of species. The list grew from past catches, so, not
+every species of fish is represented. The list is static  because it is look-up
+data and it does not often change. Future versions of this app may localize the
+species list by region.
+
+The class which manages the species list is a regular Ruby class with
+`ActiveModel` mixins.
+
 # About
-This app, although functional, is really an on-going academic exercise. It shows
-how to use Devise and Pundit together to manage users and their authorizations.
-This project also includes over 150 tests written for RSpec.
-
-Assets are handled using Bower. This was decided in lieu
-
-This app is intended for Heroku, hence the `Procfile`.
+Although a functional app, this project is actually an academic exercise. It
+provides example usage of the gems Devise and Pundit, of a has-many through
+relationship, of ActiveModel usage, of Bower usage, of RSpec test cases and of
+deployment to Heroku.
 
 # License
 MIT
